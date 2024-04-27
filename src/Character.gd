@@ -15,7 +15,7 @@ func _enter_tree() -> void:
 	instance = self
 
 func _ready() -> void:
-	currentGun = shotgun.instantiate()
+	currentGun = gun.instantiate()
 	currentGun.connect("shake", shake_camera)
 	call_deferred("add_child", currentGun)
 	%PickupBox.area_entered.connect(pickup)
