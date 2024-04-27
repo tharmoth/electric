@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://dvu7bb1batiyl"]
+[gd_scene load_steps=17 format=3 uid="uid://dvu7bb1batiyl"]
 
+[ext_resource type="Script" path="res://src/components/cancel_rotation_component.gd" id="1_dv8tq"]
 [ext_resource type="Script" path="res://main_menu/main_menu_scripts/background.gd" id="1_m3ofy"]
 [ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/sprites/timer.png" id="2_yknjr"]
 
@@ -55,11 +56,15 @@ gradient = SubResource("Gradient_bbcid")
 [node name="tv" type="Node2D"]
 z_index = 1
 
+[node name="Node" type="Node" parent="."]
+script = ExtResource("1_dv8tq")
+
 [node name="static" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+modulate = Color(3, 3, 3, 1)
 light_mask = 0
 z_index = 2
-position = Vector2(259, 471.5)
+position = Vector2(260, 299)
 scale = Vector2(2.55833, 2.87)
 texture = SubResource("NoiseTexture2D_t7nri")
 script = ExtResource("1_m3ofy")
@@ -70,30 +75,30 @@ scale = Vector2(1.80469, 351)
 texture = SubResource("GradientTexture1D_o758f")
 
 [node name="body2" type="Sprite2D" parent="."]
-position = Vector2(482, 560.5)
+position = Vector2(482, 462)
 scale = Vector2(0.273438, 137)
 texture = SubResource("GradientTexture1D_3kkp0")
 
 [node name="top" type="Sprite2D" parent="."]
-position = Vector2(263.571, 260.64)
+position = Vector2(307, 122)
 scale = Vector2(1.80469, 113.131)
 skew = -0.872665
 texture = SubResource("GradientTexture1D_gshvu")
 
 [node name="side" type="Sprite2D" parent="."]
-position = Vector2(32.7416, 436.048)
+position = Vector2(-10, 225)
 rotation = 1.5708
 scale = Vector2(1.37208, 112.966)
 skew = 0.698132
 texture = SubResource("GradientTexture1D_8r0qq")
 
 [node name="front" type="Sprite2D" parent="."]
-position = Vector2(259.25, 471.5)
+position = Vector2(260, 457)
 scale = Vector2(1.32617, 319)
 texture = SubResource("GradientTexture1D_gb8sv")
 
 [node name="frontPlate" type="Sprite2D" parent="."]
-position = Vector2(482, 393)
+position = Vector2(480, 312)
 scale = Vector2(0.26709, 159.5)
 texture = SubResource("GradientTexture1D_gb8sv")
 
@@ -106,7 +111,7 @@ scale = Vector2(0.25, 0.25)
 position = Vector2(0, -1)
 
 [node name="knob" type="Sprite2D" parent="tvKnob/knob"]
-position = Vector2(4.76837e-07, -4.76837e-07)
+position = Vector2(-12, -651)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_yknjr")
 
@@ -125,7 +130,7 @@ scale = Vector2(0.25, 0.25)
 position = Vector2(0, -1)
 
 [node name="knob" type="Sprite2D" parent="tvKnob2/knob"]
-position = Vector2(4.76837e-07, -307)
+position = Vector2(-8, -951)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_yknjr")
 
