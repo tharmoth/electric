@@ -108,8 +108,8 @@ color_ramp = SubResource("GradientTexture1D_glw8s")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1ykyp"]
 particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(20, 320, 1)
+emission_shape = 1
+emission_sphere_radius = 1.0
 angle_max = 360.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.1
@@ -134,18 +134,17 @@ polygon = PackedVector2Array(9, 1024, -138, 1013, -298, 979, -412, 937, -554, 86
 
 [node name="Timer" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(2, -706)
+position = Vector2(-1, -8)
 script = ExtResource("2_uorbx")
 
 [node name="Sprite2D" type="Sprite2D" parent="Timer"]
 z_index = -100
 position = Vector2(0, -1)
-scale = Vector2(2, 2)
 texture = ExtResource("1_4nl5p")
 
 [node name="Character" type="CharacterBody2D" parent="Timer"]
 unique_name_in_owner = true
-position = Vector2(81, 767)
+position = Vector2(83, 131)
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_xjqbd")
@@ -224,6 +223,7 @@ autoplay = true
 [node name="Battery" parent="." instance=ExtResource("14_5kbvx")]
 
 [node name="GPUParticles2D3" type="GPUParticles2D" parent="."]
+visible = false
 position = Vector2(0, -320)
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_4h18v")
@@ -231,13 +231,13 @@ texture = ExtResource("15_i46s2")
 lifetime = 0.2
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
-position = Vector2(-575, 2)
-amount = 50
+position = Vector2(-503, -249)
 process_material = SubResource("ParticleProcessMaterial_1ykyp")
 texture = ExtResource("15_i46s2")
 lifetime = 0.2
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
 position = Vector2(573, 19)
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_1ykyp")

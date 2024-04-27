@@ -17,13 +17,12 @@ func _process(delta: float) -> void:
 		if (ammo == 0):
 			reload()
 		else:
-			fire()
-		#var fire_tween = create_tween()
-		#fire_tween.tween_callback(fire)
-		#fire_tween.tween_interval(.2)
-		#fire_tween.tween_callback(fire)
-		#fire_tween.tween_interval(.2)
-		#fire_tween.tween_callback(fire)
+			var fire_tween = create_tween()
+			fire_tween.tween_callback(fire)
+			fire_tween.tween_interval(.2)
+			fire_tween.tween_callback(fire)
+			fire_tween.tween_interval(.2)
+			fire_tween.tween_callback(fire)
 
 
 func move_to_position() -> void:
