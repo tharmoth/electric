@@ -1,6 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://h8phtu7ogbnb"]
+[gd_scene load_steps=7 format=3 uid="uid://h8phtu7ogbnb"]
 
 [ext_resource type="Texture2D" uid="uid://doi73aghhpalw" path="res://data/particles/spark_02.png" id="1_cyktc"]
+[ext_resource type="Script" path="res://src/shotgun_particle.gd" id="2_p5co5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5y2r4"]
 
 [sub_resource type="Gradient" id="Gradient_n1abs"]
 offsets = PackedFloat32Array(0, 0.213115, 0.418033, 1)
@@ -19,14 +22,13 @@ scale_min = 0.0
 scale_max = 0.08
 color_ramp = SubResource("GradientTexture1D_glw8s")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5y2r4"]
+[node name="Area2D" type="Area2D"]
+script = ExtResource("2_p5co5")
 
-[node name="GPUParticles2D2" type="GPUParticles2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5y2r4")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
 process_material = SubResource("ParticleProcessMaterial_1ykyp")
 texture = ExtResource("1_cyktc")
 lifetime = 0.2
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_5y2r4")

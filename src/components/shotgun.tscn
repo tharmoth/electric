@@ -19,4 +19,5 @@ position = Vector2(33, 0)
 texture = ExtResource("2_y36el")
 
 [node name="ParticleOrigin" type="Marker2D" parent="."]
+modulate = Color(0.802518, 0, 0.170893, 1)
 position = Vector2(61, -2)

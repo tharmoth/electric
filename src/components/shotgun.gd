@@ -13,17 +13,15 @@ const SHOTS : int = 5
 
 var ammo: int = SHOTS
 var isReloading: bool = false
-var shotsFired: Array = []
+# Upgrading shotgun upgrades damage
+var minDamage: int = 5
+var maxDamage: int = 8
 
 func _ready() -> void:
 	%ReloadTimer.connect("timeout", _handle_reload)
 
 func _process(delta: float) -> void:
 	self._point_at_mouse()
-	
-	for i in shotsFired.size():
-		var shot = shotsFired[i]
-		shot.global_position += Vector2.from_angle(shot.rotation) * 300 * delta
 
 func fire() -> void:
 	print('attempting to fire', %ShootTimer.time_left)
@@ -34,11 +32,8 @@ func fire() -> void:
 	print('bang!')
 	ammo -= 1
 
-	var shots := _create_shots()
-	
-	for shot in shots:
+	for shot in _create_shots():
 		get_tree().get_root().add_child(shot)
-		shotsFired.push_back(shot)
 
 	emit_signal("shake")
 	%ShootTimer.start(SHOT_DELAY)
@@ -69,8 +64,7 @@ func _handle_reload() -> void:
 func _point_at_mouse() -> void:
 	var m = get_global_mouse_position()
 	global_rotation = global_position.angle_to_point(m)
-	$ParticleOrigin.look_at(m)
-	
+
 	if m.x < 0:
 		$Sprite2D.flip_v = true
 	else:
@@ -81,9 +75,12 @@ func _create_shots() -> Array:
 
 	for i in SHOTS:
 		var shot = particle.instantiate()
-		var angle = (-35 / 2) + (35 / (SHOTS - 1) * i)
+		var angle = ((-1.125 / 2) + (1.125 / (SHOTS - 1)) * i)
 		shot.global_position = $ParticleOrigin.global_position
-		shot.rotation = global_position.angle_to_point(get_global_mouse_position().rotated(angle))
+		shot.starting_position = shot.global_position
+		shot.minDamage = minDamage
+		shot.maxDamage = maxDamage
+		shot.rotation = global_position.angle_to_point(get_global_mouse_position()) + angle
 		shots.push_back(shot)
 
 	return shots
