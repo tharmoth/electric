@@ -34,13 +34,12 @@ func fire() -> void:
 	print('bang!')
 	ammo -= 1
 
-	var mouse = get_global_mouse_position()
-	var shot = particle.instantiate()
-	shot.global_position = $ParticleOrigin.global_position
-	shot.rotation = global_position.angle_to_point(mouse)
+	var shots := _create_shots()
+	
+	for shot in shots:
+		get_tree().get_root().add_child(shot)
+		shotsFired.push_back(shot)
 
-	get_tree().get_root().add_child(shot)
-	shotsFired.push_back(shot)
 	emit_signal("shake")
 	%ShootTimer.start(SHOT_DELAY)
 
@@ -76,3 +75,15 @@ func _point_at_mouse() -> void:
 		$Sprite2D.flip_v = true
 	else:
 		$Sprite2D.flip_v = false
+
+func _create_shots() -> Array:
+	var shots := []
+
+	for i in SHOTS:
+		var shot = particle.instantiate()
+		var angle = (-35 / 2) + (35 / (SHOTS - 1) * i)
+		shot.global_position = $ParticleOrigin.global_position
+		shot.rotation = global_position.angle_to_point(get_global_mouse_position().rotated(angle))
+		shots.push_back(shot)
+
+	return shots
