@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlklea4emlp2"
-path="res://.godot/imported/timer.png-6dcb0bc0d7eb053cfd86be0665f7c76d.ctex"
+uid="uid://ceg1hiloai3x3"
+path="res://.godot/imported/rifle.png-85f186c482b56d66984ae63f47a3ac14.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/timer.png"
-dest_files=["res://.godot/imported/timer.png-6dcb0bc0d7eb053cfd86be0665f7c76d.ctex"]
+source_file="res://data/sprites/rifle.png"
+dest_files=["res://.godot/imported/rifle.png-85f186c482b56d66984ae63f47a3ac14.ctex"]
 
 [params]
 

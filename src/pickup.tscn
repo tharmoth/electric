@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bgk1fl5lw4fyi"]
 
-[ext_resource type="Texture2D" uid="uid://qb7rlb6jk10i" path="res://data/battery.png" id="1_ldhox"]
+[ext_resource type="Texture2D" uid="uid://qb7rlb6jk10i" path="res://data/sprites/battery.png" id="1_ldhox"]
 [ext_resource type="Texture2D" uid="uid://b0wl2wna6gd12" path="res://data/particles/SofterLight.png" id="2_sfs6w"]
 [ext_resource type="Script" path="res://src/pickup.gd" id="2_sy5m0"]
 [ext_resource type="Script" path="res://src/components/bounce_movement_component.gd" id="3_tn3nl"]

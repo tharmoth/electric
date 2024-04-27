@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://dvu7bb1batiyl"]
 
-[ext_resource type="Script" path="res://main_menu/background.gd" id="1_m3ofy"]
-[ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/timer.png" id="2_yknjr"]
+[ext_resource type="Script" path="res://main_menu/main_menu_scripts/background.gd" id="1_m3ofy"]
+[ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/sprites/timer.png" id="2_yknjr"]
 
 [sub_resource type="Gradient" id="Gradient_iirpr"]
 colors = PackedColorArray(0, 0, 0, 1, 0.411765, 0.870588, 1, 1)

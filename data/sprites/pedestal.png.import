@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ceg1hiloai3x3"
-path="res://.godot/imported/rifle.png-ed5f91f9ffed01372254f48ac2a36dd8.ctex"
+uid="uid://dol3a711l6rbn"
+path="res://.godot/imported/pedestal.png-4c01c320b0a24c501445a912dabc2d85.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/rifle.png"
-dest_files=["res://.godot/imported/rifle.png-ed5f91f9ffed01372254f48ac2a36dd8.ctex"]
+source_file="res://data/sprites/pedestal.png"
+dest_files=["res://.godot/imported/pedestal.png-4c01c320b0a24c501445a912dabc2d85.ctex"]
 
 [params]
 

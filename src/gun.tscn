@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://di7v32te6b0ns"]
 
-[ext_resource type="Texture2D" uid="uid://bm73u6kjv4ftu" path="res://data/gun.png" id="1_70a6o"]
+[ext_resource type="Texture2D" uid="uid://bm73u6kjv4ftu" path="res://data/sprites/gun.png" id="1_70a6o"]
 [ext_resource type="Script" path="res://src/components/gun.gd" id="2_mv4vi"]
 [ext_resource type="AudioStream" uid="uid://biyn8iit2iqh0" path="res://data/sfx/laser1.wav" id="3_xd8d8"]
 [ext_resource type="AudioStream" uid="uid://bcvn6k2q0c7yu" path="res://data/sfx/laser2.wav" id="4_uoo41"]

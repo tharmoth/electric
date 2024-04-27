@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://cof2fwefma8ws"]
 
-[ext_resource type="Texture2D" uid="uid://dol3a711l6rbn" path="res://data/pedestal.png" id="1_cglw0"]
+[ext_resource type="Texture2D" uid="uid://dol3a711l6rbn" path="res://data/sprites/pedestal.png" id="1_cglw0"]
 [ext_resource type="Script" path="res://src/pickups/level_up_pickup.gd" id="1_ugs5h"]
-[ext_resource type="Texture2D" uid="uid://dml7nl6a4gp6w" path="res://data/pedestal_outline.png" id="2_ofpex"]
+[ext_resource type="Texture2D" uid="uid://dml7nl6a4gp6w" path="res://data/sprites/pedestal_outline.png" id="2_ofpex"]
 [ext_resource type="Script" path="res://src/components/cancel_rotation_component.gd" id="3_1ex16"]
 [ext_resource type="Texture2D" uid="uid://b0wl2wna6gd12" path="res://data/particles/SofterLight.png" id="4_6siwo"]
 [ext_resource type="Script" path="res://src/components/bounce_movement_component.gd" id="5_yntot"]
-[ext_resource type="Texture2D" uid="uid://ceg1hiloai3x3" path="res://data/rifle.png" id="6_di0ia"]
+[ext_resource type="Texture2D" uid="uid://ceg1hiloai3x3" path="res://data/sprites/rifle.png" id="6_di0ia"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yhgod"]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dml7nl6a4gp6w"
-path="res://.godot/imported/pedestal_outline.png-77ec76f9254cb6c3ac94a8a00a0bf62a.ctex"
+uid="uid://bwwlwk2niy77x"
+path="res://.godot/imported/character.png-8de8901f86ffc2996fbcd450f0c94f12.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/pedestal_outline.png"
-dest_files=["res://.godot/imported/pedestal_outline.png-77ec76f9254cb6c3ac94a8a00a0bf62a.ctex"]
+source_file="res://data/sprites/character.png"
+dest_files=["res://.godot/imported/character.png-8de8901f86ffc2996fbcd450f0c94f12.ctex"]
 
 [params]
 

@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bp27bqsulnbv0"]
 
 [ext_resource type="Texture2D" uid="uid://bnytewetpk40t" path="res://data/gui/panel-border-015.png" id="1_xmj63"]
-[ext_resource type="Texture2D" uid="uid://bm73u6kjv4ftu" path="res://data/gun.png" id="2_u2x4o"]
-[ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/timer.png" id="3_dws6x"]
+[ext_resource type="Texture2D" uid="uid://bm73u6kjv4ftu" path="res://data/sprites/gun.png" id="2_u2x4o"]
+[ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/sprites/timer.png" id="3_dws6x"]
 [ext_resource type="Texture2D" uid="uid://udvcofnt2ayp" path="res://data/character/engines.png" id="4_fc3di"]
 
 [node name="LevelUpGui" type="Control"]
