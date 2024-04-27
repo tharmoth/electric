@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://drh6er8pl0atq"]
+[gd_scene load_steps=3 format=3 uid="uid://drh6er8pl0atq"]
 
 [ext_resource type="Script" path="res://src/components/shotgun.gd" id="1_nf86e"]
+[ext_resource type="Texture2D" uid="uid://hpasopkvipfy" path="res://data/shotgun.png" id="2_y36el"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_nf86e")
@@ -12,3 +13,10 @@ one_shot = true
 [node name="ShootTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(33, 0)
+texture = ExtResource("2_y36el")
+
+[node name="ParticleOrigin" type="Marker2D" parent="."]
+position = Vector2(61, -2)

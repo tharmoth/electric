@@ -1,14 +1,19 @@
-extends Node
+extends Node2D
 
 signal shake
 
-const MAX_AMMO: int = 5
-const RELOAD_DELAY: float = 0.75
+const MAX_AMMO : int = 5
+# Should be in the particle
+const MAX_DISTANCE : int = 300
+const RELOAD_DELAY : float = 0.75
 const SHOT_DELAY : float = 0.5
-const SHOTS: int = 5
+const SHOTS : int = 5
+
+@onready var particle : PackedScene = preload("res://src/shotgun_particle.tscn")
 
 var ammo: int = SHOTS
 var isReloading: bool = false
+var shotsFired: Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,18 +23,32 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if isReloading:
 		return
+	
+	self._point_at_mouse()
+	
+	for i in shotsFired.size():
+		var shot = shotsFired[i]
+		shot.global_position += (Vector2.RIGHT * 300) * delta
 
 func fire() -> void:
 	print('attempting to fire', %ShootTimer.time_left)
 	if !self.can_fire():
 		return
 
-	ammo -= 1
-	emit_signal("shake")
-	%ShootTimer.start(SHOT_DELAY)
 	# Do something
 	print('bang!')
-	
+	ammo -= 1
+
+	var mouse = get_global_mouse_position()
+	var shot = particle.instantiate()
+	shot.global_position = $ParticleOrigin.global_position
+	shot.rotation = $ParticleOrigin.rotation
+
+	add_child(shot)
+	shotsFired.push_back(shot)
+	emit_signal("shake")
+	%ShootTimer.start(SHOT_DELAY)
+
 	if ammo == 0:
 		self._reload()
 
@@ -52,3 +71,13 @@ func _reload() -> void:
 func _handle_reload() -> void:
 	ammo = MAX_AMMO
 	isReloading = false
+
+func _point_at_mouse() -> void:
+	var m = get_global_mouse_position()
+	global_rotation = global_position.angle_to_point(m)
+	$ParticleOrigin.look_at(m)
+	
+	if m.x < 0:
+		$Sprite2D.flip_v = true
+	else:
+		$Sprite2D.flip_v = false
