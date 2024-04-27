@@ -21,7 +21,6 @@ func _process(delta: float) -> void:
 		%Timer.add_child(enemy)
 		enemy.global_position = %Character.global_position + random_point_on_circle(500)
 
-
 func random_point_on_circle(radius : float) -> Vector2:
 	var angle = randf() * PI * 2
 	return Vector2(cos(angle), sin(angle)) * radius
