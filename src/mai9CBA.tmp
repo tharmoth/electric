@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://cjfagb6ey5fr3"]
+
+[ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/timer.png" id="1_4nl5p"]
+[ext_resource type="Script" path="res://src/Character.gd" id="1_xjqbd"]
+[ext_resource type="Texture2D" uid="uid://dqongslx1l148" path="res://data/circle.png" id="2_gs14k"]
+[ext_resource type="Script" path="res://src/components/rotate_component.gd" id="2_uorbx"]
+[ext_resource type="Texture2D" uid="uid://bm73u6kjv4ftu" path="res://data/gun.png" id="5_rwqt5"]
+[ext_resource type="Script" path="res://src/components/point_at_cursor_component.gd" id="6_sxsx8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u7y10"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, -706)
+scale = Vector2(2, 2)
+texture = ExtResource("1_4nl5p")
+script = ExtResource("2_uorbx")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Sprite2D"]
+position = Vector2(-1, 353)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_xjqbd")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D/CharacterBody2D"]
+texture = ExtResource("2_gs14k")
+
+[node name="Gun" type="Sprite2D" parent="Sprite2D/CharacterBody2D"]
+scale = Vector2(2, 2)
+texture = ExtResource("5_rwqt5")
+offset = Vector2(0, 4)
+script = ExtResource("6_sxsx8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/CharacterBody2D"]
+shape = SubResource("CircleShape2D_u7y10")
+
+[node name="Camera2D" type="Camera2D" parent="."]

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dg6mu8wqvi2a7"]
+
+[ext_resource type="Texture2D" uid="uid://dqongslx1l148" path="res://data/circle.png" id="1_07la8"]
+[ext_resource type="Script" path="res://src/enemy.gd" id="2_ew2oe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pxabb"]
+radius = 16.0
+
+[node name="Target2" type="Node2D"]
+position = Vector2(452, -120)
+script = ExtResource("2_ew2oe")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_pxabb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("1_07la8")

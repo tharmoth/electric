@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://rf0alfuvb5r8"]
+
+[ext_resource type="Texture2D" uid="uid://bd32r58qtg7g4" path="res://data/particles/laser_light.png" id="1_chtgk"]
+
+[node name="PointLight2D" type="PointLight2D"]
+scale = Vector2(0.5, 100)
+color = Color(1, 0.752941, 0.796078, 1)
+texture = ExtResource("1_chtgk")
+offset = Vector2(0, -16)
