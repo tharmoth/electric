@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://drh6er8pl0atq"]
+[gd_scene load_steps=5 format=3 uid="uid://drh6er8pl0atq"]
 
 [ext_resource type="Script" path="res://src/components/shotgun.gd" id="1_nf86e"]
 [ext_resource type="Texture2D" uid="uid://hpasopkvipfy" path="res://data/shotgun.png" id="2_y36el"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kun5"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f6yuq"]
+bg_color = Color(0.6, 2.4, 4, 1)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_nf86e")
@@ -21,3 +27,16 @@ texture = ExtResource("2_y36el")
 [node name="ParticleOrigin" type="Marker2D" parent="."]
 modulate = Color(0.802518, 0, 0.170893, 1)
 position = Vector2(61, -2)
+
+[node name="AmmoCapacity" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+z_index = -1
+offset_left = 25.0
+offset_top = -4.0
+offset_right = 49.0
+offset_bottom = 1.0
+theme_override_styles/background = SubResource("StyleBoxFlat_5kun5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_f6yuq")
+max_value = 5.0
+value = 3.0
+show_percentage = false

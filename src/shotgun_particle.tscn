@@ -29,6 +29,7 @@ script = ExtResource("2_p5co5")
 shape = SubResource("CircleShape2D_5y2r4")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+modulate = Color(3, 3, 3, 1)
 process_material = SubResource("ParticleProcessMaterial_1ykyp")
 texture = ExtResource("1_cyktc")
 lifetime = 0.2

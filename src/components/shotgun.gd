@@ -19,6 +19,9 @@ var maxDamage: int = 8
 
 func _ready() -> void:
 	%ReloadTimer.connect("timeout", _handle_reload)
+	%AmmoCapacity.min_value = 0
+	%AmmoCapacity.max_value = MAX_AMMO
+	%AmmoCapacity.value = MAX_AMMO
 
 func _process(delta: float) -> void:
 	self._point_at_mouse()
@@ -31,6 +34,7 @@ func fire() -> void:
 	# Do something
 	print('bang!')
 	ammo -= 1
+	%AmmoCapacity.value -= 1
 
 	for shot in _create_shots():
 		get_tree().get_root().add_child(shot)
@@ -56,6 +60,7 @@ func _reload() -> void:
 	print('reloading')
 	isReloading = true
 	%ReloadTimer.start(RELOAD_DELAY)
+	%AmmoCapacity.value = MAX_AMMO
 
 func _handle_reload() -> void:
 	ammo = MAX_AMMO
