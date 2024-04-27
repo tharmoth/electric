@@ -58,6 +58,9 @@ func return_to_menu():
 	get_tree().change_scene_to_file("res://main_menu/main_menu.tscn")
 	#get_tree().paused = false
 
+func get_current_time() -> float:
+	return to_timer(rotation_degrees)
+
 func to_timer(degrees : float): 
 	return 60 * degrees / 360
 

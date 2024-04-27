@@ -13,7 +13,7 @@ func _ready() -> void:
 	elif item_name == "shotgun":
 		%WeaponSprite.texture = load("res://data/shotgun.png")
 	elif item_name == "reload":
-		%WeaponSprite.texture = load("res://data/sprites/reload_up.png")
+		%WeaponSprite.texture = load("res://data/sprites/resistor.png")
 		%Outline.self_modulate = Color("1eff00")
 	
 	var color = %Outline.self_modulate
@@ -40,6 +40,7 @@ func on_pickup():
 	if item_name == "reload":
 		Character.instance.stats.reload_time -= 1
 		Character.instance.stats.reload_time = max(Character.instance.stats.reload_time, 0)
+		FloatingLabel.show("Reload UP!", global_position, Color.WHITE)
 		return
 	
 	Character.instance.equip_gun(item_name)

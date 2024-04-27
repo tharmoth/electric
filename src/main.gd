@@ -19,7 +19,9 @@ func _process(delta: float) -> void:
 		return
 	timer = 0
 	
-	for i in range(3):
+	var amount_to_spawn = roundi(abs(%Timer.get_current_time()) / 10) + 1
+	
+	for i in range(amount_to_spawn):
 		var enemy = preload("res://src/enemy.tscn").instantiate()
 		%Timer.add_child(enemy)
 		enemy.global_position = random_point_on_circle(512)
