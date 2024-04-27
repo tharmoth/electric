@@ -3,7 +3,7 @@ extends Node2D
 signal turnedKnob
 
 var following := false
-const MAX_DIST := 28000
+const MAX_DIST := 32000
 const MAX_TURN := 6.28
 
 func _physics_process(delta: float) -> void:

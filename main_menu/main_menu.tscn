@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cthcmq0f4mxf4"]
+[gd_scene load_steps=14 format=3 uid="uid://cthcmq0f4mxf4"]
 
 [ext_resource type="Script" path="res://main_menu/main_menu_scripts/main_menu.gd" id="1_0cyx6"]
 [ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/sprites/timer.png" id="1_e64cu"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://src/components/bounce_movement_component.gd" id="8_npv5h"]
 [ext_resource type="PackedScene" uid="uid://bvhveibcwfqxw" path="res://src/background.tscn" id="9_ahrn7"]
 [ext_resource type="AudioStream" uid="uid://d0qkjaxmaxipq" path="res://data/sfx/main_menu_music.mp3" id="9_cuh44"]
+[ext_resource type="Texture2D" uid="uid://cciufktoxstl3" path="res://main_menu/textures/title.png" id="11_08up0"]
 
 [sub_resource type="Gradient" id="Gradient_ucsia"]
 offsets = PackedFloat32Array(0, 0.435065)
@@ -39,7 +40,7 @@ texture = SubResource("GradientTexture2D_2tr7n")
 
 [node name="kitchenTimer" type="Node2D" parent="."]
 z_index = 2
-position = Vector2(517, 494)
+position = Vector2(512, 600)
 scale = Vector2(2, 2)
 script = ExtResource("1_jfd6a")
 
@@ -87,5 +88,17 @@ metadata/_edit_lock_ = true
 [node name="mainMenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_cuh44")
 volume_db = -10.0
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -240.0
+offset_top = 168.0
+offset_right = 240.0
+offset_bottom = 253.0
+grow_horizontal = 2
+texture = ExtResource("11_08up0")
 
 [connection signal="turnedKnob" from="kitchenTimer" to="." method="_on_kitchen_timer_turned_knob"]
