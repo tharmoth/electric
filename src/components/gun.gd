@@ -5,7 +5,7 @@ signal shake
 var knockback_tween : Tween
 var max_ammo = 24
 var shots = 3
-var ammo : int = max_ammo
+var ammo : int = 0
 var reloading : bool = false
 var ready_to_fire : bool = true
 @export var is_rifle : bool
@@ -18,7 +18,7 @@ func _ready() -> void:
 	else:
 		max_ammo = 6
 		shots = 1
-	ammo = max_ammo
+	reload()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
