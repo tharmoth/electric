@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddusnt4m6gbal"]
+
+[ext_resource type="PackedScene" uid="uid://di7v32te6b0ns" path="res://src/gun.tscn" id="1_ocsp2"]
+[ext_resource type="Texture2D" uid="uid://ceg1hiloai3x3" path="res://data/rifle.png" id="2_e553g"]
+
+[node name="Rifle" instance=ExtResource("1_ocsp2")]
+texture = ExtResource("2_e553g")
+is_rifle = true
+
+[node name="ProgressBar" parent="." index="4"]
+offset_left = 3.99986
+offset_top = -5.00012
+offset_right = 275.0
+offset_bottom = 14.9999
