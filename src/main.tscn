@@ -76,8 +76,11 @@ gradient = SubResource("Gradient_n1abs")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4h18v"]
 particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(640, 20, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 512.0
+emission_ring_inner_radius = 512.0
 angle_max = 360.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.1
@@ -86,8 +89,8 @@ color_ramp = SubResource("GradientTexture1D_glw8s")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1ykyp"]
 particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 1.0
+emission_shape = 3
+emission_box_extents = Vector3(20, 512, 1)
 angle_max = 360.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.1
@@ -133,7 +136,6 @@ collision_mask = 4
 script = ExtResource("1_xjqbd")
 
 [node name="Sprites" type="Node2D" parent="Timer/Character"]
-unique_name_in_owner = true
 scale = Vector2(2, 2)
 
 [node name="PointLight2D" type="PointLight2D" parent="Timer/Character/Sprites"]
@@ -153,7 +155,6 @@ offset_bottom = 175.5
 scale = Vector2(0.1, 0.1)
 theme_override_styles/background = SubResource("StyleBoxFlat_vknm1")
 theme_override_styles/fill = SubResource("StyleBoxFlat_xenfm")
-value = 50.0
 fill_mode = 3
 show_percentage = false
 
@@ -220,25 +221,46 @@ autoplay = true
 
 [node name="Battery" parent="." instance=ExtResource("14_5kbvx")]
 
+[node name="GPUParticles2D5" type="GPUParticles2D" parent="."]
+modulate = Color(3, 3, 3, 1)
+amount = 250
+process_material = SubResource("ParticleProcessMaterial_4h18v")
+texture = ExtResource("15_i46s2")
+lifetime = 0.2
+
 [node name="GPUParticles2D3" type="GPUParticles2D" parent="."]
 visible = false
-position = Vector2(0, -320)
+modulate = Color(3, 3, 3, 1)
+position = Vector2(0, -510)
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_4h18v")
 texture = ExtResource("15_i46s2")
 lifetime = 0.2
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
-position = Vector2(-521, -267)
+visible = false
+modulate = Color(3, 3, 3, 1)
+position = Vector2(-512, 0)
+amount = 100
 process_material = SubResource("ParticleProcessMaterial_1ykyp")
 texture = ExtResource("15_i46s2")
 lifetime = 0.2
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 visible = false
-position = Vector2(573, 19)
-amount = 50
+modulate = Color(3, 3, 3, 1)
+position = Vector2(512, -1)
+amount = 100
 process_material = SubResource("ParticleProcessMaterial_1ykyp")
+texture = ExtResource("15_i46s2")
+lifetime = 0.2
+
+[node name="GPUParticles2D4" type="GPUParticles2D" parent="."]
+visible = false
+modulate = Color(3, 3, 3, 1)
+position = Vector2(0, 512)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_4h18v")
 texture = ExtResource("15_i46s2")
 lifetime = 0.2
 

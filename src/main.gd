@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 	for i in range(3):
 		var enemy = preload("res://src/enemy.tscn").instantiate()
 		%Timer.add_child(enemy)
-		enemy.global_position = %Character.global_position + random_point_on_circle(500)
+		enemy.global_position = random_point_on_circle(512)
 
 func random_point_on_circle(radius : float) -> Vector2:
 	var angle = randf() * PI * 2

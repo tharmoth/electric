@@ -7,6 +7,7 @@ var knockback : Vector2 = Vector2.ZERO
 var charge : int = 0
 
 var gun = preload("res://src/gun.tscn")
+var rifle = preload("res://src/weapons/rifle.tscn")
 var shotgun = preload("res://src/components/shotgun.tscn")
 var currentGun;
 
@@ -14,18 +15,32 @@ func _enter_tree() -> void:
 	instance = self
 
 func _ready() -> void:
+	%PickupBox.area_entered.connect(pickup)
+	
 	add_to_group("Character")
 	currentGun = gun.instantiate()
 	currentGun.connect("shake", shake_camera)
 	call_deferred("add_child", currentGun)
-	%PickupBox.area_entered.connect(pickup)
+	
 
 func pickup(area : Area2D) -> void:
 	area.get_parent().queue_free()
 	%Timer.seek(10)
-	if (%Charge.value < 100):
+	if %Charge.value < 100:
 		%Charge.value += 10
 	
+	if %Charge.value >= 100:
+		on_level_up()
+	
+func on_level_up():
+	var tween = create_tween()
+	tween.tween_property(%Charge, "value", 0, 1)
+	if currentGun is HitscanGun && !currentGun.is_rifle:
+		currentGun.queue_free()
+		currentGun = rifle.instantiate()
+		currentGun.connect("shake", shake_camera)
+		call_deferred("add_child", currentGun)
+
 func _process(delta: float) -> void:
 	global_rotation = 0
 
@@ -53,4 +68,6 @@ func shake_camera() -> void:
 	%Camera2D/AnimationPlayer.play("shake")
 	
 func on_gameover() -> void:
-	death_animation.kill(%Sprites)
+	var tween = create_tween()
+	tween.tween_property(self, "modulate", Color.TRANSPARENT, 1)
+	currentGun.queue_free()

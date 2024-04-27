@@ -1,15 +1,24 @@
-extends Sprite2D
+class_name HitscanGun extends Sprite2D
 
 signal shake
 
 var knockback_tween : Tween
 var max_ammo = 24
+var shots = 3
 var ammo : int = max_ammo
 var reloading : bool = false
 var ready_to_fire : bool = true
+@export var is_rifle : bool
 
 func _ready() -> void:
 	%GunAnimationPlayer.animation_finished.connect(reload_complete)
+	if is_rifle:
+		max_ammo = 24
+		shots = 3
+	else:
+		max_ammo = 6
+		shots = 1
+	ammo = max_ammo
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -51,7 +60,7 @@ func fire() -> void:
 		return
 	ready_to_fire = false
 	var tween = create_tween()
-	for i in range(3):
+	for i in range(shots):
 		tween.tween_callback(loose)
 		tween.tween_interval(.2)
 	tween.tween_interval(.8)
@@ -61,7 +70,8 @@ func fire() -> void:
 	
 func loose() -> void:
 	ammo -= 1
-	print(ammo)
+	%ProgressBar.value = ammo / float(max_ammo) * 100.0
+	print(%ProgressBar.value)
 
 	var mouse = get_global_mouse_position()
 	var direction = global_position.direction_to(mouse)

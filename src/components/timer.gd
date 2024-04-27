@@ -35,6 +35,11 @@ func _process(delta: float) -> void:
 		game_over()
 
 func game_over():
+	var audio : AudioStreamPlayer = %Music
+	var stream : AudioStream = audio.stream
+	if (audio.get_playback_position() < stream.get_length() - 5):
+		%Music.seek(stream.get_length() - 5)
+
 	is_game_over = true
 	for node in get_tree().get_nodes_in_group("Enemy"):
 		node.on_gameover()

@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://di7v32te6b0ns"]
+[gd_scene load_steps=12 format=3 uid="uid://di7v32te6b0ns"]
 
-[ext_resource type="Texture2D" uid="uid://ceg1hiloai3x3" path="res://data/rifle.png" id="1_u6y5a"]
+[ext_resource type="Texture2D" uid="uid://bm73u6kjv4ftu" path="res://data/gun.png" id="1_70a6o"]
 [ext_resource type="Script" path="res://src/components/gun.gd" id="2_mv4vi"]
 [ext_resource type="AudioStream" uid="uid://biyn8iit2iqh0" path="res://data/sfx/laser1.wav" id="3_xd8d8"]
 [ext_resource type="AudioStream" uid="uid://bcvn6k2q0c7yu" path="res://data/sfx/laser2.wav" id="4_uoo41"]
@@ -32,15 +32,33 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0, 2.0944, 4.18879, 6.28319, 8.37758, 10.472, 12.5664]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ProgressBar:value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 100.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6jwtj"]
 _data = {
 "reload": SubResource("Animation_5jov8")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7ma3"]
+bg_color = Color(0.360784, 0.364706, 0.345098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5r0or"]
+bg_color = Color(16, 0, 0, 1)
+
 [node name="Gun" type="Sprite2D"]
 rotation = 12.5664
-texture = ExtResource("1_u6y5a")
+texture = ExtResource("1_70a6o")
 offset = Vector2(0, 4)
 script = ExtResource("2_mv4vi")
 
@@ -62,3 +80,15 @@ volume_db = -10.0
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(8, -0.000231679)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -1.0
+offset_top = -6.0
+offset_right = 160.0
+offset_bottom = 22.0
+scale = Vector2(0.1, 0.1)
+theme_override_styles/background = SubResource("StyleBoxFlat_x7ma3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5r0or")
+value = 100.0
+show_percentage = false
