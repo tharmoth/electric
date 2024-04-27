@@ -27,12 +27,9 @@ func _process(delta: float) -> void:
 	self._point_at_mouse()
 
 func fire() -> void:
-	print('attempting to fire', %ShootTimer.time_left)
 	if !self.can_fire():
 		return
 
-	# Do something
-	print('bang!')
 	ammo -= 1
 	%AmmoCapacity.value -= 1
 
@@ -41,26 +38,27 @@ func fire() -> void:
 
 	emit_signal("shake")
 	%ShootTimer.start(SHOT_DELAY)
+	%ShootAudio.play(0)
 
 	if ammo == 0:
 		self._reload()
 
 func can_fire() -> bool:
 	if isReloading:
-		print(1)
 		return false
 
 	if %ShootTimer.time_left != 0:
-		print(2)
 		return false
 
 	return ammo > 0
 
 func _reload() -> void:
-	print('reloading')
 	isReloading = true
 	%ReloadTimer.start(RELOAD_DELAY)
 	%AmmoCapacity.value = MAX_AMMO
+	%ReloadAudio.play(0)
+	await get_tree().create_timer(RELOAD_DELAY).timeout
+	%ReloadAudio.stop()
 
 func _handle_reload() -> void:
 	ammo = MAX_AMMO
