@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/main.gd" id="1_xa5wo"]
 [ext_resource type="Script" path="res://src/Character.gd" id="1_xjqbd"]
 [ext_resource type="Texture2D" uid="uid://h4cjswv74lav" path="res://data/handle.png" id="2_jr2jg"]
-[ext_resource type="Script" path="res://src/components/rotate_component.gd" id="2_uorbx"]
+[ext_resource type="Script" path="res://src/components/timer.gd" id="2_uorbx"]
 [ext_resource type="Texture2D" uid="uid://5taqte82qsbl" path="res://data/character/character.png" id="5_8cd5a"]
 [ext_resource type="Script" path="res://src/Engines.gd" id="5_au8ny"]
 [ext_resource type="Texture2D" uid="uid://udvcofnt2ayp" path="res://data/character/engines.png" id="6_uva1i"]
@@ -96,9 +96,11 @@ color_ramp = SubResource("GradientTexture1D_glw8s")
 
 [sub_resource type="Environment" id="Environment_f3sby"]
 background_mode = 3
+background_energy_multiplier = 0.0
 ambient_light_energy = 0.0
 reflected_light_source = 1
 glow_enabled = true
+glow_intensity = 1.0
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_xa5wo")
@@ -123,17 +125,6 @@ z_index = -100
 position = Vector2(0, -1)
 texture = ExtResource("1_4nl5p")
 
-[node name="Engines" type="Sprite2D" parent="Timer"]
-unique_name_in_owner = true
-position = Vector2(83, 131)
-scale = Vector2(2, 2)
-texture = ExtResource("6_uva1i")
-script = ExtResource("5_au8ny")
-
-[node name="Fire" type="Sprite2D" parent="Timer/Engines"]
-unique_name_in_owner = true
-texture = ExtResource("8_kw3gu")
-
 [node name="Character" type="CharacterBody2D" parent="Timer"]
 unique_name_in_owner = true
 position = Vector2(83, 131)
@@ -142,6 +133,7 @@ collision_mask = 4
 script = ExtResource("1_xjqbd")
 
 [node name="Sprites" type="Node2D" parent="Timer/Character"]
+unique_name_in_owner = true
 scale = Vector2(2, 2)
 
 [node name="PointLight2D" type="PointLight2D" parent="Timer/Character/Sprites"]
@@ -174,6 +166,16 @@ unique_name_in_owner = true
 modulate = Color(2, 4, 4, 1)
 texture = ExtResource("7_2rs57")
 script = ExtResource("8_xdvpb")
+
+[node name="Engines" type="Sprite2D" parent="Timer/Character/Sprites"]
+unique_name_in_owner = true
+texture = ExtResource("6_uva1i")
+script = ExtResource("5_au8ny")
+
+[node name="Fire" type="Sprite2D" parent="Timer/Character/Sprites/Engines"]
+unique_name_in_owner = true
+modulate = Color(2, 4, 4, 1)
+texture = ExtResource("8_kw3gu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Timer/Character"]
 visible = false
@@ -258,7 +260,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.2, 0.2, 0.2, 1)
+color = Color(0.6, 0.6, 0.6, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.25

@@ -12,6 +12,8 @@ func restart():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if WorldTimer.instance.is_game_over:
+		return
 	timer += delta
 	if (timer < COOLDOWN):
 		return

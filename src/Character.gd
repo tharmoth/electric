@@ -8,13 +8,13 @@ var charge : int = 0
 
 var gun = preload("res://src/gun.tscn")
 var shotgun = preload("res://src/components/shotgun.tscn")
-
 var currentGun;
 
 func _enter_tree() -> void:
 	instance = self
 
 func _ready() -> void:
+	add_to_group("Character")
 	currentGun = gun.instantiate()
 	currentGun.connect("shake", shake_camera)
 	call_deferred("add_child", currentGun)
@@ -26,11 +26,12 @@ func pickup(area : Area2D) -> void:
 	if (%Charge.value < 100):
 		%Charge.value += 10
 	
-	
 func _process(delta: float) -> void:
 	global_rotation = 0
 
 func _physics_process(delta: float) -> void:
+	if WorldTimer.instance.is_game_over:
+		return
 	var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
 	var movement : Vector2
@@ -50,3 +51,6 @@ func _physics_process(delta: float) -> void:
 
 func shake_camera() -> void:
 	%Camera2D/AnimationPlayer.play("shake")
+	
+func on_gameover() -> void:
+	death_animation.kill(%Sprites)

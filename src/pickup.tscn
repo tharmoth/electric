@@ -24,7 +24,7 @@ position = Vector2(0, 15)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_sfs6w")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="BatterySprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 texture = ExtResource("1_ldhox")
 script = ExtResource("3_tn3nl")

@@ -11,7 +11,7 @@ static func init():
 	
 
 # Called when the node enters the scene tree for the first time.
-static func kill(sprite : Sprite2D) -> void:
+static func kill(sprite : Node2D) -> void:
 	var material = ShaderMaterial.new()
 	material.shader = shatter_shader
 	material.set_shader_parameter("strength", 1.5)

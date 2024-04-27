@@ -8,14 +8,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
-	
 	var target = Character.instance.global_position
 	var direction = global_position.direction_to(target).normalized()
-
-	#global_position = global_position.move_toward(target, (Character.SPEED - 10) * delta)
-	global_position = Character.instance.global_position
-	
 	var target_degrees
 	
 	var axis = Input.get_axis("ui_left", "ui_right")

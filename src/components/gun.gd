@@ -8,6 +8,9 @@ var ammo : int = max_ammo
 var reloading : bool = false
 var ready_to_fire : bool = true
 
+func _ready() -> void:
+	%GunAnimationPlayer.animation_finished.connect(reload_complete)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	move_to_position()
@@ -37,7 +40,6 @@ func move_to_position() -> void:
 func reload() -> void:
 	%GunAnimationPlayer.play("reload")
 	reloading = true
-	%GunAnimationPlayer.animation_finished.connect(reload_complete)
 	%GunReload.play()
 	
 func reload_complete(something):
