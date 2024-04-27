@@ -3,6 +3,7 @@ class_name Character extends CharacterBody2D
 const SPEED = 300.0
 
 static var instance : Character
+var knockbackTween : Tween = null
 var knockback : Vector2 = Vector2.ZERO
 
 var gun = preload("res://src/gun.tscn")
@@ -39,6 +40,7 @@ func equip_gun(name : String):
 		currentGun = shotgun.instantiate()
 	
 	currentGun.connect("shake", shake_camera)
+	currentGun.connect("knockback", recoil_knockback)
 	call_deferred("add_child", currentGun) 
 	
 func on_level_up():
@@ -47,6 +49,7 @@ func on_level_up():
 
 	var pick : Node2D = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
 	pick.init("gun")
+
 	var direction = global_position.direction_to(Vector2.ZERO)
 	var angle = global_position.angle_to_point(Vector2.ZERO) + PI / 2
 	
@@ -55,6 +58,7 @@ func on_level_up():
 	
 	var pick2 : Node2D = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
 	pick2.init("rifle")
+
 	get_parent().add_child(pick2)
 	pick2.global_position = global_position + direction * 100 + Vector2.LEFT.rotated(angle) * 100
 	
@@ -62,8 +66,6 @@ func on_level_up():
 	pick3.init("shotgun")
 	get_parent().add_child(pick3)
 	pick3.global_position = global_position + direction * 100 + Vector2.RIGHT.rotated(angle) * 100
-	
-		
 
 func _process(delta: float) -> void:
 	global_rotation = 0
@@ -111,7 +113,17 @@ func on_damage() -> void:
 
 func shake_camera() -> void:
 	%Camera2D/AnimationPlayer.play("shake")
+
+func recoil_knockback(recoil: Vector2) -> void:
+	if knockbackTween:
+		knockbackTween.kill()
 	
+	knockback = recoil
+	knockbackTween = get_tree().create_tween()
+	knockbackTween.set_ease(Tween.EASE_OUT)
+	knockbackTween.set_trans(Tween.TRANS_CUBIC)
+	knockbackTween.tween_property(self, "knockback", Vector2.ZERO, .25)
+
 func on_gameover() -> void:
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color.TRANSPARENT, 1)
