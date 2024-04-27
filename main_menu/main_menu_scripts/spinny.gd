@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 		var finalAng : float = remap(a, -PI, PI, 0, 100)
 		print("finalAng: " + String.num(finalAng))
 		
-		var fang : float = lerp_angle($knob.rotation, ang, 0.3)
+		var fang : float = lerp_angle($knob.rotation, ang, 0.05)
 		$knob.rotation = clamp(fang, 0, 2*PI)
 		emit_signal("turnedKnob", finalAng)
 		
