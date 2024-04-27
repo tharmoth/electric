@@ -89,9 +89,25 @@ func _physics_process(delta: float) -> void:
 		currentGun.fire()
 
 func on_damage() -> void:
+	
+	var time = .5
 	var tween = create_tween()
-	tween.tween_property(self, "modulate", Color(10, 0, 0, 1), .1)
-	tween.tween_property(self, "modulate", Color.WHITE, .1)
+	tween.tween_property(self, "modulate", Color(10, 0, 0, 1), time / 4.0)
+	tween.tween_property(self, "modulate", Color.WHITE, 3 * time / 4.0)
+	
+	var tween2 = create_tween()
+	tween2.set_ease(Tween.EASE_IN_OUT)
+	tween2.set_trans(Tween.TRANS_SINE)
+	tween2.tween_property(%Sprites, "position", Vector2(randf_range(-10, 10), randf_range(-10, 10)) , time / 3.0)
+	tween2.tween_property(%Sprites, "position", Vector2(randf_range(-10, 10), randf_range(-10, 10)) , time / 3.0)
+	tween2.tween_property(%Sprites, "position", Vector2.ZERO, time / 3.0)
+	
+	var tween3 = create_tween()
+	tween3.set_ease(Tween.EASE_IN_OUT)
+	tween3.set_trans(Tween.TRANS_SINE)
+	tween3.tween_property(%Sprites, "rotation_degrees", randf_range(-10, 10) , time / 3.0)
+	tween3.tween_property(%Sprites, "rotation_degrees", randf_range(-10, 10) , time / 3.0)
+	tween3.tween_property(%Sprites, "rotation_degrees", 0, time / 3.0)
 
 func shake_camera() -> void:
 	%Camera2D/AnimationPlayer.play("shake")
