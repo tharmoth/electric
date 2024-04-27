@@ -90,7 +90,7 @@ func _physics_process(delta: float) -> void:
 
 func on_damage() -> void:
 	
-	var time = .5
+	var time = .3
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color(10, 0, 0, 1), time / 4.0)
 	tween.tween_property(self, "modulate", Color.WHITE, 3 * time / 4.0)
