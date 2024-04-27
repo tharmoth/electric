@@ -1,8 +1,8 @@
 class_name Enemy extends Node2D
 
+var maxHealth : int = 5
 var speed := 100.0
 var dead : bool = false
-
 
 func _ready() -> void:
 	add_to_group("Enemy")
@@ -40,3 +40,9 @@ func on_gameover():
 	%StaticBody2D.queue_free()
 	death_animation.kill(%Sprite2D)
 	queue_free()
+
+func damage(damage: int) -> void:
+	if maxHealth - damage <= 0:
+		self.on_death()
+
+	print("Damage taken: %s" % str(damage))

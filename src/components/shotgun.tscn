@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://drh6er8pl0atq"]
+[gd_scene load_steps=7 format=3 uid="uid://drh6er8pl0atq"]
 
 [ext_resource type="Script" path="res://src/components/shotgun.gd" id="1_nf86e"]
 [ext_resource type="Texture2D" uid="uid://hpasopkvipfy" path="res://data/shotgun.png" id="2_y36el"]
+[ext_resource type="AudioStream" uid="uid://b7y8flhhbcdo4" path="res://data/sfx/shotgun_shoot.mp3" id="3_wc0s3"]
+[ext_resource type="AudioStream" uid="uid://n0j86fcv2032" path="res://data/sfx/shotgun_reload.mp3" id="4_3nak7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kun5"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f6yuq"]
+bg_color = Color(0.6, 2.4, 4, 1)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_nf86e")
@@ -19,4 +27,27 @@ position = Vector2(33, 0)
 texture = ExtResource("2_y36el")
 
 [node name="ParticleOrigin" type="Marker2D" parent="."]
+modulate = Color(0.802518, 0, 0.170893, 1)
 position = Vector2(61, -2)
+
+[node name="AmmoCapacity" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+z_index = -1
+offset_left = 25.0
+offset_top = -4.0
+offset_right = 49.0
+offset_bottom = 1.0
+theme_override_styles/background = SubResource("StyleBoxFlat_5kun5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_f6yuq")
+max_value = 5.0
+value = 3.0
+show_percentage = false
+
+[node name="ShootAudio" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_wc0s3")
+
+[node name="ReloadAudio" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_3nak7")
+volume_db = 10.0
