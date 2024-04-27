@@ -9,6 +9,7 @@ var shots = 3
 var ammo : int = 0
 var reloading : bool = false
 var ready_to_fire : bool = true
+const KNOCKBACK_FORCE : float = 250
 @export var is_rifle : bool
 
 func _ready() -> void:
@@ -82,7 +83,7 @@ func loose() -> void:
 
 	var mouse = get_global_mouse_position()
 	var direction = global_position.direction_to(mouse)
-	var origin = $Marker2D.global_position
+	var origin = $ParticleOrigin.global_position
 	var target = origin + direction * 40
 	
 	var space_state = get_world_2d().direct_space_state
@@ -111,7 +112,9 @@ func loose() -> void:
 
 	%GunAudio.play()
 	emit_signal("shake")
-	emit_signal("knockback", origin - direction * 250)
+	
+	var force : Vector2 = Character.instance.global_position - Character.instance.global_position.direction_to(get_global_mouse_position()).normalized() * KNOCKBACK_FORCE
+	emit_signal("knockback", force)
 	
 	if ammo == 0:
 		reload()

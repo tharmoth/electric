@@ -19,6 +19,9 @@ func _process(delta: float) -> void:
 		return
 	timer = 0
 	
+	if (true):
+		return;
+	
 	for i in range(3):
 		var enemy = preload("res://src/enemy.tscn").instantiate()
 		%Timer.add_child(enemy)

@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://src/components/shotgun.gd" id="1_nf86e"]
 [ext_resource type="Texture2D" uid="uid://hpasopkvipfy" path="res://data/shotgun.png" id="2_y36el"]
-[ext_resource type="AudioStream" uid="uid://b7y8flhhbcdo4" path="res://data/sfx/shotgun_shoot.mp3" id="3_wc0s3"]
-[ext_resource type="AudioStream" uid="uid://n0j86fcv2032" path="res://data/sfx/shotgun_reload.mp3" id="4_3nak7"]
+[ext_resource type="AudioStream" path="res://data/sfx/shotgun_shoot.mp3" id="3_wc0s3"]
+[ext_resource type="AudioStream" path="res://data/sfx/shotgun_reload.mp3" id="4_3nak7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kun5"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -27,6 +27,7 @@ position = Vector2(33, 0)
 texture = ExtResource("2_y36el")
 
 [node name="ParticleOrigin" type="Marker2D" parent="."]
+unique_name_in_owner = true
 modulate = Color(0.802518, 0, 0.170893, 1)
 position = Vector2(61, -2)
 

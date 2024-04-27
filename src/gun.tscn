@@ -80,7 +80,8 @@ unique_name_in_owner = true
 stream = ExtResource("6_owrg4")
 volume_db = -10.0
 
-[node name="Marker2D" type="Marker2D" parent="."]
+[node name="ParticleOrigin" type="Marker2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(16, 0)
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
