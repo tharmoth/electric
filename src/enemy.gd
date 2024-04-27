@@ -26,7 +26,7 @@ func on_death():
 	dead = true
 	
 	if (randf() > .75):
-		var battery = pwreload("res://src/pickup.tscn").instantiate()
+		var battery = preload("res://src/pickup.tscn").instantiate()
 		WorldTimer.instance.add_child(battery)
 		battery.global_position = global_position
 	
