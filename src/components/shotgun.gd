@@ -74,13 +74,6 @@ func _reload() -> void:
 	isReloading = true
 	%GunAnimationPlayer.play("reload")
 	
-	%AmmoCapacity.value = MAX_AMMO
-	%ReloadAudio.play(0)
-	await get_tree().create_timer(RELOAD_DELAY).timeout
-	%ReloadAudio.stop()
-	#await get_tree().create_timer(RELOAD_DELAY).timeout
-	#%AnimationPlayer.stop()
-
 var spin_to_win = 5	
 	
 func _reload_complete(something):

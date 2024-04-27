@@ -57,7 +57,6 @@ bg_color = Color(0.360784, 0.364706, 0.345098, 1)
 bg_color = Color(16, 0, 0, 1)
 
 [node name="Gun" type="Node2D"]
-rotation = 12.5664
 script = ExtResource("2_mv4vi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -93,5 +92,4 @@ offset_bottom = 27.0
 scale = Vector2(0.1, 0.1)
 theme_override_styles/background = SubResource("StyleBoxFlat_x7ma3")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5r0or")
-value = 100.0
 show_percentage = false

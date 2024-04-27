@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/components/shotgun.gd" id="1_nf86e"]
 [ext_resource type="Texture2D" uid="uid://hpasopkvipfy" path="res://data/shotgun.png" id="2_y36el"]
 [ext_resource type="AudioStream" path="res://data/sfx/shotgun_shoot.mp3" id="3_wc0s3"]
-[ext_resource type="AudioStream" path="res://data/sfx/shotgun_reload.mp3" id="4_3nak7"]
+[ext_resource type="AudioStream" uid="uid://s3nmubg5gry1" path="res://data/sfx/shotgun_reload_2.wav" id="4_612yg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kun5"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -26,6 +26,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 2.0944, 4.18879, 6.28319, 8.37758, 10.472, 12.5664]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ReloadAudio:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_78r6x"]
@@ -67,8 +79,8 @@ stream = ExtResource("3_wc0s3")
 
 [node name="ReloadAudio" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("4_3nak7")
-volume_db = 10.0
+stream = ExtResource("4_612yg")
+volume_db = -10.0
 
 [node name="GunAnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
