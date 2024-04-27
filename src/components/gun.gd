@@ -1,8 +1,11 @@
 extends Sprite2D
 
+signal shake
+
 var knockback_tween : Tween
 var ammo : int = 6
 var reloading : bool = false
+var parent
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -24,6 +27,8 @@ func _process(delta: float) -> void:
 			fire_tween.tween_interval(.2)
 			fire_tween.tween_callback(fire)
 
+func can_fire() -> bool:
+	return true
 
 func move_to_position() -> void:
 	var mouse = get_global_mouse_position()
@@ -48,10 +53,10 @@ func reload() -> void:
 func fire() -> void:
 	var mouse = get_global_mouse_position()
 	var direction = global_position.direction_to(mouse)
-	var origin = get_parent().global_position
+	var origin = $Marker2D.global_position
 	var target = origin + direction * 20
 	
-	var space_state =  get_world_2d().direct_space_state
+	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(global_position + direction * 10,  direction * 2000)
 	var result = space_state.intersect_ray(query)
 	var end : Vector2
@@ -67,24 +72,24 @@ func fire() -> void:
 	line.points = [global_position, end]
 	line.width = 0
 	line.default_color = Color.RED
-	get_tree().root.add_child(line)
+	parent.get_tree().root.add_child(line)
 	
-	var laser_tween = create_tween()
+	var laser_tween = parent.get_tree().create_tween()
 	laser_tween.tween_property(line, "width", 6, .05)
 	laser_tween.tween_property(line, "width", 0, .3)
 	laser_tween.tween_callback(func(): line.queue_free())
 
-	%Camera2D/AnimationPlayer.play("shake")
+	emit_signal("shake")
 	%GunAudio.play()
 	
 	if knockback_tween:
 		knockback_tween.kill()
 
-	knockback_tween = create_tween()
-	get_parent().knockback = origin - direction * 250;
+	knockback_tween = parent.get_tree().create_tween()
+	parent.knockback = origin - direction * 250;
 	knockback_tween.set_ease(Tween.EASE_OUT)
 	knockback_tween.set_trans(Tween.TRANS_CUBIC)
-	knockback_tween.tween_property(get_parent(), "knockback", Vector2.ZERO, .25)
+	knockback_tween.tween_property(parent, "knockback", Vector2.ZERO, .25)
 	
 	#var light = preload("res://src/laser_light.tscn").instantiate()
 	#light.global_position = global_position
