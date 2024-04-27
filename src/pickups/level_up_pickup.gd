@@ -1,7 +1,9 @@
 extends Node2D
 
-func init(name : String):
-	pass
+var item_name : String
+
+func init(item_name : String):
+	self.item_name = item_name
 
 func _ready() -> void:
 	add_to_group("LevelUpPickup")
@@ -19,6 +21,6 @@ func destroy():
 
 func on_pickup():
 	queue_free()
-	Character.instance.equip_gun("rifle")
+	Character.instance.equip_gun(item_name)
 	for node in get_tree().get_nodes_in_group("LevelUpPickup"):
 		node.destroy()

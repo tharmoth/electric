@@ -6,17 +6,19 @@ var dead : bool = false
 
 func _ready() -> void:
 	add_to_group("Enemy")
+	%Hurtbox.area_entered.connect(test)
+	
+func test(area : Area2D):
+	Character.instance.on_damage()
+	WorldTimer.instance.seek(-30)
+	death_animation.kill(%Sprite2D)
+	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var target = Character.instance.global_position
 	global_position = global_position.move_toward(target, speed * delta)
-	
-	if global_position.distance_to(target) < 24:
-		Character.instance.on_damage()
-		WorldTimer.instance.seek(-30)
-		death_animation.kill(%Sprite2D)
-		queue_free()
+
 
 func on_death():
 	if dead:

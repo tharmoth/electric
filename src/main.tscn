@@ -17,7 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://d2ak74rou1req" path="res://data/sfx/a-kitchen-timer-55420.wav" id="14_2bgwq"]
 [ext_resource type="PackedScene" uid="uid://bgk1fl5lw4fyi" path="res://src/pickup.tscn" id="14_5kbvx"]
 [ext_resource type="Texture2D" uid="uid://doi73aghhpalw" path="res://data/particles/spark_02.png" id="15_i46s2"]
-[ext_resource type="AudioStream" uid="uid://cdi574hqve8cc" path="res://data/sfx/timer_winding.wav" id="17_08sto"]
+[ext_resource type="AudioStream" path="res://data/sfx/timer_winding.wav" id="17_08sto"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vknm1"]
 bg_color = Color(0.203922, 0.203922, 0.203922, 1)
@@ -25,11 +25,13 @@ bg_color = Color(0.203922, 0.203922, 0.203922, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xenfm"]
 bg_color = Color(0.6, 2.4, 4, 1)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_u7y10"]
-radius = 16.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5w6x5"]
+radius = 24.0
+height = 64.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jpemb"]
-radius = 16.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xx30q"]
+radius = 24.0
+height = 64.0
 
 [sub_resource type="Animation" id="Animation_bvjvu"]
 resource_name = "shake"
@@ -171,17 +173,15 @@ modulate = Color(2, 4, 4, 1)
 texture = ExtResource("8_kw3gu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Timer/Character"]
-visible = false
-shape = SubResource("CircleShape2D_u7y10")
+shape = SubResource("CapsuleShape2D_5w6x5")
 
 [node name="PickupBox" type="Area2D" parent="Timer/Character"]
 unique_name_in_owner = true
-visible = false
-collision_layer = 0
+collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Timer/Character/PickupBox"]
-shape = SubResource("CircleShape2D_jpemb")
+shape = SubResource("CapsuleShape2D_xx30q")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true

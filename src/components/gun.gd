@@ -1,4 +1,4 @@
-class_name HitscanGun extends Sprite2D
+class_name HitscanGun extends Node2D
 
 signal shake
 
@@ -34,6 +34,12 @@ func can_fire() -> bool:
 func point_at_mouse() -> void:
 	var mouse = get_global_mouse_position()
 	global_rotation = global_position.angle_to_point(mouse)
+
+	# Breaks progress bars	
+	#if mouse.x < 0:
+		#$Sprite2D.flip_v = true
+	#else:
+		#$Sprite2D.flip_v = false
 
 func move_to_position() -> void:
 	var mouse = get_global_mouse_position()

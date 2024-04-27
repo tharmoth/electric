@@ -4,11 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://ceg1hiloai3x3" path="res://data/rifle.png" id="2_e553g"]
 
 [node name="Rifle" instance=ExtResource("1_ocsp2")]
-texture = ExtResource("2_e553g")
 is_rifle = true
 
-[node name="ProgressBar" parent="." index="4"]
-offset_left = 3.99986
-offset_top = -5.00012
-offset_right = 275.0
-offset_bottom = 14.9999
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_e553g")
+
+[node name="Marker2D" parent="." index="4"]
+position = Vector2(32, -0.000463359)
+
+[node name="ProgressBar" parent="." index="5"]
+offset_left = 2.99998
+offset_top = -1.00009
+offset_right = 274.0
+offset_bottom = 18.9999
