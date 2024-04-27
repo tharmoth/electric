@@ -4,6 +4,16 @@ extends Sprite2D
 var timer : float = 0
 var blink_time : float = 3.0 # seconds
 
+func blink():
+	timer = 0
+	blink_time = .2
+	visible = false
+
+func open():
+	timer = 0
+	blink_time = randf_range(2, 5) 
+	visible = true
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -12,9 +22,4 @@ func _process(delta: float) -> void:
 		return
 	timer = 0
 	
-	if visible:
-		blink_time = .2
-	else:
-		blink_time = randf_range(2, 5) 
-	visible = !visible
-	
+	blink() if visible else open()

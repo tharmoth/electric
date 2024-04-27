@@ -91,7 +91,7 @@ func _physics_process(delta: float) -> void:
 		currentGun.fire()
 
 func on_damage() -> void:
-	
+	%Eyes.blink()
 	var time = .3
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color(10, 0, 0, 1), time / 4.0)
