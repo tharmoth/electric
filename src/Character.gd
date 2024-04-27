@@ -15,22 +15,10 @@ func _ready() -> void:
 func pickup(area : Area2D) -> void:
 	area.get_parent().queue_free()
 	%Timer.seek(10)
-	charge += 1
-	var node_to_make_visible : Node2D
-	if (charge == 1):
-		node_to_make_visible = %Charge1
-	elif (charge == 2):
-		node_to_make_visible = %Charge2
-	elif (charge == 3):
-		node_to_make_visible = %Charge3
-	else:
-		return
+	if (%Charge.value < 100):
+		%Charge.value += 10
 	
-	node_to_make_visible.visible = true
-	node_to_make_visible.modulate = Color.TRANSPARENT
-	var visible_tween = create_tween()
-	visible_tween.tween_property(node_to_make_visible, "modulate", Color.WHITE, .5)
-
+	
 func _process(delta: float) -> void:
 	global_rotation = 0
 
