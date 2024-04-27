@@ -71,9 +71,12 @@ func seek(degrees : float):
 	var rot = %Timer.rotation_degrees + bonus_rotation
 	rot = -clamp(rot, -360, 0)
 	var percent_complete = max(rot / max_spin, 0)
-
+	
 	if degrees > 0:
 		%WindClock.play()
+	else:
+		%RecordScratch.play()
+	
 	if (percent_complete >= 1):
 		return
 	%Music.seek(music_length * percent_complete)
