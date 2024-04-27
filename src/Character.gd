@@ -11,6 +11,7 @@ var rifle = preload("res://src/weapons/rifle.tscn")
 var shotgun = preload("res://src/components/shotgun.tscn")
 var currentGun;
 @onready var charge : ProgressBar = %Charge
+@export var stats : CharacterStats
 
 func _enter_tree() -> void:
 	instance = self
@@ -48,7 +49,7 @@ func on_level_up():
 	tween.tween_property(%Charge, "value", 0, 1)
 
 	var pick : Node2D = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
-	pick.init("gun")
+	pick.init("reload")
 
 	var direction = global_position.direction_to(Vector2.ZERO)
 	var angle = global_position.angle_to_point(Vector2.ZERO) + PI / 2

@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 	point_at_mouse()
 
 func can_fire() -> bool:
-	return ready_to_fire and !reloading
+	return (ready_to_fire || (!is_rifle && Input.is_action_just_pressed("click"))) and !reloading
 
 func point_at_mouse() -> void:
 	var mouse = get_global_mouse_position()
@@ -58,16 +58,21 @@ func reload() -> void:
 	reloading = true
 	%GunReload.play()
 	
+var spin_to_win = 5	
+	
 func reload_complete(something):
 	reloading = false
-	ammo = max_ammo
+	if spin_to_win > 0:
+		spin_to_win -= 1
+		reload()
+	ammo = max_ammo + Character.instance.stats.clip_bonus
 
 func fire() -> void:
 	if !can_fire():
 		return
 	ready_to_fire = false
 	var tween = create_tween()
-	for i in range(shots):
+	for i in range(shots + Character.instance.stats.burst_bonus):
 		tween.tween_callback(loose)
 		tween.tween_interval(.2)
 	tween.tween_interval(.8)
@@ -77,8 +82,7 @@ func fire() -> void:
 	
 func loose() -> void:
 	ammo -= 1
-	%ProgressBar.value = ammo / float(max_ammo) * 100.0
-	print(%ProgressBar.value)
+	%ProgressBar.value = ammo / float(max_ammo + Character.instance.stats.clip_bonus) * 100.0
 
 	var mouse = get_global_mouse_position()
 	var direction = global_position.direction_to(mouse)
@@ -114,6 +118,7 @@ func loose() -> void:
 	emit_signal("knockback", origin - direction * 250)
 	
 	if ammo == 0:
+		spin_to_win = Character.instance.stats.reload_time
 		reload()
 	
 	#var light = preload("res://src/laser_light.tscn").instantiate()
