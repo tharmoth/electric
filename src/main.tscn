@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cjfagb6ey5fr3"]
+[gd_scene load_steps=32 format=3 uid="uid://cjfagb6ey5fr3"]
 
 [ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/timer.png" id="1_4nl5p"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xa5wo"]
@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://d2ak74rou1req" path="res://data/sfx/a-kitchen-timer-55420.wav" id="14_2bgwq"]
 [ext_resource type="PackedScene" uid="uid://bgk1fl5lw4fyi" path="res://src/pickup.tscn" id="14_5kbvx"]
 [ext_resource type="Texture2D" uid="uid://doi73aghhpalw" path="res://data/particles/spark_02.png" id="15_i46s2"]
+[ext_resource type="AudioStream" uid="uid://cdi574hqve8cc" path="res://data/sfx/timer_winding.wav" id="17_08sto"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vknm1"]
 bg_color = Color(0.203922, 0.203922, 0.203922, 1)
@@ -222,6 +223,10 @@ unique_name_in_owner = true
 stream = ExtResource("14_2bgwq")
 volume_db = -10.0
 autoplay = true
+
+[node name="WindClock" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("17_08sto")
 
 [node name="Battery" parent="." instance=ExtResource("14_5kbvx")]
 
