@@ -13,6 +13,7 @@ func _process(delta: float) -> void:
 	global_position = global_position.move_toward(target, speed * delta)
 	
 	if global_position.distance_to(target) < 24:
+		Character.instance.on_damage()
 		WorldTimer.instance.seek(-30)
 		death_animation.kill(%Sprite2D)
 		queue_free()

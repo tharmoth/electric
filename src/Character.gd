@@ -88,6 +88,11 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("click"):
 		currentGun.fire()
 
+func on_damage() -> void:
+	var tween = create_tween()
+	tween.tween_property(self, "modulate", Color(10, 0, 0, 1), .1)
+	tween.tween_property(self, "modulate", Color.WHITE, .1)
+
 func shake_camera() -> void:
 	%Camera2D/AnimationPlayer.play("shake")
 	
