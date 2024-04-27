@@ -23,9 +23,7 @@ func _process(delta: float) -> void:
 	
 	for i in shotsFired.size():
 		var shot = shotsFired[i]
-		# I believe since the shot is a child of a rotating object
-		# when you aim your mouse the projectile moves with it
-		shot.global_position += (Vector2.RIGHT * 300).rotated(shot.rotation) * delta
+		shot.global_position += Vector2.from_angle(shot.rotation) * 300 * delta
 
 func fire() -> void:
 	print('attempting to fire', %ShootTimer.time_left)
@@ -39,7 +37,7 @@ func fire() -> void:
 	var mouse = get_global_mouse_position()
 	var shot = particle.instantiate()
 	shot.global_position = $ParticleOrigin.global_position
-	shot.rotation = $ParticleOrigin.rotation
+	shot.rotation = global_position.angle_to_point(mouse)
 
 	get_tree().get_root().add_child(shot)
 	shotsFired.push_back(shot)
