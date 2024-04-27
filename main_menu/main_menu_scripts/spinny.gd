@@ -3,7 +3,7 @@ extends Node2D
 signal turnedKnob
 
 var following := false
-const MAX_DIST := 14000
+const MAX_DIST := 28000
 const MAX_TURN := 6.28
 
 func _physics_process(delta: float) -> void:
@@ -28,12 +28,14 @@ func _physics_process(delta: float) -> void:
 			get_tree().create_timer(.5).timeout.connect(func(): emit_signal("turnedKnob"))
 			
 		if knob_rot > 0:
-			$AudioStreamPlayer2D.play()
+			$tickNoise.play()
 		
 	else:
 		rotate_back()
 		if knob_rot == 0:
-			$AudioStreamPlayer2D.stop()
+			if $tickNoise.playing:
+				$ringNoise.play()
+			$tickNoise.stop()
 		
 func rotate_back():
 	$knob.rotation = clamp($knob.rotation-0.005, 0, 2*PI)
