@@ -1,16 +1,9 @@
 [gd_scene load_steps=31 format=3 uid="uid://cjfagb6ey5fr3"]
 
-<<<<<<< HEAD
 [ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/sprites/timer.png" id="1_4nl5p"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xa5wo"]
 [ext_resource type="Script" path="res://src/Character.gd" id="1_xjqbd"]
 [ext_resource type="Texture2D" uid="uid://h4cjswv74lav" path="res://data/sprites/handle.png" id="2_jr2jg"]
-=======
-[ext_resource type="Texture2D" path="res://data/timer.png" id="1_4nl5p"]
-[ext_resource type="Script" path="res://src/main.gd" id="1_xa5wo"]
-[ext_resource type="Script" path="res://src/Character.gd" id="1_xjqbd"]
-[ext_resource type="Texture2D" path="res://data/handle.png" id="2_jr2jg"]
->>>>>>> aed1b0f (added all wepaons to level up seleciton)
 [ext_resource type="Script" path="res://src/components/timer.gd" id="2_uorbx"]
 [ext_resource type="Texture2D" uid="uid://5taqte82qsbl" path="res://data/character/character.png" id="5_8cd5a"]
 [ext_resource type="Script" path="res://src/Engines.gd" id="5_au8ny"]
@@ -25,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bgk1fl5lw4fyi" path="res://src/pickup.tscn" id="14_5kbvx"]
 [ext_resource type="Texture2D" uid="uid://doi73aghhpalw" path="res://data/particles/spark_02.png" id="15_i46s2"]
 [ext_resource type="AudioStream" uid="uid://cdi574hqve8cc" path="res://data/sfx/timer_winding.wav" id="17_08sto"]
-[ext_resource type="PackedScene" uid="uid://bvhveibcwfqxw" path="res://src/background.tscn" id="19_epnoa"]
+[ext_resource type="PackedScene" path="res://src/background.tscn" id="19_epnoa"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vknm1"]
 bg_color = Color(0.203922, 0.203922, 0.203922, 1)
