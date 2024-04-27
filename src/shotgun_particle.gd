@@ -1,6 +1,6 @@
 class_name Bullet extends Area2D
 
-const MAX_DISTANCE : float = 300.00
+const MAX_DISTANCE : float = 200.00
 const SPEED : float = 500.00
 
 var starting_position : Vector2 = Vector2.ZERO

@@ -5,10 +5,8 @@ signal knockback(recoil: Vector2)
 
 const KNOCKBACK_FORCE : float = 1250
 const MAX_AMMO : int = 5
-# Should be in the particle
-const MAX_DISTANCE : int = 300
-const RELOAD_DELAY : float = 0.75
-const SHOT_DELAY : float = 0.5
+const RELOAD_DELAY : float = 1.00
+const SHOT_DELAY : float = 1.00
 const SHOTS : int = 5
 
 @onready var particle : PackedScene = preload("res://src/shotgun_particle.tscn")
@@ -58,11 +56,14 @@ func can_fire() -> bool:
 
 func _reload() -> void:
 	isReloading = true
+	%AnimationPlayer.play("reload")
 	%ReloadTimer.start(RELOAD_DELAY)
 	%AmmoCapacity.value = MAX_AMMO
 	%ReloadAudio.play(0)
 	await get_tree().create_timer(RELOAD_DELAY).timeout
 	%ReloadAudio.stop()
+	#await get_tree().create_timer(RELOAD_DELAY).timeout
+	#%AnimationPlayer.stop()
 
 func _handle_reload() -> void:
 	ammo = MAX_AMMO
