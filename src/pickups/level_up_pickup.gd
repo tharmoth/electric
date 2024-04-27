@@ -6,7 +6,6 @@ func init(item_name : String):
 	self.item_name = item_name
 
 func _ready() -> void:
-	
 	if (item_name == "gun"):
 		%WeaponSprite.texture = load("res://data/sprites/gun.png")
 	elif item_name == "rifle":
@@ -14,8 +13,7 @@ func _ready() -> void:
 	elif item_name == "shotgun":
 		%WeaponSprite.texture = load("res://data/shotgun.png")
 	elif item_name == "reload":
-		%WeaponSprite.texture = load("res://data/sprites/circle.png")
-	
+		%WeaponSprite.texture = load("res://data/sprites/reload_up.png")
 	
 	add_to_group("LevelUpPickup")
 	modulate = Color.TRANSPARENT
