@@ -111,7 +111,7 @@ func loose() -> void:
 	knockback_tween = get_parent().get_tree().create_tween()
 	get_parent().knockback = origin - direction * 250;
 	knockback_tween.set_ease(Tween.EASE_OUT)
-	knockback_tween.set_trans(Tween.TRANS_CUBIC)
+	knockback_tween.set_trans(Tween.TRANS_QUINT)
 	knockback_tween.tween_property(get_parent(), "knockback", Vector2.ZERO, .25)
 	
 	if ammo == 0:
