@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://bmthbhtv1jhhw"]
+[gd_scene load_steps=10 format=3 uid="uid://di7v32te6b0ns"]
 
-[ext_resource type="Texture2D" uid="uid://bm73u6kjv4ftu" path="res://data/gun.png" id="1_3it0g"]
+[ext_resource type="Texture2D" uid="uid://ceg1hiloai3x3" path="res://data/rifle.png" id="1_u6y5a"]
 [ext_resource type="Script" path="res://src/components/gun.gd" id="2_mv4vi"]
 [ext_resource type="AudioStream" uid="uid://biyn8iit2iqh0" path="res://data/sfx/laser1.wav" id="3_xd8d8"]
 [ext_resource type="AudioStream" uid="uid://bcvn6k2q0c7yu" path="res://data/sfx/laser2.wav" id="4_uoo41"]
@@ -40,7 +40,7 @@ _data = {
 
 [node name="Gun" type="Sprite2D"]
 rotation = 12.5664
-texture = ExtResource("1_3it0g")
+texture = ExtResource("1_u6y5a")
 offset = Vector2(0, 4)
 script = ExtResource("2_mv4vi")
 
@@ -58,7 +58,7 @@ speed_scale = 5.0
 [node name="GunReload" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("6_owrg4")
-volume_db = -20.0
+volume_db = -10.0
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(8, -0.000231679)

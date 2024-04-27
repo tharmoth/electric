@@ -3,8 +3,10 @@ extends Sprite2D
 signal shake
 
 var knockback_tween : Tween
-var ammo : int = 6
+var max_ammo = 24
+var ammo : int = max_ammo
 var reloading : bool = false
+var ready_to_fire : bool = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -15,7 +17,7 @@ func _process(delta: float) -> void:
 	point_at_mouse()
 
 func can_fire() -> bool:
-	return true
+	return ready_to_fire and !reloading
 
 func point_at_mouse() -> void:
 	var mouse = get_global_mouse_position()
@@ -25,14 +27,12 @@ func move_to_position() -> void:
 	var mouse = get_global_mouse_position()
 	var direction = global_position.direction_to(mouse)
 	var origin = get_parent().global_position
-	var target = origin + direction * 20
+	var target = origin + direction * 40
 	
 	if global_position.distance_to(target) < 1:
 		global_position = target
 	else:
 		global_position += global_position.direction_to(target)
-		
-	
 
 func reload() -> void:
 	%GunAnimationPlayer.play("reload")
@@ -42,32 +42,47 @@ func reload() -> void:
 	
 func reload_complete(something):
 	reloading = false
-	ammo = 6
+	ammo = max_ammo
 
 func fire() -> void:
+	if !can_fire():
+		return
+	ready_to_fire = false
+	var tween = create_tween()
+	for i in range(3):
+		tween.tween_callback(loose)
+		tween.tween_interval(.2)
+	tween.tween_interval(.8)
+	tween.tween_callback(func(): ready_to_fire = true)
+
+	
+	
+func loose() -> void:
 	ammo -= 1
+	print(ammo)
 
 	var mouse = get_global_mouse_position()
 	var direction = global_position.direction_to(mouse)
 	var origin = $Marker2D.global_position
-	var target = origin + direction * 20
+	var target = origin + direction * 40
 	
 	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsRayQueryParameters2D.create(global_position + direction * 10,  direction * 2000)
+	var query = PhysicsRayQueryParameters2D.create(origin,  origin + direction * 2000)
 	var result = space_state.intersect_ray(query)
 	var end : Vector2
 	if result:
 		var node = result.collider.get_parent()
-		if node is Enemy:
-			node.on_death()
 		end = result.position
+		if node is Enemy:
+			FloatingLabel.show(str(randi_range(5, 10)), end, Color.WHITE)
+			node.on_death()
 	else:
-		end = direction * 2000
+		end = mouse
 	
 	var line = Line2D.new()
 	line.points = [global_position, end]
 	line.width = 0
-	line.default_color = Color.RED
+	line.default_color = Color(10, 0, 0, 1)
 	get_parent().get_tree().root.add_child(line)
 	
 	var laser_tween = get_parent().get_tree().create_tween()

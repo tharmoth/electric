@@ -1,15 +1,17 @@
 class_name death_animation extends Node
 
 static var shatter_shader = preload("res://src/shaders/shatter.gdshader")
+static var noise1 = NoiseTexture2D.new()
+static var noise2 = NoiseTexture2D.new()
+
+static func init():
+	noise1.noise = FastNoiseLite.new()
+	noise2.noise = FastNoiseLite.new()
+	noise2.as_normal_map = true
+	
 
 # Called when the node enters the scene tree for the first time.
 static func kill(sprite : Sprite2D) -> void:
-	var noise1 = NoiseTexture2D.new()
-	noise1.noise = FastNoiseLite.new()
-	var noise2 = NoiseTexture2D.new()
-	noise2.as_normal_map = true
-	noise2.noise = FastNoiseLite.new()
-
 	var material = ShaderMaterial.new()
 	material.shader = shatter_shader
 	material.set_shader_parameter("strength", 1.5)

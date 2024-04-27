@@ -45,7 +45,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	if Input.is_action_just_pressed("click"):
+	if Input.is_action_pressed("click"):
 		currentGun.fire()
 
 func shake_camera() -> void:
