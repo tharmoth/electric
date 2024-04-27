@@ -56,11 +56,13 @@ bg_color = Color(0.360784, 0.364706, 0.345098, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5r0or"]
 bg_color = Color(16, 0, 0, 1)
 
-[node name="Gun" type="Sprite2D"]
-rotation = 12.5664
-texture = ExtResource("1_70a6o")
-offset = Vector2(0, 4)
+[node name="Gun" type="Node2D"]
 script = ExtResource("2_mv4vi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("1_70a6o")
+offset = Vector2(0, 8)
 
 [node name="GunAudio" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
@@ -79,14 +81,14 @@ stream = ExtResource("6_owrg4")
 volume_db = -10.0
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(8, -0.000231679)
+position = Vector2(16, 0)
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
-offset_left = -1.0
-offset_top = -6.0
+offset_left = -0.999855
+offset_top = -1.0
 offset_right = 160.0
-offset_bottom = 22.0
+offset_bottom = 27.0
 scale = Vector2(0.1, 0.1)
 theme_override_styles/background = SubResource("StyleBoxFlat_x7ma3")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5r0or")
