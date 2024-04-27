@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://drh6er8pl0atq"]
+
+[ext_resource type="Script" path="res://src/components/shotgun.gd" id="1_nf86e"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_nf86e")
+
+[node name="ReloadTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
