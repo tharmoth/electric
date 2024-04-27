@@ -19,8 +19,8 @@
 [ext_resource type="AudioStream" uid="uid://d2ak74rou1req" path="res://data/sfx/a-kitchen-timer-55420.wav" id="14_2bgwq"]
 [ext_resource type="PackedScene" uid="uid://bgk1fl5lw4fyi" path="res://src/pickup.tscn" id="14_5kbvx"]
 [ext_resource type="Texture2D" uid="uid://doi73aghhpalw" path="res://data/particles/spark_02.png" id="15_i46s2"]
-[ext_resource type="AudioStream" uid="uid://cdi574hqve8cc" path="res://data/sfx/timer_winding.wav" id="17_08sto"]
-[ext_resource type="PackedScene" path="res://src/background.tscn" id="19_epnoa"]
+[ext_resource type="AudioStream" uid="uid://bljeed1cthxbd" path="res://data/sfx/timer_winding_noloop.wav" id="18_0scj5"]
+[ext_resource type="PackedScene" uid="uid://bvhveibcwfqxw" path="res://src/background.tscn" id="19_epnoa"]
 
 [sub_resource type="Resource" id="Resource_d28yr"]
 script = ExtResource("7_vtfxf")
@@ -214,23 +214,27 @@ speed_scale = 4.0
 [node name="Music" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("10_bhipu")
-volume_db = -30.0
+volume_db = -10.0
 autoplay = true
+bus = &"Music"
 
 [node name="RecordScratch" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_h315s")
 volume_db = -20.0
+bus = &"SFX"
 
 [node name="TickTick" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("14_2bgwq")
 volume_db = -10.0
 autoplay = true
+bus = &"SFX"
 
 [node name="WindClock" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("17_08sto")
+stream = ExtResource("18_0scj5")
+bus = &"SFX"
 
 [node name="Battery" parent="." instance=ExtResource("14_5kbvx")]
 
