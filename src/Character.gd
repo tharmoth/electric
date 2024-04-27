@@ -92,7 +92,6 @@ func _physics_process(delta: float) -> void:
 		currentGun.fire()
 
 func on_damage() -> void:
-	
 	var time = .3
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color(10, 0, 0, 1), time / 4.0)
@@ -111,6 +110,8 @@ func on_damage() -> void:
 	tween3.tween_property(%Sprites, "rotation_degrees", randf_range(-10, 10) , time / 3.0)
 	tween3.tween_property(%Sprites, "rotation_degrees", randf_range(-10, 10) , time / 3.0)
 	tween3.tween_property(%Sprites, "rotation_degrees", 0, time / 3.0)
+	
+	shake_camera()
 
 func shake_camera() -> void:
 	%Camera2D/AnimationPlayer.play("shake")

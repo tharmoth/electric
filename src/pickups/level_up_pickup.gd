@@ -14,6 +14,10 @@ func _ready() -> void:
 		%WeaponSprite.texture = load("res://data/shotgun.png")
 	elif item_name == "reload":
 		%WeaponSprite.texture = load("res://data/sprites/reload_up.png")
+		%Outline.self_modulate = Color("1eff00")
+	
+	var color = %Outline.self_modulate
+	%Outline.modulate = color * 4
 	
 	add_to_group("LevelUpPickup")
 	modulate = Color.TRANSPARENT

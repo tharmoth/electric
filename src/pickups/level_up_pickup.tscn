@@ -24,10 +24,11 @@ monitorable = false
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_yhgod")
 
-[node name="Sprite2D3" type="Sprite2D" parent="."]
+[node name="pedestal" type="Sprite2D" parent="."]
 texture = ExtResource("1_cglw0")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Outline" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 modulate = Color(10, 10, 10, 1)
 self_modulate = Color(0, 0.439216, 0.866667, 1)
 texture = ExtResource("2_ofpex")
