@@ -4,42 +4,46 @@ const SPEED = 300.0
 
 static var instance : Character
 var knockback : Vector2 = Vector2.ZERO
-var charge : int = 0
 
 var gun = preload("res://src/gun.tscn")
 var rifle = preload("res://src/weapons/rifle.tscn")
 var shotgun = preload("res://src/components/shotgun.tscn")
 var currentGun;
+@onready var charge : ProgressBar = %Charge
 
 func _enter_tree() -> void:
 	instance = self
 
 func _ready() -> void:
 	%PickupBox.area_entered.connect(pickup)
-	
 	add_to_group("Character")
-	currentGun = gun.instantiate()
-	currentGun.connect("shake", shake_camera)
-	call_deferred("add_child", currentGun)
+	
+	equip_gun("gun")
 	
 
 func pickup(area : Area2D) -> void:
-	area.get_parent().queue_free()
-	%Timer.seek(10)
-	if %Charge.value < 100:
-		%Charge.value += 10
+	area.get_parent().on_pickup()
+
+
+func equip_gun(name : String):
+	if currentGun:
+		currentGun.queue_free()
+		
+	if (name == "gun"):
+		currentGun = gun.instantiate()
+	elif name == "rifle":
+		currentGun = rifle.instantiate()
+	elif name == "shotgun":
+		currentGun = shotgun.instantiate()
 	
-	if %Charge.value >= 100:
-		on_level_up()
+	currentGun.connect("shake", shake_camera)
+	call_deferred("add_child", currentGun) 
 	
 func on_level_up():
 	var tween = create_tween()
 	tween.tween_property(%Charge, "value", 0, 1)
-	if currentGun is HitscanGun && !currentGun.is_rifle:
-		currentGun.queue_free()
-		currentGun = rifle.instantiate()
-		currentGun.connect("shake", shake_camera)
-		call_deferred("add_child", currentGun)
+
+		
 
 func _process(delta: float) -> void:
 	global_rotation = 0

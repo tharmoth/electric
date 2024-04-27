@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://cof2fwefma8ws"]
+
+[ext_resource type="Texture2D" uid="uid://dol3a711l6rbn" path="res://data/pedestal.png" id="1_cglw0"]
+[ext_resource type="Script" path="res://src/pickups/level_up_pickup.gd" id="1_ugs5h"]
+[ext_resource type="Texture2D" uid="uid://dml7nl6a4gp6w" path="res://data/pedestal_outline.png" id="2_ofpex"]
+[ext_resource type="Script" path="res://src/components/cancel_rotation_component.gd" id="3_1ex16"]
+[ext_resource type="Texture2D" uid="uid://b0wl2wna6gd12" path="res://data/particles/SofterLight.png" id="4_6siwo"]
+[ext_resource type="Script" path="res://src/components/bounce_movement_component.gd" id="5_yntot"]
+[ext_resource type="Texture2D" uid="uid://ceg1hiloai3x3" path="res://data/rifle.png" id="6_di0ia"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yhgod"]
+
+[node name="LevelUpPickup" type="Node2D"]
+script = ExtResource("1_ugs5h")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_yhgod")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+texture = ExtResource("1_cglw0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(10, 10, 10, 1)
+self_modulate = Color(0, 0.439216, 0.866667, 1)
+texture = ExtResource("2_ofpex")
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("3_1ex16")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0, 0, 0.501961)
+position = Vector2(0, -9)
+scale = Vector2(0.1, 0.05)
+texture = ExtResource("4_6siwo")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0, -30)
+texture = ExtResource("6_di0ia")
+
+[node name="Node" type="Node" parent="Sprite2D2"]
+script = ExtResource("5_yntot")
