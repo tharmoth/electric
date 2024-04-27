@@ -9,13 +9,17 @@ var reloading : bool = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	move_to_position()
-	if reloading:
+	if (reloading): 
 		return
 		
 	point_at_mouse()
 
 func can_fire() -> bool:
 	return true
+
+func point_at_mouse() -> void:
+	var mouse = get_global_mouse_position()
+	global_rotation = global_position.angle_to_point(mouse)
 
 func move_to_position() -> void:
 	var mouse = get_global_mouse_position()
@@ -27,15 +31,18 @@ func move_to_position() -> void:
 		global_position = target
 	else:
 		global_position += global_position.direction_to(target)
-
-func point_at_mouse() -> void:
-	var mouse = get_global_mouse_position()
-	global_rotation = global_position.angle_to_point(mouse)
+		
+	
 
 func reload() -> void:
-	ammo = 6
 	%GunAnimationPlayer.play("reload")
+	reloading = true
+	%GunAnimationPlayer.animation_finished.connect(reload_complete)
 	%GunReload.play()
+	
+func reload_complete(something):
+	reloading = false
+	ammo = 6
 
 func fire() -> void:
 	ammo -= 1
