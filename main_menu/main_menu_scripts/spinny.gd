@@ -31,6 +31,7 @@ func _physics_process(delta: float) -> void:
 			$tickNoise.play()
 		
 	else:
+		$windingNoise.play()
 		rotate_back()
 		if knob_rot == 0:
 			if $tickNoise.playing:
