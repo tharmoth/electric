@@ -6,6 +6,15 @@ func init(item_name : String):
 	self.item_name = item_name
 
 func _ready() -> void:
+	
+	if (item_name == "gun"):
+		%WeaponSprite.texture = load("res://data/sprites/gun.png")
+	elif item_name == "rifle":
+		%WeaponSprite.texture = load("res://data/sprites/rifle.png")
+	elif item_name == "shotgun":
+		%WeaponSprite.texture = load("res://data/shotgun.png")
+	
+	
 	add_to_group("LevelUpPickup")
 	modulate = Color.TRANSPARENT
 	var tween = create_tween()
