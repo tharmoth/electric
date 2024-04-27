@@ -2,11 +2,15 @@ extends Sprite2D
 
 var knockback_tween : Tween
 var ammo : int = 6
+var reloading : bool = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-
 	move_to_position()
+	if (reloading): 
+		return
+	
+	point_at_mouse()
 	if Input.is_action_just_pressed("click"):
 		ammo -= 1
 		if (ammo == 0):
@@ -20,6 +24,9 @@ func _process(delta: float) -> void:
 		#fire_tween.tween_interval(.2)
 		#fire_tween.tween_callback(fire)
 
+func point_at_mouse() -> void:
+	var mouse = get_global_mouse_position()
+	global_rotation = global_position.angle_to_point(mouse)
 
 func move_to_position() -> void:
 	var mouse = get_global_mouse_position()
@@ -32,10 +39,17 @@ func move_to_position() -> void:
 	else:
 		global_position += global_position.direction_to(target)
 		
-	global_rotation = global_position.angle_to_point(mouse)
+	
 
 func reload() -> void:
-	%g
+	%GunAnimationPlayer.play("reload")
+	reloading = true
+	%GunAnimationPlayer.animation_finished.connect(reload_complete)
+	%GunReload.play()
+	
+func reload_complete(something):
+	reloading = false
+	ammo = 6
 
 func fire() -> void:
 	var mouse = get_global_mouse_position()

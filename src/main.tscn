@@ -146,7 +146,6 @@ polygon = PackedVector2Array(-2, 184, 57, 189, 139, 205, 197, 225, 271, 264, 341
 
 [node name="Timer" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-1, -8)
 script = ExtResource("2_uorbx")
 
 [node name="Sprite2D" type="Sprite2D" parent="Timer"]
