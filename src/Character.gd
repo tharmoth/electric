@@ -20,6 +20,8 @@ func _ready() -> void:
 	
 	equip_gun("gun")
 	
+	charge.value = 99
+	
 
 func pickup(area : Area2D) -> void:
 	area.get_parent().on_pickup()
@@ -43,6 +45,24 @@ func on_level_up():
 	var tween = create_tween()
 	tween.tween_property(%Charge, "value", 0, 1)
 
+	var pick : Node2D = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
+	
+	var direction = global_position.direction_to(Vector2.ZERO)
+	var angle = global_position.angle_to_point(Vector2.ZERO) + PI / 2
+	
+	get_parent().add_child(pick)
+	pick.global_position = global_position + direction * 100
+	
+	var pick2 : Node2D = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
+	
+	get_parent().add_child(pick2)
+	pick2.global_position = global_position + direction * 100 + Vector2.LEFT.rotated(angle) * 100
+	
+	var pick3 : Node2D = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
+	
+	get_parent().add_child(pick3)
+	pick3.global_position = global_position + direction * 100 + Vector2.RIGHT.rotated(angle) * 100
+	
 		
 
 func _process(delta: float) -> void:
