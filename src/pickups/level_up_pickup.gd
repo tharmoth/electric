@@ -13,6 +13,8 @@ func _ready() -> void:
 		%WeaponSprite.texture = load("res://data/sprites/rifle.png")
 	elif item_name == "shotgun":
 		%WeaponSprite.texture = load("res://data/shotgun.png")
+	elif item_name == "reload":
+		%WeaponSprite.texture = load("res://data/circle.png")
 	
 	
 	add_to_group("LevelUpPickup")
@@ -30,6 +32,12 @@ func destroy():
 
 func on_pickup():
 	queue_free()
-	Character.instance.equip_gun(item_name)
 	for node in get_tree().get_nodes_in_group("LevelUpPickup"):
 		node.destroy()
+		
+	if item_name == "reload":
+		Character.instance.stats.reload_time -= 1
+		Character.instance.stats.reload_time = max(Character.instance.stats.reload_time, 0)
+		return
+	
+	Character.instance.equip_gun(item_name)

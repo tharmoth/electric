@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cjfagb6ey5fr3"]
+[gd_scene load_steps=34 format=3 uid="uid://cjfagb6ey5fr3"]
 
 [ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/sprites/timer.png" id="1_4nl5p"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xa5wo"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://udvcofnt2ayp" path="res://data/character/engines.png" id="6_uva1i"]
 [ext_resource type="Texture2D" uid="uid://b0wl2wna6gd12" path="res://data/particles/SofterLight.png" id="6_yea85"]
 [ext_resource type="Texture2D" uid="uid://bwaoufhbbl4vc" path="res://data/character/eyes.png" id="7_2rs57"]
+[ext_resource type="Script" path="res://src/character_stats.gd" id="7_vtfxf"]
 [ext_resource type="Texture2D" uid="uid://dn147m1na16l1" path="res://data/character/fire.png" id="8_kw3gu"]
 [ext_resource type="Script" path="res://src/Blink.gd" id="8_xdvpb"]
 [ext_resource type="AudioStream" uid="uid://cp68ohsn6unab" path="res://data/sfx/high-speed-57463.mp3" id="10_bhipu"]
@@ -20,6 +21,12 @@
 [ext_resource type="Texture2D" uid="uid://doi73aghhpalw" path="res://data/particles/spark_02.png" id="15_i46s2"]
 [ext_resource type="AudioStream" uid="uid://cdi574hqve8cc" path="res://data/sfx/timer_winding.wav" id="17_08sto"]
 [ext_resource type="PackedScene" path="res://src/background.tscn" id="19_epnoa"]
+
+[sub_resource type="Resource" id="Resource_d28yr"]
+script = ExtResource("7_vtfxf")
+reload_time = 5
+clip_bonus = 1
+burst_bonus = 0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vknm1"]
 bg_color = Color(0.203922, 0.203922, 0.203922, 1)
@@ -136,6 +143,7 @@ position = Vector2(83, 131)
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_xjqbd")
+stats = SubResource("Resource_d28yr")
 
 [node name="Sprites" type="Node2D" parent="Timer/Character"]
 unique_name_in_owner = true
