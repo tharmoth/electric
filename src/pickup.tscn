@@ -27,4 +27,6 @@ texture = ExtResource("2_sfs6w")
 [node name="BatterySprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 texture = ExtResource("1_ldhox")
+
+[node name="Node" type="Node" parent="BatterySprite"]
 script = ExtResource("3_tn3nl")

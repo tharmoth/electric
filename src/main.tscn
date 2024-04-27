@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cjfagb6ey5fr3"]
+[gd_scene load_steps=35 format=3 uid="uid://cjfagb6ey5fr3"]
 
 [ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/timer.png" id="1_4nl5p"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xa5wo"]
@@ -14,9 +14,14 @@
 [ext_resource type="Script" path="res://src/Blink.gd" id="8_xdvpb"]
 [ext_resource type="AudioStream" uid="uid://cp68ohsn6unab" path="res://data/sfx/high-speed-57463.mp3" id="10_bhipu"]
 [ext_resource type="AudioStream" uid="uid://r4dbyjs3nkdh" path="res://data/sfx/record_scratch-108233.mp3" id="11_wfk86"]
+[ext_resource type="Texture2D" uid="uid://dol3a711l6rbn" path="res://data/pedestal.png" id="13_0firr"]
 [ext_resource type="AudioStream" uid="uid://d2ak74rou1req" path="res://data/sfx/a-kitchen-timer-55420.wav" id="14_2bgwq"]
 [ext_resource type="PackedScene" uid="uid://bgk1fl5lw4fyi" path="res://src/pickup.tscn" id="14_5kbvx"]
+[ext_resource type="Texture2D" uid="uid://dml7nl6a4gp6w" path="res://data/pedestal_outline.png" id="14_wsci1"]
 [ext_resource type="Texture2D" uid="uid://doi73aghhpalw" path="res://data/particles/spark_02.png" id="15_i46s2"]
+[ext_resource type="Script" path="res://src/components/cancel_rotation_component.gd" id="15_uutvs"]
+[ext_resource type="Texture2D" uid="uid://bm73u6kjv4ftu" path="res://data/gun.png" id="16_yabdn"]
+[ext_resource type="Script" path="res://src/components/bounce_movement_component.gd" id="17_skar5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vknm1"]
 bg_color = Color(0.203922, 0.203922, 0.203922, 1)
@@ -190,6 +195,25 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Timer/Character/PickupBox"]
 shape = SubResource("CircleShape2D_jpemb")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Timer"]
+position = Vector2(213, 66)
+texture = ExtResource("13_0firr")
+
+[node name="Sprite2D" type="Sprite2D" parent="Timer/Sprite2D2"]
+modulate = Color(10, 10, 10, 1)
+self_modulate = Color(0, 0.439216, 0.866667, 1)
+texture = ExtResource("14_wsci1")
+
+[node name="Node" type="Node" parent="Timer/Sprite2D2"]
+script = ExtResource("15_uutvs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Timer/Sprite2D2"]
+position = Vector2(0, -30)
+texture = ExtResource("16_yabdn")
+
+[node name="Node" type="Node" parent="Timer/Sprite2D2/Sprite2D2"]
+script = ExtResource("17_skar5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
