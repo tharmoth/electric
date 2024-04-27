@@ -29,7 +29,7 @@ func move_to_position() -> void:
 	var mouse = get_global_mouse_position()
 	var direction = global_position.direction_to(mouse)
 	var origin = get_parent().global_position
-	var target = origin + direction * 20
+	var target = origin + direction * 40
 	
 	if global_position.distance_to(target) < 1:
 		global_position = target
@@ -49,9 +49,9 @@ func fire() -> void:
 	var mouse = get_global_mouse_position()
 	var direction = global_position.direction_to(mouse)
 	var origin = get_parent().global_position
-	var target = origin + direction * 20
+	var target = origin + direction * 40
 	
-	var space_state =  get_world_2d().direct_space_state
+	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(global_position + direction * 10,  direction * 2000)
 	var result = space_state.intersect_ray(query)
 	var end : Vector2

@@ -1,17 +1,24 @@
-[gd_scene load_steps=29 format=3 uid="uid://cjfagb6ey5fr3"]
+[gd_scene load_steps=36 format=3 uid="uid://cjfagb6ey5fr3"]
 
 [ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/timer.png" id="1_4nl5p"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xa5wo"]
 [ext_resource type="Script" path="res://src/Character.gd" id="1_xjqbd"]
-[ext_resource type="Texture2D" uid="uid://dqongslx1l148" path="res://data/circle.png" id="2_gs14k"]
 [ext_resource type="Script" path="res://src/components/rotate_component.gd" id="2_uorbx"]
+[ext_resource type="Texture2D" uid="uid://5taqte82qsbl" path="res://data/character/character.png" id="5_8cd5a"]
 [ext_resource type="Texture2D" uid="uid://bm73u6kjv4ftu" path="res://data/gun.png" id="5_rwqt5"]
 [ext_resource type="Script" path="res://src/components/gun.gd" id="6_sxsx8"]
+[ext_resource type="Texture2D" uid="uid://udvcofnt2ayp" path="res://data/character/engines.png" id="6_uva1i"]
+[ext_resource type="Texture2D" uid="uid://bwaoufhbbl4vc" path="res://data/character/eyes.png" id="7_2rs57"]
 [ext_resource type="AudioStream" uid="uid://biyn8iit2iqh0" path="res://data/sfx/laser1.wav" id="7_iwoi7"]
 [ext_resource type="AudioStream" uid="uid://bcvn6k2q0c7yu" path="res://data/sfx/laser2.wav" id="8_1ha6d"]
+[ext_resource type="Texture2D" uid="uid://dn147m1na16l1" path="res://data/character/fire.png" id="8_kw3gu"]
+[ext_resource type="Script" path="res://src/Blink.gd" id="8_xdvpb"]
 [ext_resource type="AudioStream" uid="uid://b5vq5m1xlp6o8" path="res://data/sfx/laser3.wav" id="9_5n358"]
+[ext_resource type="Texture2D" uid="uid://cquulpmusc01a" path="res://data/character/charge1.png" id="9_ntbmx"]
+[ext_resource type="Texture2D" uid="uid://f6m2rgimra2c" path="res://data/character/charge2.png" id="10_223p5"]
 [ext_resource type="AudioStream" uid="uid://cp68ohsn6unab" path="res://data/sfx/high-speed-57463.mp3" id="10_bhipu"]
 [ext_resource type="AudioStream" uid="uid://djumfjwa8t515" path="res://data/sfx/recharge.wav" id="11_e33me"]
+[ext_resource type="Texture2D" uid="uid://c1f67rjod4vhi" path="res://data/character/charge3.png" id="11_i3q2y"]
 [ext_resource type="AudioStream" uid="uid://r4dbyjs3nkdh" path="res://data/sfx/record_scratch-108233.mp3" id="11_wfk86"]
 [ext_resource type="AudioStream" uid="uid://d2ak74rou1req" path="res://data/sfx/a-kitchen-timer-55420.wav" id="14_2bgwq"]
 [ext_resource type="PackedScene" uid="uid://bgk1fl5lw4fyi" path="res://src/pickup.tscn" id="14_5kbvx"]
@@ -149,8 +156,40 @@ collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_xjqbd")
 
-[node name="Sprite2D" type="Sprite2D" parent="Timer/Character"]
-texture = ExtResource("2_gs14k")
+[node name="Sprites" type="Node2D" parent="Timer/Character"]
+scale = Vector2(2, 2)
+
+[node name="Body" type="Sprite2D" parent="Timer/Character/Sprites"]
+unique_name_in_owner = true
+texture = ExtResource("5_8cd5a")
+
+[node name="Engines" type="Sprite2D" parent="Timer/Character/Sprites"]
+unique_name_in_owner = true
+texture = ExtResource("6_uva1i")
+
+[node name="Eyes" type="Sprite2D" parent="Timer/Character/Sprites"]
+unique_name_in_owner = true
+texture = ExtResource("7_2rs57")
+script = ExtResource("8_xdvpb")
+
+[node name="Fire" type="Sprite2D" parent="Timer/Character/Sprites"]
+unique_name_in_owner = true
+texture = ExtResource("8_kw3gu")
+
+[node name="Charge1" type="Sprite2D" parent="Timer/Character/Sprites"]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("9_ntbmx")
+
+[node name="Charge2" type="Sprite2D" parent="Timer/Character/Sprites"]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("10_223p5")
+
+[node name="Charge3" type="Sprite2D" parent="Timer/Character/Sprites"]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("11_i3q2y")
 
 [node name="Gun" type="Sprite2D" parent="Timer/Character"]
 rotation = 12.5664
@@ -175,10 +214,12 @@ stream = ExtResource("11_e33me")
 volume_db = -20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Timer/Character"]
+visible = false
 shape = SubResource("CircleShape2D_u7y10")
 
 [node name="PickupBox" type="Area2D" parent="Timer/Character"]
 unique_name_in_owner = true
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -231,7 +272,7 @@ texture = ExtResource("15_i46s2")
 lifetime = 0.2
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
-position = Vector2(-503, -249)
+position = Vector2(-521, -267)
 process_material = SubResource("ParticleProcessMaterial_1ykyp")
 texture = ExtResource("15_i46s2")
 lifetime = 0.2
