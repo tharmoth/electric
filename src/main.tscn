@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://bgk1fl5lw4fyi" path="res://src/pickup.tscn" id="14_5kbvx"]
 [ext_resource type="Texture2D" uid="uid://doi73aghhpalw" path="res://data/particles/spark_02.png" id="15_i46s2"]
 [ext_resource type="AudioStream" uid="uid://cdi574hqve8cc" path="res://data/sfx/timer_winding.wav" id="17_08sto"]
-[ext_resource type="PackedScene" uid="uid://bvhveibcwfqxw" path="res://src/background.tscn" id="19_epnoa"]
+[ext_resource type="PackedScene" path="res://src/background.tscn" id="19_epnoa"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vknm1"]
 bg_color = Color(0.203922, 0.203922, 0.203922, 1)
