@@ -1,5 +1,6 @@
 extends Control
 
+const main_game = preload("res://src/main.tscn") as PackedScene
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -11,5 +12,5 @@ func _process(delta):
 
 
 func _on_kitchen_timer_turned_knob():
-	get_tree ().change_scene_to_file("res://src/main.tscn")
-	hide ()
+	get_tree().change_scene_to_packed(main_game)
+	hide()

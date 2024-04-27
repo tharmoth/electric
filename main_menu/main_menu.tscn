@@ -1,12 +1,13 @@
-[gd_scene load_steps=28 format=3 uid="uid://cthcmq0f4mxf4"]
+[gd_scene load_steps=18 format=3 uid="uid://cthcmq0f4mxf4"]
 
 [ext_resource type="Script" path="res://main_menu/main_menu.gd" id="1_0cyx6"]
 [ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/timer.png" id="1_e64cu"]
 [ext_resource type="Script" path="res://main_menu/main_menu_scripts/spinny.gd" id="1_jfd6a"]
-[ext_resource type="Script" path="res://main_menu/background.gd" id="3_q6s8c"]
+[ext_resource type="Texture2D" uid="uid://h4cjswv74lav" path="res://data/handle.png" id="4_jb3qc"]
+[ext_resource type="AudioStream" uid="uid://crnsfvqvx5d4r" path="res://data/sfx/a-kitchen-timer-55420.mp3" id="5_v6kgi"]
 
 [sub_resource type="Gradient" id="Gradient_ucsia"]
-offsets = PackedFloat32Array(0, 0.668831)
+offsets = PackedFloat32Array(0, 0.435065)
 colors = PackedColorArray(0.625597, 0.625597, 0.625597, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_2tr7n"]
@@ -22,55 +23,6 @@ colors = PackedColorArray(0.552956, 0.552956, 0.552955, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_gsccr"]
 gradient = SubResource("Gradient_gkh3y")
 
-[sub_resource type="Gradient" id="Gradient_iirpr"]
-colors = PackedColorArray(0, 0, 0, 1, 0.411765, 0.870588, 1, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_jkj7c"]
-frequency = 1.0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t7nri"]
-width = 120
-height = 100
-seamless_blend_skirt = 0.0
-bump_strength = 0.0
-color_ramp = SubResource("Gradient_iirpr")
-noise = SubResource("FastNoiseLite_jkj7c")
-
-[sub_resource type="Gradient" id="Gradient_7dmvb"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.307189, 0.152198, 7.21961e-08, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_o758f"]
-gradient = SubResource("Gradient_7dmvb")
-
-[sub_resource type="Gradient" id="Gradient_adb7w"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.219681, 0.102138, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_3kkp0"]
-gradient = SubResource("Gradient_adb7w")
-
-[sub_resource type="Gradient" id="Gradient_etiq3"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.230044, 0.108066, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_gshvu"]
-gradient = SubResource("Gradient_etiq3")
-
-[sub_resource type="Gradient" id="Gradient_u1nd6"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.18828, 0.0841743, 2.40654e-08, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_8r0qq"]
-gradient = SubResource("Gradient_u1nd6")
-
-[sub_resource type="Gradient" id="Gradient_bbcid"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.396889, 0.396889, 0.396889, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_gb8sv"]
-gradient = SubResource("Gradient_bbcid")
-
 [sub_resource type="Gradient" id="Gradient_1xm4v"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(0.370364, 0.370365, 0.370364, 1)
@@ -84,6 +36,13 @@ colors = PackedColorArray(0.215902, 0.215902, 0.215902, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_1483e"]
 gradient = SubResource("Gradient_bc02y")
+
+[sub_resource type="Gradient" id="Gradient_7dmvb"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.307189, 0.152198, 7.21961e-08, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o758f"]
+gradient = SubResource("Gradient_7dmvb")
 
 [sub_resource type="Gradient" id="Gradient_n8dyd"]
 offsets = PackedFloat32Array(1)
@@ -103,13 +62,13 @@ script = ExtResource("1_0cyx6")
 metadata/_edit_lock_ = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(508, 508)
+position = Vector2(688, 489)
 scale = Vector2(11.6006, 11.0879)
 texture = SubResource("GradientTexture2D_2tr7n")
 
 [node name="kitchenTimer" type="Node2D" parent="."]
 z_index = 2
-position = Vector2(749, 574)
+position = Vector2(525, 574)
 script = ExtResource("1_jfd6a")
 
 [node name="clockBottom" type="Sprite2D" parent="kitchenTimer"]
@@ -131,88 +90,13 @@ position = Vector2(0, -102)
 [node name="middlePoint" type="Marker2D" parent="kitchenTimer"]
 position = Vector2(0, 101)
 
-[node name="tv" type="Node2D" parent="."]
-z_index = 1
-
-[node name="static" type="Sprite2D" parent="tv"]
-unique_name_in_owner = true
-light_mask = 0
-z_index = 2
-position = Vector2(259, 471.5)
-scale = Vector2(2.55833, 2.87)
-texture = SubResource("NoiseTexture2D_t7nri")
-script = ExtResource("3_q6s8c")
-
-[node name="body" type="Sprite2D" parent="tv"]
-position = Vector2(307, 472.5)
-scale = Vector2(1.80469, 351)
-texture = SubResource("GradientTexture1D_o758f")
-
-[node name="body2" type="Sprite2D" parent="tv"]
-position = Vector2(482, 560.5)
-scale = Vector2(0.273438, 137)
-texture = SubResource("GradientTexture1D_3kkp0")
-
-[node name="top" type="Sprite2D" parent="tv"]
-position = Vector2(263.571, 260.64)
-scale = Vector2(1.80469, 113.131)
-skew = -0.872665
-texture = SubResource("GradientTexture1D_gshvu")
-
-[node name="side" type="Sprite2D" parent="tv"]
-position = Vector2(32.7416, 436.048)
-rotation = 1.5708
-scale = Vector2(1.37208, 112.966)
-skew = 0.698132
-texture = SubResource("GradientTexture1D_8r0qq")
-
-[node name="front" type="Sprite2D" parent="tv"]
-position = Vector2(259.25, 471.5)
-scale = Vector2(1.32617, 319)
-texture = SubResource("GradientTexture1D_gb8sv")
-
-[node name="frontPlate" type="Sprite2D" parent="tv"]
-position = Vector2(482, 393)
-scale = Vector2(0.26709, 159.5)
-texture = SubResource("GradientTexture1D_gb8sv")
-
-[node name="tvKnob" type="Node2D" parent="tv"]
-z_index = 2
-position = Vector2(483, 436)
-scale = Vector2(0.25, 0.25)
-
-[node name="knob" type="Marker2D" parent="tv/tvKnob"]
+[node name="Handle" type="Sprite2D" parent="kitchenTimer"]
 position = Vector2(0, -1)
-
-[node name="knob" type="Sprite2D" parent="tv/tvKnob/knob"]
-position = Vector2(4.76837e-07, -4.76837e-07)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_e64cu")
+texture = ExtResource("4_jb3qc")
 
-[node name="knobPoint" type="Marker2D" parent="tv/tvKnob/knob"]
-position = Vector2(0, -102)
-
-[node name="middlePoint" type="Marker2D" parent="tv/tvKnob"]
-position = Vector2(0, 101)
-
-[node name="tvKnob2" type="Node2D" parent="tv"]
-z_index = 2
-position = Vector2(483, 436)
-scale = Vector2(0.25, 0.25)
-
-[node name="knob" type="Marker2D" parent="tv/tvKnob2"]
-position = Vector2(0, -1)
-
-[node name="knob" type="Sprite2D" parent="tv/tvKnob2/knob"]
-position = Vector2(4.76837e-07, -307)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_e64cu")
-
-[node name="knobPoint" type="Marker2D" parent="tv/tvKnob2/knob"]
-position = Vector2(0, -102)
-
-[node name="middlePoint" type="Marker2D" parent="tv/tvKnob2"]
-position = Vector2(0, 101)
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="kitchenTimer"]
+stream = ExtResource("5_v6kgi")
 
 [node name="backdrop" type="Node2D" parent="."]
 position = Vector2(4, -18)
