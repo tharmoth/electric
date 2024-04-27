@@ -14,7 +14,7 @@ func _ready() -> void:
 	elif item_name == "shotgun":
 		%WeaponSprite.texture = load("res://data/shotgun.png")
 	elif item_name == "reload":
-		%WeaponSprite.texture = load("res://data/circle.png")
+		%WeaponSprite.texture = load("res://data/sprites/circle.png")
 	
 	
 	add_to_group("LevelUpPickup")
