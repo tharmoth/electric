@@ -1,5 +1,8 @@
 extends Node2D
 
+func init(name : String):
+	pass
+
 func _ready() -> void:
 	add_to_group("LevelUpPickup")
 	modulate = Color.TRANSPARENT
