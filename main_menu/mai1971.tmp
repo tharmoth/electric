@@ -1,0 +1,89 @@
+[gd_scene load_steps=4 format=3 uid="uid://cthcmq0f4mxf4"]
+
+[ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/timer.png" id="1_e64cu"]
+[ext_resource type="Script" path="res://main_menu/main_menu_scripts/spinny.gd" id="1_jfd6a"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_pxqn8"]
+size = Vector2(200, 200)
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="kitchenTimer" type="Node2D" parent="."]
+position = Vector2(571, 313)
+script = ExtResource("1_jfd6a")
+
+[node name="Sprite2D" type="Sprite2D" parent="kitchenTimer"]
+z_index = -5
+position = Vector2(0, 101)
+texture = SubResource("PlaceholderTexture2D_pxqn8")
+
+[node name="knob" type="Marker2D" parent="kitchenTimer"]
+position = Vector2(0, -1)
+
+[node name="knob" type="Sprite2D" parent="kitchenTimer/knob"]
+position = Vector2(4.76837e-07, -4.76837e-07)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_e64cu")
+
+[node name="Label" type="Label" parent="kitchenTimer/knob/knob"]
+offset_top = -670.0
+offset_right = 40.0
+offset_bottom = -647.0
+text = "Top
+"
+
+[node name="knobPoint" type="Marker2D" parent="kitchenTimer/knob"]
+position = Vector2(0, -102)
+
+[node name="middlePoint" type="Marker2D" parent="kitchenTimer"]
+position = Vector2(0, 101)
+
+[node name="Background2" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="Background2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.054902, 0.113725, 1, 0.270588)
+
+[node name="ColorRect2" type="ColorRect" parent="Background2"]
+top_level = true
+light_mask = 3
+visibility_layer = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 491.0
+offset_bottom = 491.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.02008, 0.283875)
+color = Color(0.435294, 0.294118, 0, 0.623529)
+
+[node name="ColorRect" type="ColorRect" parent="Background2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 439.0
+offset_bottom = 439.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 0.0799998)
+color = Color(0.370364, 0.370364, 0.370364, 1)
