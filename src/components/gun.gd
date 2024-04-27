@@ -2,56 +2,48 @@ extends Sprite2D
 
 var knockback_tween : Tween
 var ammo : int = 6
-var reloading : bool = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+
 	move_to_position()
-	if reloading:
-		return
-		
-	point_at_mouse()
-	
 	if Input.is_action_just_pressed("click"):
 		ammo -= 1
 		if (ammo == 0):
 			reload()
 		else:
-			var fire_tween = create_tween()
-			fire_tween.tween_callback(fire)
-			fire_tween.tween_interval(.2)
-			fire_tween.tween_callback(fire)
-			fire_tween.tween_interval(.2)
-			fire_tween.tween_callback(fire)
+			fire()
+		#var fire_tween = create_tween()
+		#fire_tween.tween_callback(fire)
+		#fire_tween.tween_interval(.2)
+		#fire_tween.tween_callback(fire)
+		#fire_tween.tween_interval(.2)
+		#fire_tween.tween_callback(fire)
 
 
 func move_to_position() -> void:
 	var mouse = get_global_mouse_position()
 	var direction = global_position.direction_to(mouse)
 	var origin = get_parent().global_position
-	var target = origin + direction * 40
+	var target = origin + direction * 20
 	
 	if global_position.distance_to(target) < 1:
 		global_position = target
 	else:
 		global_position += global_position.direction_to(target)
-
-func point_at_mouse() -> void:
-	var mouse = get_global_mouse_position()
+		
 	global_rotation = global_position.angle_to_point(mouse)
 
 func reload() -> void:
-	ammo = 6
-	%GunAnimationPlayer.play("reload")
-	%GunReload.play()
+	%g
 
 func fire() -> void:
 	var mouse = get_global_mouse_position()
 	var direction = global_position.direction_to(mouse)
 	var origin = get_parent().global_position
-	var target = origin + direction * 40
+	var target = origin + direction * 20
 	
-	var space_state = get_world_2d().direct_space_state
+	var space_state =  get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(global_position + direction * 10,  direction * 2000)
 	var result = space_state.intersect_ray(query)
 	var end : Vector2
