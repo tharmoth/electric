@@ -15,20 +15,17 @@ var ammo: int = SHOTS
 var isReloading: bool = false
 var shotsFired: Array = []
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	%ReloadTimer.connect("timeout", _handle_reload)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if isReloading:
-		return
-	
 	self._point_at_mouse()
 	
 	for i in shotsFired.size():
 		var shot = shotsFired[i]
-		shot.global_position += (Vector2.RIGHT * 300) * delta
+		# I believe since the shot is a child of a rotating object
+		# when you aim your mouse the projectile moves with it
+		shot.global_position += (Vector2.RIGHT * 300).rotated(shot.rotation) * delta
 
 func fire() -> void:
 	print('attempting to fire', %ShootTimer.time_left)
