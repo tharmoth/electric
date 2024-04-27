@@ -6,10 +6,18 @@ static var instance : Character
 var knockback : Vector2 = Vector2.ZERO
 var charge : int = 0
 
+var gun = preload("res://src/gun.tscn")
+var shotgun = preload("res://src/components/shotgun.tscn")
+
+var currentGun;
+
 func _enter_tree() -> void:
 	instance = self
 
 func _ready() -> void:
+	currentGun = shotgun.instantiate()
+	currentGun.connect("shake", shake_camera)
+	call_deferred("add_child", currentGun)
 	%PickupBox.area_entered.connect(pickup)
 
 func pickup(area : Area2D) -> void:
@@ -37,6 +45,8 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+	if Input.is_action_just_pressed("click"):
+		currentGun.fire()
 
-	
-	
+func shake_camera() -> void:
+	%Camera2D/AnimationPlayer.play("shake")

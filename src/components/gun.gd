@@ -1,5 +1,7 @@
 extends Sprite2D
 
+signal shake
+
 var knockback_tween : Tween
 var ammo : int = 6
 var reloading : bool = false
@@ -9,20 +11,11 @@ func _process(delta: float) -> void:
 	move_to_position()
 	if (reloading): 
 		return
-	
+		
 	point_at_mouse()
-	if Input.is_action_just_pressed("click"):
-		ammo -= 1
-		if (ammo == 0):
-			reload()
-		else:
-			fire()
-		#var fire_tween = create_tween()
-		#fire_tween.tween_callback(fire)
-		#fire_tween.tween_interval(.2)
-		#fire_tween.tween_callback(fire)
-		#fire_tween.tween_interval(.2)
-		#fire_tween.tween_callback(fire)
+
+func can_fire() -> bool:
+	return true
 
 func point_at_mouse() -> void:
 	var mouse = get_global_mouse_position()
@@ -52,12 +45,14 @@ func reload_complete(something):
 	ammo = 6
 
 func fire() -> void:
+	ammo -= 1
+
 	var mouse = get_global_mouse_position()
 	var direction = global_position.direction_to(mouse)
-	var origin = get_parent().global_position
+	var origin = $Marker2D.global_position
 	var target = origin + direction * 20
 	
-	var space_state =  get_world_2d().direct_space_state
+	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(global_position + direction * 10,  direction * 2000)
 	var result = space_state.intersect_ray(query)
 	var end : Vector2
@@ -73,24 +68,27 @@ func fire() -> void:
 	line.points = [global_position, end]
 	line.width = 0
 	line.default_color = Color.RED
-	get_tree().root.add_child(line)
+	get_parent().get_tree().root.add_child(line)
 	
-	var laser_tween = create_tween()
+	var laser_tween = get_parent().get_tree().create_tween()
 	laser_tween.tween_property(line, "width", 6, .05)
 	laser_tween.tween_property(line, "width", 0, .3)
 	laser_tween.tween_callback(func(): line.queue_free())
 
-	%Camera2D/AnimationPlayer.play("shake")
+	emit_signal("shake")
 	%GunAudio.play()
 	
 	if knockback_tween:
 		knockback_tween.kill()
 
-	knockback_tween = create_tween()
+	knockback_tween = get_parent().get_tree().create_tween()
 	get_parent().knockback = origin - direction * 250;
 	knockback_tween.set_ease(Tween.EASE_OUT)
 	knockback_tween.set_trans(Tween.TRANS_CUBIC)
 	knockback_tween.tween_property(get_parent(), "knockback", Vector2.ZERO, .25)
+	
+	if ammo == 0:
+		reload()
 	
 	#var light = preload("res://src/laser_light.tscn").instantiate()
 	#light.global_position = global_position
