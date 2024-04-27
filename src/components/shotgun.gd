@@ -41,7 +41,7 @@ func fire() -> void:
 	shot.global_position = $ParticleOrigin.global_position
 	shot.rotation = $ParticleOrigin.rotation
 
-	add_child(shot)
+	get_tree().get_root().add_child(shot)
 	shotsFired.push_back(shot)
 	emit_signal("shake")
 	%ShootTimer.start(SHOT_DELAY)
