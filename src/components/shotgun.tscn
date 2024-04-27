@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://drh6er8pl0atq"]
+[gd_scene load_steps=10 format=3 uid="uid://drh6er8pl0atq"]
 
 [ext_resource type="Script" path="res://src/components/shotgun.gd" id="1_nf86e"]
 [ext_resource type="Texture2D" uid="uid://hpasopkvipfy" path="res://data/shotgun.png" id="2_y36el"]
@@ -10,6 +10,42 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f6yuq"]
 bg_color = Color(0.6, 2.4, 4, 1)
+
+[sub_resource type="Animation" id="Animation_u3w0v"]
+resource_name = "reload"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_duu77"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3spbw"]
+_data = {
+"RESET": SubResource("Animation_duu77"),
+"reload": SubResource("Animation_u3w0v")
+}
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_nf86e")
@@ -52,3 +88,9 @@ stream = ExtResource("3_wc0s3")
 unique_name_in_owner = true
 stream = ExtResource("4_3nak7")
 volume_db = 10.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_3spbw")
+}
