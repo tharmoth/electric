@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cthcmq0f4mxf4"]
+[gd_scene load_steps=19 format=3 uid="uid://cthcmq0f4mxf4"]
 
 [ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/timer.png" id="1_e64cu"]
 [ext_resource type="Script" path="res://main_menu/main_menu_scripts/spinny.gd" id="1_jfd6a"]
@@ -56,6 +56,13 @@ colors = PackedColorArray(0.307189, 0.152198, 7.21961e-08, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_o758f"]
 gradient = SubResource("Gradient_7dmvb")
 
+[sub_resource type="Gradient" id="Gradient_n8dyd"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6ckpx"]
+gradient = SubResource("Gradient_n8dyd")
+
 [node name="Main Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -66,13 +73,13 @@ grow_vertical = 2
 metadata/_edit_lock_ = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(677, 578)
-scale = Vector2(7.99219, 7.75781)
+position = Vector2(508, 508)
+scale = Vector2(11.6006, 11.0879)
 texture = SubResource("GradientTexture2D_2tr7n")
 
 [node name="kitchenTimer" type="Node2D" parent="."]
 z_index = 2
-position = Vector2(575, 578)
+position = Vector2(749, 574)
 script = ExtResource("1_jfd6a")
 
 [node name="clockBottom" type="Sprite2D" parent="kitchenTimer"]
@@ -97,38 +104,36 @@ position = Vector2(0, 101)
 [node name="backdrop" type="Node2D" parent="."]
 position = Vector2(4, -18)
 
-[node name="background" type="Sprite2D" parent="backdrop"]
+[node name="static" type="Sprite2D" parent="backdrop"]
 unique_name_in_owner = true
 light_mask = 0
 z_index = -11
-position = Vector2(571, 591)
-scale = Vector2(10, 10)
+position = Vector2(265, 438)
+scale = Vector2(2.55833, 2.76667)
 texture = SubResource("NoiseTexture2D_t7nri")
 script = ExtResource("3_q6s8c")
-metadata/_edit_lock_ = true
 
 [node name="counterTop" type="Sprite2D" parent="backdrop"]
-position = Vector2(572.791, 704)
-scale = Vector2(4.50618, 76)
+position = Vector2(508, 704)
+scale = Vector2(4, 76)
 texture = SubResource("GradientTexture1D_vpcwd")
 
 [node name="counterTop2" type="Sprite2D" parent="backdrop"]
-position = Vector2(571, 760)
-scale = Vector2(4.50618, 48)
+position = Vector2(507.104, 774)
+scale = Vector2(4.007, 76)
 texture = SubResource("GradientTexture1D_1483e")
 
 [node name="counterBottom" type="Sprite2D" parent="backdrop"]
-position = Vector2(572.791, 976.5)
-scale = Vector2(4.50618, 385)
+position = Vector2(508, 923.5)
+scale = Vector2(4, 237)
 texture = SubResource("GradientTexture1D_o758f")
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 534.0
-offset_top = 298.0
-offset_right = 626.0
-offset_bottom = 359.0
-text = "Spin to Win!"
+[node name="counterTop3" type="Sprite2D" parent="backdrop"]
+z_index = -19
+position = Vector2(508, 380)
+scale = Vector2(4, 724)
+texture = SubResource("GradientTexture1D_6ckpx")
+metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
