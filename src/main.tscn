@@ -1,10 +1,11 @@
-[gd_scene load_steps=31 format=3 uid="uid://cjfagb6ey5fr3"]
+[gd_scene load_steps=32 format=3 uid="uid://cjfagb6ey5fr3"]
 
 [ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/sprites/timer.png" id="1_4nl5p"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xa5wo"]
 [ext_resource type="Script" path="res://src/Character.gd" id="1_xjqbd"]
 [ext_resource type="Texture2D" uid="uid://h4cjswv74lav" path="res://data/sprites/handle.png" id="2_jr2jg"]
 [ext_resource type="Script" path="res://src/components/timer.gd" id="2_uorbx"]
+[ext_resource type="Script" path="res://src/MapBorder.gd" id="3_sbw06"]
 [ext_resource type="Texture2D" uid="uid://5taqte82qsbl" path="res://data/character/character.png" id="5_8cd5a"]
 [ext_resource type="Script" path="res://src/Engines.gd" id="5_au8ny"]
 [ext_resource type="Texture2D" uid="uid://udvcofnt2ayp" path="res://data/character/engines.png" id="6_uva1i"]
@@ -18,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://bgk1fl5lw4fyi" path="res://src/pickup.tscn" id="14_5kbvx"]
 [ext_resource type="Texture2D" uid="uid://doi73aghhpalw" path="res://data/particles/spark_02.png" id="15_i46s2"]
 [ext_resource type="AudioStream" uid="uid://cdi574hqve8cc" path="res://data/sfx/timer_winding.wav" id="17_08sto"]
-[ext_resource type="PackedScene" path="res://src/background.tscn" id="19_epnoa"]
+[ext_resource type="PackedScene" uid="uid://bvhveibcwfqxw" path="res://src/background.tscn" id="19_epnoa"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vknm1"]
 bg_color = Color(0.203922, 0.203922, 0.203922, 1)
@@ -109,8 +110,15 @@ texture = ExtResource("2_jr2jg")
 position = Vector2(2, -706)
 collision_layer = 4
 collision_mask = 0
+script = ExtResource("3_sbw06")
 
 [node name="Polygon2D" type="CollisionPolygon2D" parent="Edge"]
+polygon = PackedVector2Array(-2, 184, 57, 189, 139, 205, 197, 225, 271, 264, 341, 317, 403, 383, 441, 440, 483, 534, 497, 588, 508, 650, 509, 720, 499, 802, 482, 866, 442, 949, 377, 1041, 329, 1087, 249, 1142, 168, 1180, 84, 1202, -3, 1209, -102, 1200, -164, 1182, -235, 1154, -312, 1106, -374, 1050, -417, 999, -458, 934, -487, 864, -508, 781, -515, 718, -514, 656, -503, 586, -481, 514, -437, 425, -384, 354, -313, 288, -240, 242, -158, 208, -74, 190, -2, 184, -2, 48, -672, 64, -705, 1324, 605, 1342, 579, 58, -2, 48)
+
+[node name="Area2D" type="Area2D" parent="Edge"]
+collision_mask = 4
+
+[node name="HurtBox" type="CollisionPolygon2D" parent="Edge/Area2D"]
 polygon = PackedVector2Array(-2, 184, 57, 189, 139, 205, 197, 225, 271, 264, 341, 317, 403, 383, 441, 440, 483, 534, 497, 588, 508, 650, 509, 720, 499, 802, 482, 866, 442, 949, 377, 1041, 329, 1087, 249, 1142, 168, 1180, 84, 1202, -3, 1209, -102, 1200, -164, 1182, -235, 1154, -312, 1106, -374, 1050, -417, 999, -458, 934, -487, 864, -508, 781, -515, 718, -514, 656, -503, 586, -481, 514, -437, 425, -384, 354, -313, 288, -240, 242, -158, 208, -74, 190, -2, 184, -2, 48, -672, 64, -705, 1324, 605, 1342, 579, 58, -2, 48)
 
 [node name="Timer" type="Node2D" parent="."]
@@ -256,3 +264,7 @@ environment = SubResource("Environment_f3sby")
 [node name="ParallaxBackground" parent="." instance=ExtResource("19_epnoa")]
 offset = Vector2(0, -512)
 transform = Transform2D(1, 0, 0, 1, 0, -512)
+
+[connection signal="input_event" from="Edge" to="Edge" method="_on_input_event"]
+[connection signal="area_entered" from="Edge/Area2D" to="Edge" method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Edge/Area2D" to="Edge" method="_on_area_2d_body_entered"]

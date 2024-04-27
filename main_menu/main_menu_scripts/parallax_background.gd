@@ -2,4 +2,4 @@ extends ParallaxBackground
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	scroll_base_offset -= Vector2(0.25 + delta, 0)
+	scroll_base_offset -= Vector2(0.5 + delta, 0)

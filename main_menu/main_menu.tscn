@@ -13,13 +13,12 @@
 
 [sub_resource type="Gradient" id="Gradient_ucsia"]
 offsets = PackedFloat32Array(0, 0.435065)
-colors = PackedColorArray(0.625597, 0.625597, 0.625597, 1, 0, 0, 0, 1)
+colors = PackedColorArray(0.439049, 0.439049, 0.439049, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_2tr7n"]
 gradient = SubResource("Gradient_ucsia")
 fill = 1
 fill_from = Vector2(0.513761, 0.522936)
-fill_to = Vector2(0, 0)
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -32,8 +31,10 @@ script = ExtResource("1_0cyx6")
 metadata/_edit_lock_ = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(688, 489)
+position = Vector2(628, 373)
 scale = Vector2(11.6006, 11.0879)
+color = Color(0.662745, 1, 1, 1)
+energy = 0.72
 texture = SubResource("GradientTexture2D_2tr7n")
 
 [node name="kitchenTimer" type="Node2D" parent="."]
@@ -74,6 +75,7 @@ stream = ExtResource("7_2ahw8")
 script = ExtResource("8_npv5h")
 
 [node name="Background" parent="." instance=ExtResource("9_ahrn7")]
+scroll_base_offset = Vector2(-93, 0)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0

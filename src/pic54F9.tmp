@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://bgk1fl5lw4fyi"]
+
+[ext_resource type="Texture2D" uid="uid://qb7rlb6jk10i" path="res://data/sprites/battery.png" id="1_ldhox"]
+[ext_resource type="Texture2D" uid="uid://b0wl2wna6gd12" path="res://data/particles/SofterLight.png" id="2_sfs6w"]
+[ext_resource type="Script" path="res://src/pickup.gd" id="2_sy5m0"]
+[ext_resource type="Script" path="res://src/components/bounce_movement_component.gd" id="3_tn3nl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j588f"]
+
+[node name="Battery" type="Node2D"]
+script = ExtResource("2_sy5m0")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_j588f")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0, 0, 0.501961)
+position = Vector2(0, 15)
+scale = Vector2(0.1, 0.05)
+texture = ExtResource("2_sfs6w")
+
+[node name="BatterySprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("1_ldhox")
+
+[node name="Node" type="Node" parent="BatterySprite"]
+script = ExtResource("3_tn3nl")

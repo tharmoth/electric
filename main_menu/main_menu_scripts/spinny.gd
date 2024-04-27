@@ -12,10 +12,10 @@ func _physics_process(delta: float) -> void:
 	
 	if mouseDist < MAX_DIST and Input.is_action_just_pressed("click"):
 		following = true
-
+	
 	if Input.is_action_just_released("click"):
 		following = false
-
+	
 	if following:
 		var ang := get_global_mouse_position().angle_to_point($knob.global_position) - PI/2
 		var d : Vector2 = ($knob/knobPoint.position.rotated(knob_rot))

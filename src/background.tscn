@@ -4,13 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://clf4w610032gb" path="res://main_menu/textures/space.png" id="2_mi5jq"]
 
 [node name="ParallaxBackground" type="ParallaxBackground"]
+scroll_ignore_camera_zoom = true
 script = ExtResource("1_xwy5g")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
-motion_mirroring = Vector2(1024, 0)
+motion_mirroring = Vector2(1280, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
 texture_repeat = 2
 position = Vector2(512, 512)
-scale = Vector2(2, 2)
+scale = Vector2(2.5, 2.5)
 texture = ExtResource("2_mi5jq")
