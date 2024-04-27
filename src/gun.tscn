@@ -57,6 +57,7 @@ bg_color = Color(0.360784, 0.364706, 0.345098, 1)
 bg_color = Color(16, 0, 0, 1)
 
 [node name="Gun" type="Node2D"]
+rotation = 12.5664
 script = ExtResource("2_mv4vi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -9,6 +9,7 @@ var shots = 3
 var ammo : int = 0
 var reloading : bool = false
 var ready_to_fire : bool = true
+var spin_to_win = 5	
 @export var is_rifle : bool
 
 func _ready() -> void:
@@ -57,9 +58,7 @@ func reload() -> void:
 	%GunAnimationPlayer.play("reload")
 	reloading = true
 	%GunReload.play()
-	
-var spin_to_win = 5	
-	
+
 func reload_complete(something):
 	reloading = false
 	if spin_to_win > 0:

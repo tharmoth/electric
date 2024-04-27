@@ -18,20 +18,35 @@ var minDamage: int = 5
 var maxDamage: int = 8
 
 func _ready() -> void:
-	%ReloadTimer.connect("timeout", _handle_reload)
 	%AmmoCapacity.min_value = 0
 	%AmmoCapacity.max_value = MAX_AMMO
 	%AmmoCapacity.value = MAX_AMMO
+	%GunAnimationPlayer.animation_finished.connect(_reload_complete)
+	_reload()
 
 func _process(delta: float) -> void:
 	self._point_at_mouse()
+	self._move_to_position()
+
+func _move_to_position() -> void:
+	var mouse = get_global_mouse_position()
+	var direction = global_position.direction_to(mouse)
+	var origin = get_parent().global_position
+	var target = origin + direction * 40
+	
+	if global_position.distance_to(target) < 1:
+		global_position = target
+	else:
+		global_position += global_position.direction_to(target)
 
 func fire() -> void:
 	if !self.can_fire():
 		return
 
 	ammo -= 1
-	%AmmoCapacity.value -= 1
+	%AmmoCapacity.value = ammo
+
+	print(%AmmoCapacity.value)
 
 	for shot in _create_shots():
 		get_tree().get_root().add_child(shot)
@@ -43,6 +58,7 @@ func fire() -> void:
 	%ShootAudio.play(0)
 
 	if ammo == 0:
+		spin_to_win = Character.instance.stats.reload_time
 		self._reload()
 
 func can_fire() -> bool:
@@ -56,8 +72,8 @@ func can_fire() -> bool:
 
 func _reload() -> void:
 	isReloading = true
-	%AnimationPlayer.play("reload")
-	%ReloadTimer.start(RELOAD_DELAY)
+	%GunAnimationPlayer.play("reload")
+	
 	%AmmoCapacity.value = MAX_AMMO
 	%ReloadAudio.play(0)
 	await get_tree().create_timer(RELOAD_DELAY).timeout
@@ -65,9 +81,14 @@ func _reload() -> void:
 	#await get_tree().create_timer(RELOAD_DELAY).timeout
 	#%AnimationPlayer.stop()
 
-func _handle_reload() -> void:
-	ammo = MAX_AMMO
+var spin_to_win = 5	
+	
+func _reload_complete(something):
 	isReloading = false
+	if spin_to_win > 0:
+		spin_to_win -= 1
+		_reload()
+	ammo = MAX_AMMO + Character.instance.stats.clip_bonus
 
 func _point_at_mouse() -> void:
 	var m = get_global_mouse_position()
