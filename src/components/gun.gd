@@ -1,6 +1,7 @@
 class_name HitscanGun extends Node2D
 
 signal shake
+signal knockback(recoil: Vector2)
 
 var knockback_tween : Tween
 var max_ammo = 24
@@ -108,17 +109,9 @@ func loose() -> void:
 	laser_tween.tween_property(line, "width", 0, .3)
 	laser_tween.tween_callback(func(): line.queue_free())
 
-	emit_signal("shake")
 	%GunAudio.play()
-	
-	if knockback_tween:
-		knockback_tween.kill()
-
-	knockback_tween = get_parent().get_tree().create_tween()
-	get_parent().knockback = origin - direction * 250;
-	knockback_tween.set_ease(Tween.EASE_OUT)
-	knockback_tween.set_trans(Tween.TRANS_QUINT)
-	knockback_tween.tween_property(get_parent(), "knockback", Vector2.ZERO, .25)
+	emit_signal("shake")
+	emit_signal("knockback", origin - direction * 250)
 	
 	if ammo == 0:
 		reload()

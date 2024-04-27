@@ -1,7 +1,9 @@
 extends Node2D
 
 signal shake
+signal knockback(recoil: Vector2)
 
+const KNOCKBACK_FORCE : float = 1250
 const MAX_AMMO : int = 5
 # Should be in the particle
 const MAX_DISTANCE : int = 300
@@ -36,7 +38,9 @@ func fire() -> void:
 	for shot in _create_shots():
 		get_tree().get_root().add_child(shot)
 
+	var v : Vector2 = $ParticleOrigin.global_position - global_position.direction_to(get_global_mouse_position()) * KNOCKBACK_FORCE
 	emit_signal("shake")
+	emit_signal("knockback", v)
 	%ShootTimer.start(SHOT_DELAY)
 	%ShootAudio.play(0)
 
