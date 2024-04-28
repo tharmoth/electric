@@ -48,7 +48,7 @@ func _ready() -> void:
 		texture = load("res://data/sprites/capactior.png")
 		%Outline.self_modulate = Color("9d9d9d")
 	elif item_name == "shoulder_laser":
-		texture = load("res://data/sprites/inductor.png")
+		texture = load("res://data/sprites/shoulder_laser.png")
 	elif item_name == "piercing":
 		texture = load("res://data/sprites/resistor.png")
 		%Outline.self_modulate = Color("e6cc80")
