@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3mekoqxwlrog"]
+[gd_scene load_steps=5 format=3 uid="uid://d2li25rr42qy4"]
 
 [ext_resource type="Texture2D" uid="uid://cwswuttwx8lf4" path="res://icon.svg" id="1_laa10"]
+[ext_resource type="Script" path="res://src/microboss.gd" id="1_lf4nr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpq6i"]
 size = Vector2(291, 290)
@@ -10,6 +11,7 @@ size = Vector2(293, 289)
 
 [node name="Node2D" type="Node2D"]
 scale = Vector2(0.657109, 0.657109)
+script = ExtResource("1_lf4nr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(136, 134.5)

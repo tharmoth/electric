@@ -3,7 +3,6 @@ class_name Enemy extends Node2D
 var health : int = 5
 var speed := 100.0
 var dead : bool = false
-static var pickup = preload("res://src/pickup.tscn")
 
 func _ready() -> void:
 	print("in enemy")
@@ -38,10 +37,10 @@ func on_death():
 	dead = true
 	
 	if (randf() > .66):
-		var battery = pickup.instantiate()
+		var battery = load("res://src/pickup.tscn").instantiate()
 		WorldTimer.instance.add_child(battery)
 		battery.global_position = global_position
-	
+
 	%StaticBody2D.free()
 	if %Sprite2D:
 		death_animation.kill(%Sprite2D)
