@@ -120,17 +120,20 @@ func loose() -> void:
 	var target = origin + direction * 40
 	
 	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsRayQueryParameters2D.create(origin,  origin + direction * 2000)
-	var result = space_state.intersect_ray(query)
+	
 	var end : Vector2
-	if result:
-		var node = result.collider.get_parent()
-		end = result.position
-		if node is Enemy:
-			FloatingLabel.show(str(randi_range(5, 10)), end, Color.WHITE)
-			node.on_death()
-	else:
-		end = mouse
+	for i in range(Character.instance.stats.piercing + 1):
+		var query = PhysicsRayQueryParameters2D.create(origin,  origin + direction * 2000)
+		var result = space_state.intersect_ray(query)
+		if result:
+			var node = result.collider.get_parent()
+			end = result.position
+			if node is Enemy:
+				var damage = randi_range(5, 10)
+				node.damage(damage)
+		else:
+			end = mouse
+			break
 	
 	var line = Line2D.new()
 	line.points = [origin, end]

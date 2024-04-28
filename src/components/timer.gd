@@ -5,6 +5,7 @@ static var instance : WorldTimer
 var max_spin = 360.0
 var is_game_over = false
 var bonus_rotation : float = 0
+var time_elapsed : float = 0
 
 func _enter_tree() -> void:
 	instance = self
@@ -16,6 +17,7 @@ func move_toward_angle(from : float, to: float, delta : float):
 	return from + ans * delta
 
 func _process(delta: float) -> void:
+	time_elapsed += delta
 	if is_game_over:
 		rotation_degrees = -360
 		return

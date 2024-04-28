@@ -21,7 +21,6 @@ func _on_body_entered(body_rid, body, body_shape_index, local_shape_index) -> vo
 	if body.get_parent() is Enemy && body.get_parent().has_method("damage"):
 		var dmg: int = floor(randf_range(minDamage, maxDamage))
 		body.get_parent().damage(dmg)
-		FloatingLabel.show(str(dmg), body.global_position, Color.WHITE)
 		piercing -= 1
 		if piercing <= 0:
 			queue_free()

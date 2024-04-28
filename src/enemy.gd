@@ -1,6 +1,6 @@
 class_name Enemy extends Node2D
 
-var maxHealth : int = 5
+var health : int = 5
 var speed := 100.0
 var dead : bool = false
 static var pickup = preload("res://src/pickup.tscn")
@@ -8,6 +8,10 @@ static var pickup = preload("res://src/pickup.tscn")
 func _ready() -> void:
 	add_to_group("Enemy")
 	%Hurtbox.area_entered.connect(test)
+	var mintues = floori(WorldTimer.instance.time_elapsed / 60)
+	print(mintues)
+	health += mintues
+	
 	
 func test(area : Area2D):
 	Character.instance.on_damage()
@@ -31,7 +35,7 @@ func on_death():
 		WorldTimer.instance.add_child(battery)
 		battery.global_position = global_position
 	
-	%StaticBody2D.queue_free()
+	%StaticBody2D.free()
 	death_animation.kill(%Sprite2D)
 	%tv.kill()
 	queue_free()
@@ -47,7 +51,7 @@ func on_gameover():
 	queue_free()
 
 func damage(damage: int) -> void:
-	if maxHealth - damage <= 0:
+	FloatingLabel.show(str(damage), global_position, Color.WHITE)
+	health -= damage
+	if health <= 0:
 		self.on_death()
-
-	print("Damage taken: %s" % str(damage))
