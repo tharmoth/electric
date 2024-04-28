@@ -69,6 +69,8 @@ func _ready() -> void:
 	add_to_group("LevelUpPickup")
 	modulate = Color.TRANSPARENT
 	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_QUAD)
+	tween.set_ease(Tween.EASE_OUT)
 	tween.tween_property(self, "modulate", Color.WHITE, 1)
 	tween.tween_callback(func():
 		%Area2D.monitoring = true
