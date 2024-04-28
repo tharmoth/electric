@@ -23,4 +23,6 @@ func on_pickup():
 		Character.instance.on_level_up()
 
 func on_gameover():
+	%BounceNode.queue_free()
 	death_animation.kill(%BatterySprite)
+	queue_free()

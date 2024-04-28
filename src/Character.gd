@@ -1,9 +1,10 @@
 class_name Character extends CharacterBody2D
 
-const SPEED = 300.0
+const SPEED : float = 300.0
+const MAX_VELOCITY : float = 1200.0
 
-static var high_score = -1
-static var score = -1
+static var high_score : int = -1
+static var score : int  = -1
 static var instance : Character
 var knockbackTween : Tween = null
 var knockback : Vector2 = Vector2.ZERO
@@ -67,7 +68,7 @@ func on_level_up():
 
 	var pick : Node2D = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
 	pick.init("weapon")
-	get_parent().add_child(pick)
+	get_parent().call_deferred("add_child", pick)
 	#pick.global_position = global_position + direction * 100
 	#pick.position = Vector2(0, -310)
 	pick.position = Vector2(0, -150)
@@ -75,14 +76,14 @@ func on_level_up():
 	
 	var pick2 : Node2D = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
 	pick2.init("passive")
-	get_parent().add_child(pick2)
+	get_parent().call_deferred("add_child", pick2)
 	#pick2.global_position = global_position + direction * 100 + Vector2.LEFT.rotated(angle) * 100
 	#pick2.position = Vector2(270, 160)
 	pick2.position = Vector2(130, 77)
 	
 	var pick3 : Node2D = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
 	pick3.init_ignore("passive", pick2.item_name)
-	get_parent().add_child(pick3)
+	get_parent().call_deferred("add_child", pick3)
 	#pick3.global_position = global_position + direction * 100 + Vector2.RIGHT.rotated(angle) * 100
 	#pick3.position = Vector2(-270, 160)
 	pick3.position = Vector2(-130, 77)
@@ -104,6 +105,8 @@ func _physics_process(delta: float) -> void:
 		
 
 	velocity = movement + knockback
+	var speed = velocity.length()
+	velocity = velocity.normalized() * clamp(speed, 0, MAX_VELOCITY)
 
 	move_and_slide()
 
@@ -134,6 +137,8 @@ func on_damage() -> void:
 	
 	for node in get_tree().get_nodes_in_group("Enemy"):
 		node.on_death()
+	for node in get_tree().get_nodes_in_group("Pickup"):
+		node.on_gameover()
 
 func shake_camera() -> void:
 	%Camera2D/AnimationPlayer.play("shake")

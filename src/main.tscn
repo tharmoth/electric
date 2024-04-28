@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cjfagb6ey5fr3"]
+[gd_scene load_steps=41 format=3 uid="uid://cjfagb6ey5fr3"]
 
 [ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/sprites/timer.png" id="1_4nl5p"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xa5wo"]
@@ -68,6 +68,10 @@ radius = 24.0
 height = 64.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xx30q"]
+radius = 48.0
+height = 128.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pqg87"]
 radius = 24.0
 height = 64.0
 
@@ -130,7 +134,7 @@ collision_mask = 0
 script = ExtResource("3_sbw06")
 
 [node name="Polygon2D" type="CollisionPolygon2D" parent="Edge"]
-polygon = PackedVector2Array(-2, 184, 57, 189, 139, 205, 197, 225, 271, 264, 341, 317, 403, 383, 441, 440, 483, 534, 497, 588, 508, 650, 509, 720, 499, 802, 482, 866, 442, 949, 377, 1041, 329, 1087, 249, 1142, 168, 1180, 84, 1202, -3, 1209, -102, 1200, -164, 1182, -235, 1154, -312, 1106, -374, 1050, -417, 999, -458, 934, -487, 864, -508, 781, -515, 718, -514, 656, -503, 586, -481, 514, -437, 425, -384, 354, -313, 288, -240, 242, -158, 208, -74, 190, -2, 184, -2, 48, -672, 64, -705, 1324, 605, 1342, 579, 58, -2, 48)
+polygon = PackedVector2Array(-1, 192, 61, 195, 139, 213, 197, 233, 270, 270, 337, 321, 400, 387, 437, 441, 482, 535, 497, 588, 508, 650, 509, 720, 501, 802, 484, 868, 447, 951, 381, 1047, 331, 1095, 255, 1149, 168, 1189, 83, 1211, -4, 1218, -106, 1207, -172, 1189, -242, 1157, -318, 1107, -379, 1051, -420, 1001, -458, 934, -489, 865, -508, 781, -515, 718, -513, 656, -501, 587, -477, 514, -432, 426, -377, 357, -305, 291, -232, 247, -149, 213, -66, 196, -1, 192, -2, 48, -672, 64, -705, 1324, 605, 1342, 579, 58, -2, 48)
 
 [node name="EdgeHurtbox" type="Area2D" parent="Edge"]
 unique_name_in_owner = true
@@ -139,7 +143,7 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Edge/EdgeHurtbox"]
-polygon = PackedVector2Array(1, 194, 56, 212, 139, 224, 189, 243, 263, 278, 330, 332, 387, 397, 423, 451, 465, 534, 482, 591, 493, 657, 492, 720, 486, 801, 468, 869, 428, 945, 363, 1035, 314, 1080, 236, 1135, 161, 1168, 75, 1195, -4, 1200, -99, 1192, -164, 1172, -232, 1142, -311, 1095, -367, 1040, -410, 987, -446, 927, -477, 855, -495, 777, -492, 717, -489, 653, -475, 584, -455, 510, -417, 434, -361, 358, -294, 294, -214, 247, -140, 217, -63, 202, -2, 196, -2, 48, -672, 64, -705, 1324, 605, 1342, 579, 58, -2, 48)
+polygon = PackedVector2Array(-2, 199, 59, 205, 140, 223, 191, 243, 263, 278, 333, 331, 391, 393, 429, 447, 467, 531, 486, 590, 496, 658, 499, 723, 490, 802, 471, 870, 434, 949, 388, 1019, 322, 1085, 242, 1142, 166, 1176, 78, 1201, -4, 1207, -102, 1197, -173, 1176, -242, 1144, -316, 1096, -371, 1043, -417, 988, -452, 927, -481, 855, -498, 777, -505, 711, -500, 645, -486, 576, -461, 505, -417, 424, -361, 355, -292, 295, -213, 248, -136, 219, -61, 203, -2, 199, -2, 48, -672, 64, -705, 1324, 605, 1342, 579, 58, -2, 48)
 
 [node name="EdgeParticles" type="GPUParticles2D" parent="Edge/EdgeHurtbox"]
 unique_name_in_owner = true
@@ -217,11 +221,19 @@ shape = SubResource("CapsuleShape2D_5w6x5")
 
 [node name="PickupBox" type="Area2D" parent="Timer/Character"]
 unique_name_in_owner = true
-collision_layer = 4
-collision_mask = 2
+collision_layer = 0
+collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Timer/Character/PickupBox"]
 shape = SubResource("CapsuleShape2D_xx30q")
+
+[node name="HitBox" type="Area2D" parent="Timer/Character"]
+unique_name_in_owner = true
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Timer/Character/HitBox"]
+shape = SubResource("CapsuleShape2D_pqg87")
 
 [node name="SpawnPos1" type="Sprite2D" parent="Timer"]
 modulate = Color(2, 4, 4, 1)

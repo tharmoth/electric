@@ -11,7 +11,7 @@
 script = ExtResource("2_sy5m0")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
+collision_layer = 512
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -19,6 +19,7 @@ position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_j588f")
 
 [node name="Shadow" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 self_modulate = Color(0, 0, 0, 0.501961)
 position = Vector2(0, 15)
 scale = Vector2(0.1, 0.05)
@@ -28,5 +29,6 @@ texture = ExtResource("2_sfs6w")
 unique_name_in_owner = true
 texture = ExtResource("1_ldhox")
 
-[node name="Node" type="Node" parent="BatterySprite"]
+[node name="BounceNode" type="Node" parent="BatterySprite"]
+unique_name_in_owner = true
 script = ExtResource("3_tn3nl")
