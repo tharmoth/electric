@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2kl7d3l0xpow"]
+
+[ext_resource type="PackedScene" uid="uid://di7v32te6b0ns" path="res://src/gun.tscn" id="1_qrjgn"]
+[ext_resource type="Texture2D" uid="uid://pff6wjk582x5" path="res://data/sprites/tesla_gun.png" id="2_3ltu1"]
+[ext_resource type="AudioStream" uid="uid://dbq2j37n7gdb4" path="res://data/sfx/zap.wav" id="3_rf5oj"]
+[ext_resource type="AudioStream" uid="uid://byuhswhkf1iga" path="res://data/sfx/steam.wav" id="4_n68ny"]
+
+[node name="tesla_gun" instance=ExtResource("1_qrjgn")]
+
+[node name="LeftHand" parent="." index="0"]
+texture = ExtResource("2_3ltu1")
+
+[node name="LeftHandProgressBar" parent="LeftHand" index="0"]
+offset_top = -5.96046e-08
+offset_bottom = 28.0
+value = 0.0
+
+[node name="RightHand" parent="." index="1"]
+texture = ExtResource("2_3ltu1")
+
+[node name="RightHandProgressBar" parent="RightHand" index="0"]
+value = 0.0
+
+[node name="GunAudio" parent="." index="2"]
+stream = ExtResource("3_rf5oj")
+bus = &"SFX"
+
+[node name="GunReload" parent="." index="4"]
+stream = ExtResource("4_n68ny")
+bus = &"SFX"
