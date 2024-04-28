@@ -2,7 +2,7 @@ class_name Microboss extends Enemy
 
 const SHOT_DELAY : float = 3.0
 
-var projectile : PackedScene = load("res://src/shotgun_particle.tscn")
+var projectile : PackedScene = preload("res://src/boss_projectile.tscn")
 var timeSinceLastShot : float = 0.0
 
 func _ready() -> void:
@@ -23,16 +23,12 @@ func fire() -> void:
 	var offset = (%StaticBody2D/CollisionShape2D.shape.extents / 1.75)
 
 	for i in 20:
-		var bullet : Bullet = projectile.instantiate()
+		var bullet : Node2D = projectile.instantiate()
 		var angle = ((-25 / 2) + (25 / (10 - 1)) * i)
 
-		bullet.set_collision_mask_value(1, false)
-		bullet.set_collision_mask_value(4, true)
+		bullet.get_node("Area2D").set_collision_mask_value(1, false)
+		bullet.get_node("Area2D").set_collision_mask_value(4, true)
 		bullet.global_position = global_position + offset
 		bullet.rotation = global_position.angle_to_point(Character.instance.global_position) + angle
-		bullet.maxDistance = 800
-		bullet.minDamage = 12
-		bullet.maxDamage = 20
-		bullet.get_node('GPUParticles2D2').modulate = Color(1, 0.08, 0.265)
 		get_tree().get_root().add_child(bullet)
 

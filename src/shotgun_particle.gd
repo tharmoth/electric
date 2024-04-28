@@ -10,18 +10,12 @@ var piercing : int = Character.instance.stats.piercing
 
 func _ready() -> void:
 	self.connect("body_shape_entered", _on_body_entered)
-	self.connect("area_entered", _on_area_entered)
 
 func _physics_process(delta: float) -> void:
 	global_position += Vector2.from_angle(rotation) * SPEED * delta
 
 	if starting_position.distance_to(global_position) > maxDistance:
 		queue_free()
-
-func _on_area_entered(area: Area2D) -> void:
-	if area.get_parent() is Character:
-		var dmg: int = floor(randf_range(minDamage, maxDamage))
-		area.get_parent().projectile_damage(dmg)
 
 func _on_body_entered(body_rid, body, body_shape_index, local_shape_index) -> void:
 	var parent = body.get_parent()
