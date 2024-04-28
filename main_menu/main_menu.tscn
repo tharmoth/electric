@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cthcmq0f4mxf4"]
+[gd_scene load_steps=18 format=3 uid="uid://cthcmq0f4mxf4"]
 
 [ext_resource type="Script" path="res://main_menu/main_menu_scripts/main_menu.gd" id="1_0cyx6"]
 [ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/sprites/timer.png" id="1_e64cu"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bvhveibcwfqxw" path="res://src/background.tscn" id="9_ahrn7"]
 [ext_resource type="AudioStream" uid="uid://d0qkjaxmaxipq" path="res://data/sfx/main_menu_music.mp3" id="9_cuh44"]
 [ext_resource type="Texture2D" uid="uid://cciufktoxstl3" path="res://main_menu/textures/title.png" id="11_08up0"]
+[ext_resource type="AudioStream" uid="uid://bljeed1cthxbd" path="res://data/sfx/timer_winding_noloop.wav" id="12_eeaxq"]
 
 [sub_resource type="Gradient" id="Gradient_ucsia"]
 offsets = PackedFloat32Array(0, 0.435065)
@@ -173,6 +174,11 @@ unique_name_in_owner = true
 stream = ExtResource("9_cuh44")
 volume_db = -10.0
 bus = &"Music"
+
+[node name="testNoise" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("12_eeaxq")
+bus = &"SFX"
 
 [node name="tickNoise" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true

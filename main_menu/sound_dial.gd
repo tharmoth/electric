@@ -29,7 +29,8 @@ func _physics_process(_delta: float) -> void:
 			musicVol = remap(a, 0, PI, 0, 10)
 		var fang : float = lerp_angle(knob_rot, ang, 0.05)
 		$knob.rotation = clamp(fang, 0.1, 2*PI-0.1)
-		print($knob.rotation)
 		if $knob.rotation < 0.11:
 			musicVol = -80
 		AudioServer.set_bus_volume_db(audioBus, musicVol)
+		if audioBus != 1 && !%testNoise.playing:
+			%testNoise.play()
