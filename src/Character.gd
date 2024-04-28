@@ -134,7 +134,7 @@ func damage_effect(time: float) -> void:
 
 func projectile_damage(dmg: int) -> void:
 	self.damage_effect(0.3)
-	WorldTimer.instance.seek(-30)
+	WorldTimer.instance.seek(dmg * -1)
 
 func on_damage() -> void:
 	self.damage_effect(0.3)
