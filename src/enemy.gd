@@ -26,7 +26,7 @@ func on_death():
 		return
 	dead = true
 	
-	if (randf() > .75):
+	if (randf() > .66):
 		var battery = pickup.instantiate()
 		WorldTimer.instance.add_child(battery)
 		battery.global_position = global_position

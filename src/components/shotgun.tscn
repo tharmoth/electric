@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/components/shotgun.gd" id="1_nf86e"]
 [ext_resource type="Texture2D" uid="uid://hpasopkvipfy" path="res://data/shotgun.png" id="2_y36el"]
-[ext_resource type="AudioStream" path="res://data/sfx/shotgun_shoot.mp3" id="3_wc0s3"]
+[ext_resource type="AudioStream" uid="uid://b7y8flhhbcdo4" path="res://data/sfx/shotgun_shoot.mp3" id="3_wc0s3"]
 [ext_resource type="AudioStream" uid="uid://s3nmubg5gry1" path="res://data/sfx/shotgun_reload_2.wav" id="4_612yg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kun5"]

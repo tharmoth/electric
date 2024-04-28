@@ -29,6 +29,7 @@ reload_time = 5
 clip_bonus = 1
 burst_bonus = 0
 shoulder_lasers = 0
+piercing = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vknm1"]
 bg_color = Color(0.203922, 0.203922, 0.203922, 1)

@@ -96,13 +96,16 @@ func fire() -> void:
 		return
 	ready_to_fire = false
 	var tween = create_tween()
+	var right_tween = create_tween()
 	for i in range(shots + Character.instance.stats.burst_bonus):
 		tween.tween_callback(loose)
+		if dual_wielding:
+			right_tween.tween_interval(.05 + randf_range(0, .05))
+			right_tween.tween_callback(loose)
 		tween.tween_interval(time_between_shots)
+		right_tween.tween_interval(time_between_shots)
 	tween.tween_interval(time_between_salvos)
 	tween.tween_callback(func(): ready_to_fire = true)
-
-	
 	
 func loose() -> void:
 	ammo -= 1

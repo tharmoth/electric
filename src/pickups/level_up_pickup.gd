@@ -3,7 +3,7 @@ extends Node2D
 var item_name : String
 var items : Array[String] = ["pistol", "rifle", "smg", "shotgun", "reload", "clip_size"]
 var weapons : Array[String] = ["pistol", "rifle", "smg", "shotgun"]
-var passives : Array[String] = ["reload", "clip_size", "shoulder_laser"]
+var passives : Array[String] = ["reload", "clip_size", "shoulder_laser", "piercing"]
 
 func init(item_name : String):
 	if item_name == "weapon":
@@ -28,13 +28,15 @@ func _ready() -> void:
 	elif item_name == "shotgun":
 		texture = load("res://data/shotgun.png")
 	elif item_name == "reload":
-		texture = load("res://data/sprites/resistor.png")
+		texture = load("res://data/sprites/reload_up.png")
 		%Outline.self_modulate = Color("1eff00")
 	elif item_name == "clip_size":
 		texture = load("res://data/sprites/inductor.png")
 		%Outline.self_modulate = Color("1eff00")
 	elif item_name == "shoulder_laser":
 		texture = load("res://data/sprites/inductor.png")
+	elif item_name == "piercing":
+		texture = load("res://data/sprites/resistor.png")
 		%Outline.self_modulate = Color("1eff00")
 	
 	%LeftWeaponSprite.texture = texture
@@ -66,14 +68,21 @@ func on_pickup():
 		Character.instance.stats.reload_time -= 1
 		Character.instance.stats.reload_time = max(Character.instance.stats.reload_time, 0)
 		var bonus = Character.instance.stats.reload_time
-		var message = "Reload Speed UP! (" + str(abs(bonus-1)) + " -> " + str(abs(bonus)) + ")"
+		var message = "Reload Speed UP!"
 		FloatingLabel.show(message, global_position, Color.WHITE)
 		return
 	elif item_name == "clip_size":
 		Character.instance.stats.clip_bonus += 1
 		Character.instance.stats.clip_bonus = max(Character.instance.stats.clip_bonus, 0)
 		var bonus = Character.instance.stats.clip_bonus
-		var message = "Clip Size UP! (" + str(bonus-1) + " -> " + str(bonus) + ")"
+		var message = "Clip Size UP!"
+		FloatingLabel.show(message, global_position, Color.WHITE)
+		return
+	elif item_name == "piercing":
+		Character.instance.stats.piercing += 1
+		Character.instance.stats.piercing = max(Character.instance.stats.piercing, 0)
+		var bonus = Character.instance.stats.piercing
+		var message = "piercing UP!"
 		FloatingLabel.show(message, global_position, Color.WHITE)
 		return
 	elif item_name == "shoulder_laser":

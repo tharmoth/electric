@@ -6,6 +6,7 @@ const SPEED : float = 500.00
 var starting_position : Vector2 = Vector2.ZERO
 var minDamage : int = 5
 var maxDamage : int = 8
+var piercing : int = Character.instance.stats.piercing
 
 func _ready() -> void:
 	self.connect("body_shape_entered", _on_body_entered)
@@ -21,4 +22,6 @@ func _on_body_entered(body_rid, body, body_shape_index, local_shape_index) -> vo
 		var dmg: int = floor(randf_range(minDamage, maxDamage))
 		body.get_parent().damage(dmg)
 		FloatingLabel.show(str(dmg), body.global_position, Color.WHITE)
-		queue_free()
+		piercing -= 1
+		if piercing <= 0:
+			queue_free()

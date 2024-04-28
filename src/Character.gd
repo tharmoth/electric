@@ -21,7 +21,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	%PickupBox.area_entered.connect(pickup)
 	add_to_group("Character")
-	equip_gun("pistol")
+	equip_gun("shotgun")
 	charge.value = 99
 	currentGun.reload()
 	
