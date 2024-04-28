@@ -1,5 +1,7 @@
 class_name Enemy extends Node2D
 
+signal boss_down
+
 var health : int = 5
 var speed := 100.0
 var dead : bool = false
@@ -42,6 +44,8 @@ func on_death():
 			var bat = battery.instantiate()
 			bat.global_position = global_position + Vector2(randf_range(25, 75), randf_range(25, 75))
 			WorldTimer.instance.add_child(bat)
+		
+		emit_signal("boss_down")
 	elif (randf() > .66):
 		var battery = load("res://src/pickup.tscn").instantiate()
 		WorldTimer.instance.add_child(battery)

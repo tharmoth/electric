@@ -27,7 +27,7 @@
 [ext_resource type="AudioStream" uid="uid://dry1v31tlx1fy" path="res://data/sfx/timer_ring_2.wav" id="19_xib4t"]
 [ext_resource type="Script" path="res://main_menu/score_label.gd" id="22_3w3ce"]
 [ext_resource type="Script" path="res://main_menu/score_title_label.gd" id="22_m8yp0"]
-[ext_resource type="PackedScene" path="res://main_menu/score_box.tscn" id="24_e4kgt"]
+[ext_resource type="PackedScene" uid="uid://vmh1o25ctcib" path="res://main_menu/score_box.tscn" id="24_e4kgt"]
 [ext_resource type="Texture2D" uid="uid://c081c3lxu7ysh" path="res://data/sprites/white_circle.png" id="26_jf0l1"]
 
 [sub_resource type="Gradient" id="Gradient_n1abs"]
@@ -231,7 +231,7 @@ shape = SubResource("CapsuleShape2D_xx30q")
 
 [node name="HitBox" type="Area2D" parent="Timer/Character"]
 unique_name_in_owner = true
-collision_layer = 4
+collision_layer = 12
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Timer/Character/HitBox"]

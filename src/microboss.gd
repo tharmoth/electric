@@ -26,8 +26,8 @@ func fire() -> void:
 		var bullet : Node2D = projectile.instantiate()
 		var angle = ((-25 / 2) + (25 / (10 - 1)) * i)
 
-		bullet.get_node("Area2D").set_collision_mask_value(1, false)
-		bullet.get_node("Area2D").set_collision_mask_value(4, true)
+		#bullet.get_node("Area2D").set_collision_mask_value(1, false)
+		#bullet.get_node("Area2D").set_collision_mask_value(4, true)
 		bullet.global_position = global_position + offset
 		bullet.rotation = global_position.angle_to_point(Character.instance.global_position) + angle
 		get_tree().get_root().add_child(bullet)
