@@ -62,13 +62,13 @@ func on_pickup():
 	if item_name == "reload":
 		Character.instance.stats.reload_time -= 1
 		Character.instance.stats.reload_time = max(Character.instance.stats.reload_time, 0)
-		var bonus = Character.instance.stats.clip_bonus
+		var bonus = Character.instance.stats.reload_time
 		var message = "Reload Speed UP! (" + str(abs(bonus-1)) + " -> " + str(abs(bonus)) + ")"
 		FloatingLabel.show(message, global_position, Color.WHITE)
 		return
 	elif item_name == "clip_size":
 		Character.instance.stats.clip_bonus += 1
-		Character.instance.stats.clip_bonus = min(Character.instance.stats.clip_bonus, 0)
+		Character.instance.stats.clip_bonus = max(Character.instance.stats.clip_bonus, 0)
 		var bonus = Character.instance.stats.clip_bonus
 		var message = "Clip Size UP! (" + str(bonus-1) + " -> " + str(bonus) + ")"
 		FloatingLabel.show(message, global_position, Color.WHITE)
