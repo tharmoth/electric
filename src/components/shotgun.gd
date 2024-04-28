@@ -9,6 +9,9 @@ const RELOAD_DELAY : float = 1.00
 const SHOT_DELAY : float = 1.00
 const SHOTS : int = 5
 
+# For pickup compatability, I wish we had interfaces
+var weapon_type : String = "shotgun"
+
 @onready var particle : PackedScene = preload("res://src/shotgun_particle.tscn")
 
 var ammo: int = SHOTS

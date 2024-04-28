@@ -1,9 +1,14 @@
 extends Node2D
 
 var item_name : String
+var items : Array[String] = ["pistol", "rifle", "smg", "shotgun", "reload", "clip_size"]
 
 func init(item_name : String):
-	self.item_name = item_name
+	self.item_name = items[randi_range(0, items.size() - 1)]
+	if self.item_name == "pistol" && Character.instance.currentGun.weapon_type == "pistol":
+		self.item_name = "dual_pistol"
+	elif self.item_name == "smg" && Character.instance.currentGun.weapon_type == "smg":
+		self.item_name = "dual_smg"
 
 func _ready() -> void:
 	var texture : Texture2D
