@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://drh6er8pl0atq"]
+[gd_scene load_steps=9 format=3 uid="uid://dw1axrqsvgm5y"]
 
 [ext_resource type="Script" path="res://src/components/shotgun.gd" id="1_nf86e"]
 [ext_resource type="Texture2D" uid="uid://hpasopkvipfy" path="res://data/shotgun.png" id="2_y36el"]
@@ -76,11 +76,13 @@ position = Vector2(50.4781, -0.980239)
 [node name="ShootAudio" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("3_wc0s3")
+bus = &"SFX"
 
 [node name="ReloadAudio" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("4_612yg")
 volume_db = -10.0
+bus = &"SFX"
 
 [node name="GunAnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

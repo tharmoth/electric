@@ -133,6 +133,7 @@ position = Vector2(10, 0)
 [node name="GunAudio" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_ht4f7")
+bus = &"SFX"
 
 [node name="GunAnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -145,3 +146,4 @@ speed_scale = 5.0
 unique_name_in_owner = true
 stream = ExtResource("6_owrg4")
 volume_db = -10.0
+bus = &"SFX"

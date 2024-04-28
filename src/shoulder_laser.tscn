@@ -13,5 +13,6 @@ autostart = true
 
 [node name="laserNoise" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_t7arp")
+bus = &"SFX"
 
 [connection signal="timeout" from="Reload" to="." method="_on_reload_timeout"]
