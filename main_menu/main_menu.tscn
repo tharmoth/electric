@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://cdi574hqve8cc" path="res://data/sfx/timer_winding.wav" id="7_2ahw8"]
 [ext_resource type="Script" path="res://main_menu/sound_dial.gd" id="7_r5efj"]
 [ext_resource type="Script" path="res://src/components/bounce_movement_component.gd" id="8_npv5h"]
-[ext_resource type="PackedScene" path="res://src/background.tscn" id="9_ahrn7"]
+[ext_resource type="PackedScene" uid="uid://bvhveibcwfqxw" path="res://src/background.tscn" id="9_ahrn7"]
 [ext_resource type="AudioStream" uid="uid://d0qkjaxmaxipq" path="res://data/sfx/main_menu_music.mp3" id="9_cuh44"]
 [ext_resource type="Texture2D" uid="uid://cciufktoxstl3" path="res://main_menu/textures/title.png" id="11_08up0"]
 
