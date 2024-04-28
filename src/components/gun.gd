@@ -12,6 +12,7 @@ var time_between_shots : float  = .2
 var reload_time : int = 0
 var dual_wielding : bool = false
 var always_shoot_on_click : bool = false
+var damage : Vector2 = Vector2(5, 10)
 
 # State Data
 var ammo : int = 0
@@ -27,6 +28,7 @@ func _ready() -> void:
 	if weapon_type == "rifle":
 		max_ammo = 24
 		shots = 3
+		damage = Vector2(9, 20)
 	elif weapon_type == "pistol" || weapon_type == "dual_pistol":
 		max_ammo = 6
 		shots = 1
@@ -134,8 +136,7 @@ func loose() -> void:
 			end = result.position
 			exclude.append(result.rid)
 			if node is Enemy:
-				var damage = randi_range(5, 10)
-				node.damage(damage)
+				node.damage( randi_range(damage.x, damage.y))
 
 	if not end:
 		end = mouse

@@ -17,8 +17,8 @@ var weapon_type : String = "shotgun"
 var ammo: int = SHOTS
 var isReloading: bool = false
 # Upgrading shotgun upgrades damage
-var minDamage: int = 5
-var maxDamage: int = 8
+var minDamage: int = 10
+var maxDamage: int = 30
 
 func _ready() -> void:
 	%AmmoCapacity.min_value = 0

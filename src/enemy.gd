@@ -58,7 +58,12 @@ func on_gameover():
 	queue_free()
 
 func damage(damage: int) -> void:
-	FloatingLabel.show(str(damage), global_position, Color.WHITE)
+	var color = Color.WHITE
+	if damage > 10:
+		color = Color.GOLD
+	if damage > 20:
+		color = Color.RED
+	FloatingLabel.show(str(damage), global_position, color)
 	health -= damage
 	if health <= 0:
 		self.on_death()

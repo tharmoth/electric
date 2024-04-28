@@ -10,19 +10,24 @@ func init(item_name : String):
 	init_ignore(item_name, "")
 
 func init_ignore(item_name : String, exclude : String):
+	
+	var valid_items : Array[String]
 	if item_name == "weapon":
-		self.item_name = weapons[randi_range(0, weapons.size() - 1)]
-		if self.item_name == "pistol" && Character.instance.currentGun.weapon_type == "pistol":
-			self.item_name = "dual_pistol"
-			%Outline.self_modulate = Color("a335ee")
-		elif self.item_name == "smg" && Character.instance.currentGun.weapon_type == "smg":
-			self.item_name = "dual_smg"
-			%Outline.self_modulate = Color("a335ee")
+		valid_items = weapons
+		
+		var current = Character.instance.currentGun.weapon_type
+		if current in weapons:
+			valid_items.erase(current)
+		if current == "pistol":
+			valid_items.append("dual_pistol")
+		if current == "smg":
+			valid_items.append("dual_smg")
 	else:
-		var valid_items = passives
-		if exclude in passives:
-			valid_items.erase(exclude)
-		self.item_name = valid_items[randi_range(0, valid_items.size() - 1)]
+		valid_items = passives
+	
+	if exclude in passives:
+		valid_items.erase(exclude)
+	self.item_name = valid_items[randi_range(0, valid_items.size() - 1)]
 
 func _ready() -> void:
 	add_to_group("LevelUpPickup")
@@ -50,6 +55,9 @@ func _ready() -> void:
 	elif item_name == "fire_speed":
 		texture = load("res://data/sprites/inductor.png")
 		%Outline.self_modulate = Color("1eff00")
+	
+	if item_name.contains("dual"):
+		%Outline.self_modulate = Color("a335ee")
 	
 	%LeftWeaponSprite.texture = texture
 	%RightWeaponSprite.texture = texture
