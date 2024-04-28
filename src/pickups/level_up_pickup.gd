@@ -5,7 +5,11 @@ var items : Array[String] = ["pistol", "rifle", "smg", "shotgun", "reload", "cli
 var weapons : Array[String] = ["pistol", "rifle", "smg", "shotgun"]
 var passives : Array[String] = ["reload", "clip_size", "piercing"]
 
+
 func init(item_name : String):
+	init_ignore(item_name, "")
+
+func init_ignore(item_name : String, exclude : String):
 	if item_name == "weapon":
 		self.item_name = weapons[randi_range(0, weapons.size() - 1)]
 		if self.item_name == "pistol" && Character.instance.currentGun.weapon_type == "pistol":
@@ -13,7 +17,10 @@ func init(item_name : String):
 		elif self.item_name == "smg" && Character.instance.currentGun.weapon_type == "smg":
 			self.item_name = "dual_smg"
 	else:
-		self.item_name = passives[randi_range(0, passives.size() - 1)]
+		var valid_items = passives
+		if exclude in passives:
+			valid_items.erase(exclude)
+		self.item_name = valid_items[randi_range(0, valid_items.size() - 1)]
 
 func _ready() -> void:
 	add_to_group("LevelUpPickup")
