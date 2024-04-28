@@ -22,7 +22,7 @@ func _ready() -> void:
 	%AmmoCapacity.max_value = MAX_AMMO
 	%AmmoCapacity.value = MAX_AMMO
 	%GunAnimationPlayer.animation_finished.connect(_reload_complete)
-	_reload()
+	ammo = MAX_AMMO + Character.instance.stats.clip_bonus
 
 func _process(delta: float) -> void:
 	self._point_at_mouse()
@@ -59,7 +59,7 @@ func fire() -> void:
 
 	if ammo == 0:
 		spin_to_win = Character.instance.stats.reload_time
-		self._reload()
+		self.reload()
 
 func can_fire() -> bool:
 	if isReloading:
@@ -70,7 +70,7 @@ func can_fire() -> bool:
 
 	return ammo > 0
 
-func _reload() -> void:
+func reload() -> void:
 	isReloading = true
 	%GunAnimationPlayer.play("reload")
 	
@@ -80,7 +80,7 @@ func _reload_complete(something):
 	isReloading = false
 	if spin_to_win > 0:
 		spin_to_win -= 1
-		_reload()
+		reload()
 	ammo = MAX_AMMO + Character.instance.stats.clip_bonus
 
 func _point_at_mouse() -> void:

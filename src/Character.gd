@@ -9,6 +9,7 @@ var knockback : Vector2 = Vector2.ZERO
 var gun = preload("res://src/gun.tscn")
 var rifle = preload("res://src/weapons/rifle.tscn")
 var shotgun = preload("res://src/components/shotgun.tscn")
+var smg = preload("res://src/weapons/smg.tscn")
 var currentGun;
 @onready var charge : ProgressBar = %Charge
 @export var stats : CharacterStats
@@ -19,12 +20,10 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	%PickupBox.area_entered.connect(pickup)
 	add_to_group("Character")
-	
-	equip_gun("gun")
-	
+	equip_gun("pistol")
 	charge.value = 99
+	currentGun.reload()
 	
-
 func pickup(area : Area2D) -> void:
 	area.get_parent().on_pickup()
 
@@ -33,12 +32,20 @@ func equip_gun(name : String):
 	if currentGun:
 		currentGun.queue_free()
 		
-	if (name == "gun"):
+	if (name == "pistol"):
+		currentGun = gun.instantiate()
+	if (name == "dual_pistol"):
 		currentGun = gun.instantiate()
 	elif name == "rifle":
 		currentGun = rifle.instantiate()
 	elif name == "shotgun":
 		currentGun = shotgun.instantiate()
+	elif name == "smg":
+		currentGun = smg.instantiate()
+	elif name == "dual_smg":
+		currentGun = smg.instantiate()
+		
+	currentGun.weapon_type = name
 	
 	currentGun.connect("shake", shake_camera)
 	currentGun.connect("knockback", recoil_knockback)
@@ -58,7 +65,7 @@ func on_level_up():
 	pick.global_position = global_position + direction * 100
 	
 	var pick2 : Node2D = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
-	pick2.init("rifle")
+	pick2.init("dual_smg")
 
 	get_parent().add_child(pick2)
 	pick2.global_position = global_position + direction * 100 + Vector2.LEFT.rotated(angle) * 100

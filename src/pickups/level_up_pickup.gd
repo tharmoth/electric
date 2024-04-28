@@ -6,15 +6,22 @@ func init(item_name : String):
 	self.item_name = item_name
 
 func _ready() -> void:
-	if (item_name == "gun"):
-		%WeaponSprite.texture = load("res://data/sprites/gun.png")
+	var texture : Texture2D
+	if item_name == "pistol" || item_name == "dual_pistol":
+		texture = load("res://data/sprites/gun.png")
+	if item_name == "smg" || item_name == "dual_smg":
+		texture = load("res://data/sprites/smg.png")
 	elif item_name == "rifle":
-		%WeaponSprite.texture = load("res://data/sprites/rifle.png")
+		texture = load("res://data/sprites/rifle.png")
 	elif item_name == "shotgun":
-		%WeaponSprite.texture = load("res://data/shotgun.png")
+		texture = load("res://data/shotgun.png")
 	elif item_name == "reload":
-		%WeaponSprite.texture = load("res://data/sprites/resistor.png")
+		texture = load("res://data/sprites/resistor.png")
 		%Outline.self_modulate = Color("1eff00")
+	
+	%LeftWeaponSprite.texture = texture
+	%RightWeaponSprite.texture = texture
+	%RightWeaponSprite.visible = item_name.contains("dual")
 	
 	var color = %Outline.self_modulate
 	%Outline.modulate = color * 4

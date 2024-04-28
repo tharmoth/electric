@@ -7,6 +7,12 @@
 [ext_resource type="AudioStream" uid="uid://b5vq5m1xlp6o8" path="res://data/sfx/laser3.wav" id="5_vx464"]
 [ext_resource type="AudioStream" uid="uid://djumfjwa8t515" path="res://data/sfx/recharge.wav" id="6_owrg4"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7ma3"]
+bg_color = Color(0.360784, 0.364706, 0.345098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5r0or"]
+bg_color = Color(16, 0, 0, 1)
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ht4f7"]
 streams_count = 3
 stream_0/stream = ExtResource("3_xd8d8")
@@ -19,27 +25,51 @@ stream_2/weight = 1.0
 [sub_resource type="Animation" id="Animation_5jov8"]
 resource_name = "reload"
 length = 2.0
-step = 0.01
+step = 0.33
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
+tracks/0/path = NodePath("RightHand/RightHandProgressBar:value")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.33, 0.66, 1, 1.33, 1.66, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 2.0944, 4.18879, 6.28319, 8.37758, 10.472, 12.5664]
+"values": [0.0, 100.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ProgressBar:value")
-tracks/1/interp = 1
+tracks/1/path = NodePath("RightHand:rotation")
+tracks/1/interp = 3
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2),
+"times": PackedFloat32Array(0, 0.33, 0.66, 0.99, 1.32, 1.65, 1.98),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 2.0944, 4.18879, 6.28319, 8.37758, 10.472, 12.5664]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LeftHand:rotation")
+tracks/2/interp = 3
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.33, 0.66, 0.99, 1.32, 1.65, 1.98),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 2.0944, 4.18879, 6.28319, 8.37758, 10.472, 12.5664]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LeftHand/LeftHandProgressBar:value")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.98),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 100.0]
@@ -50,19 +80,55 @@ _data = {
 "reload": SubResource("Animation_5jov8")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7ma3"]
-bg_color = Color(0.360784, 0.364706, 0.345098, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5r0or"]
-bg_color = Color(16, 0, 0, 1)
-
 [node name="Gun" type="Node2D"]
 script = ExtResource("2_mv4vi")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="LeftHand" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+y_sort_enabled = true
+position = Vector2(0, -8)
 texture = ExtResource("1_70a6o")
-offset = Vector2(0, 8)
+
+[node name="LeftHandProgressBar" type="ProgressBar" parent="LeftHand"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+z_index = 1
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 160.0
+offset_bottom = 27.0
+scale = Vector2(0.1, 0.1)
+theme_override_styles/background = SubResource("StyleBoxFlat_x7ma3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5r0or")
+value = 100.0
+show_percentage = false
+
+[node name="LeftHandMarker" type="Marker2D" parent="LeftHand"]
+unique_name_in_owner = true
+position = Vector2(10, 0)
+
+[node name="RightHand" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+y_sort_enabled = true
+position = Vector2(0, 16)
+texture = ExtResource("1_70a6o")
+
+[node name="RightHandProgressBar" type="ProgressBar" parent="RightHand"]
+unique_name_in_owner = true
+z_index = 1
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 160.0
+offset_bottom = 27.0
+scale = Vector2(0.1, 0.1)
+theme_override_styles/background = SubResource("StyleBoxFlat_x7ma3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5r0or")
+value = 100.0
+show_percentage = false
+
+[node name="RightHandMarker" type="Marker2D" parent="RightHand"]
+unique_name_in_owner = true
+position = Vector2(10, 0)
 
 [node name="GunAudio" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
@@ -79,17 +145,3 @@ speed_scale = 5.0
 unique_name_in_owner = true
 stream = ExtResource("6_owrg4")
 volume_db = -10.0
-
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(16, 0)
-
-[node name="ProgressBar" type="ProgressBar" parent="."]
-unique_name_in_owner = true
-offset_left = -0.999855
-offset_top = -1.0
-offset_right = 160.0
-offset_bottom = 27.0
-scale = Vector2(0.1, 0.1)
-theme_override_styles/background = SubResource("StyleBoxFlat_x7ma3")
-theme_override_styles/fill = SubResource("StyleBoxFlat_5r0or")
-show_percentage = false
