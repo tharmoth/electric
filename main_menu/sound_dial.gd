@@ -22,10 +22,14 @@ func _physics_process(_delta: float) -> void:
 		var ang := get_global_mouse_position().angle_to_point($knob.global_position) - PI/2
 		var d : Vector2 = ($knob/knobPoint.position.rotated(knob_rot))
 		var a = $middlePoint.position.angle_to(d)
-		var musicVol : float = remap(a, -PI, PI, -24, 24)
+		var musicVol : float
+		if a < 0:
+			musicVol = remap(a, -PI, PI, -24, 24)
+		else:
+			musicVol = remap(a, 0, PI, 0, 10)
 		var fang : float = lerp_angle(knob_rot, ang, 0.05)
-		$knob.rotation = clamp(fang, 0.1, 2*PI - 0.1)
-		print(a)
+		$knob.rotation = clamp(fang, 0.1, 2*PI-0.1)
+		print($knob.rotation)
 		if $knob.rotation < 0.11:
 			musicVol = -80
 		AudioServer.set_bus_volume_db(audioBus, musicVol)

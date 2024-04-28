@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://bk4qpeu8ub1sx"]
+
+[ext_resource type="PackedScene" uid="uid://di7v32te6b0ns" path="res://src/gun.tscn" id="1_qrjgn"]
+[ext_resource type="Texture2D" uid="uid://ceg1hiloai3x3" path="res://data/sprites/rifle.png" id="2_300kd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7ma3"]
+bg_color = Color(0.360784, 0.364706, 0.345098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5r0or"]
+bg_color = Color(16, 0, 0, 1)
+
+[node name="Rifle" instance=ExtResource("1_qrjgn")]
+rotation = 12.5664
+weapon_type = "rifle"
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+unique_name_in_owner = true
+texture = ExtResource("2_300kd")
+offset = Vector2(0, 8)
+
+[node name="Marker2D" type="Marker2D" parent="." index="4"]
+position = Vector2(32, -0.000463359)
+
+[node name="ProgressBar" type="ProgressBar" parent="." index="5"]
+unique_name_in_owner = true
+offset_left = 2.99998
+offset_top = -1.00009
+offset_right = 274.0
+offset_bottom = 18.9999
+scale = Vector2(0.1, 0.1)
+theme_override_styles/background = SubResource("StyleBoxFlat_x7ma3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5r0or")
+value = 100.0
+show_percentage = false
