@@ -3,24 +3,48 @@ class_name HitscanGun extends Node2D
 signal shake
 signal knockback(recoil: Vector2)
 
-var knockback_tween : Tween
-var max_ammo = 24
-var shots = 3
+# Weapon Stats
+@export var weapon_type : String = "pistol"
+var max_ammo : int = 24
+var shots : int = 3
+var time_between_salvos : float = .8
+var time_between_shots : float  = .2
+var reload_time : int = 0
+var dual_wielding : bool = false
+var always_shoot_on_click : bool = false
+
+# State Data
 var ammo : int = 0
 var reloading : bool = false
 var ready_to_fire : bool = true
-var spin_to_win = 5	
-@export var is_rifle : bool
+var spin_to_win : int = 5	
+
+# Tweens
+var knockback_tween : Tween
 
 func _ready() -> void:
 	%GunAnimationPlayer.animation_finished.connect(reload_complete)
-	if is_rifle:
+	if weapon_type == "rifle":
 		max_ammo = 24
 		shots = 3
-	else:
+	elif weapon_type == "pistol" || weapon_type == "dual_pistol":
 		max_ammo = 6
 		shots = 1
-	reload()
+		always_shoot_on_click = true
+	elif weapon_type == "smg" || weapon_type == "dual_smg":
+		max_ammo = 12
+		shots = 1
+		time_between_shots = .1
+		time_between_salvos = 0
+		reload_time = 3
+
+	if weapon_type.contains("dual"):
+		max_ammo *= 2
+		dual_wielding = true
+
+	%LeftHand.visible = dual_wielding
+	spin_to_win = reload_time + Character.instance.stats.reload_time
+	ammo = max_ammo + Character.instance.stats.clip_bonus
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -31,17 +55,18 @@ func _process(delta: float) -> void:
 	point_at_mouse()
 
 func can_fire() -> bool:
-	return (ready_to_fire || (!is_rifle && Input.is_action_just_pressed("click"))) and !reloading
+	return (ready_to_fire || (always_shoot_on_click && Input.is_action_just_pressed("click"))) and !reloading
 
 func point_at_mouse() -> void:
 	var mouse = get_global_mouse_position()
 	global_rotation = global_position.angle_to_point(mouse)
 
-	# Breaks progress bars	
-	#if mouse.x < 0:
-		#$Sprite2D.flip_v = true
-	#else:
-		#$Sprite2D.flip_v = false
+	if mouse.x < 0:
+		$RightHand.flip_v = true
+		$LeftHand.flip_v = true
+	else:
+		$RightHand.flip_v = false
+		$LeftHand.flip_v = false
 
 func move_to_position() -> void:
 	var mouse = get_global_mouse_position()
@@ -73,19 +98,22 @@ func fire() -> void:
 	var tween = create_tween()
 	for i in range(shots + Character.instance.stats.burst_bonus):
 		tween.tween_callback(loose)
-		tween.tween_interval(.2)
-	tween.tween_interval(.8)
+		tween.tween_interval(time_between_shots)
+	tween.tween_interval(time_between_salvos)
 	tween.tween_callback(func(): ready_to_fire = true)
 
 	
 	
 func loose() -> void:
 	ammo -= 1
-	%ProgressBar.value = ammo / float(max_ammo + Character.instance.stats.clip_bonus) * 100.0
+	%RightHandProgressBar.value = ammo / float(max_ammo + Character.instance.stats.clip_bonus) * 100.0
+	%LeftHandProgressBar.value = ammo / float(max_ammo + Character.instance.stats.clip_bonus) * 100.0
+
+	var shoot_right = ammo % 2 == 1 && dual_wielding
 
 	var mouse = get_global_mouse_position()
 	var direction = global_position.direction_to(mouse)
-	var origin = $Marker2D.global_position
+	var origin = %LeftHandMarker.global_position if shoot_right else %RightHandMarker.global_position
 	var target = origin + direction * 40
 	
 	var space_state = get_world_2d().direct_space_state
@@ -102,7 +130,7 @@ func loose() -> void:
 		end = mouse
 	
 	var line = Line2D.new()
-	line.points = [global_position, end]
+	line.points = [origin, end]
 	line.width = 0
 	line.default_color = Color(10, 0, 0, 1)
 	get_parent().get_tree().root.add_child(line)
@@ -117,7 +145,7 @@ func loose() -> void:
 	emit_signal("knockback", origin - direction * 250)
 	
 	if ammo == 0:
-		spin_to_win = Character.instance.stats.reload_time
+		spin_to_win = reload_time + Character.instance.stats.reload_time
 		reload()
 	
 	#var light = preload("res://src/laser_light.tscn").instantiate()

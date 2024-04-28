@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ceg1hiloai3x3" path="res://data/sprites/rifle.png" id="2_e553g"]
 
 [node name="Rifle" instance=ExtResource("1_ocsp2")]
-is_rifle = true
+weapon_type = "rifle"
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_e553g")

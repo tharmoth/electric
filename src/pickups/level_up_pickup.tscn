@@ -42,10 +42,19 @@ position = Vector2(0, -9)
 scale = Vector2(0.1, 0.05)
 texture = ExtResource("4_6siwo")
 
-[node name="WeaponSprite" type="Sprite2D" parent="."]
+[node name="RightWeaponSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, -45)
+texture = ExtResource("6_di0ia")
+
+[node name="Node" type="Node" parent="RightWeaponSprite"]
+script = ExtResource("5_yntot")
+
+[node name="LeftWeaponSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(0, -30)
 texture = ExtResource("6_di0ia")
 
-[node name="Node" type="Node" parent="WeaponSprite"]
+[node name="Node" type="Node" parent="LeftWeaponSprite"]
 script = ExtResource("5_yntot")

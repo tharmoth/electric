@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl4c7clhyoxaf"]
+
+[ext_resource type="PackedScene" uid="uid://di7v32te6b0ns" path="res://src/gun.tscn" id="1_w2hty"]
+[ext_resource type="Texture2D" uid="uid://c04y4abfq57ao" path="res://data/sprites/smg.png" id="2_356el"]
+
+[node name="Smg" instance=ExtResource("1_w2hty")]
+weapon_type = "smg"
+
+[node name="LeftHand" parent="." index="0"]
+texture = ExtResource("2_356el")
+
+[node name="RightHand" parent="." index="1"]
+texture = ExtResource("2_356el")
