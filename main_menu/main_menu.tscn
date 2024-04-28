@@ -56,6 +56,7 @@ offset_bottom = 1946.0
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("3_oxab4")
 expand_mode = 3
+metadata/_edit_lock_ = true
 
 [node name="musicLabel" type="TextureRect" parent="."]
 auto_translate_mode = 1
@@ -67,6 +68,7 @@ offset_bottom = 1946.0
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("4_a8pkt")
 expand_mode = 3
+metadata/_edit_lock_ = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(628, 373)
@@ -106,12 +108,14 @@ script = ExtResource("8_npv5h")
 [node name="sfxTimer" type="Node2D" parent="."]
 z_index = 2
 position = Vector2(917, 916)
+rotation = 3.14159
 scale = Vector2(0.5, 0.5)
 script = ExtResource("7_r5efj")
-audioBus = 1
+audioBus = 2
+metadata/_edit_lock_ = true
 
 [node name="knob" type="Marker2D" parent="sfxTimer"]
-position = Vector2(0, -1)
+position = Vector2(-4.76837e-07, -9.53674e-07)
 
 [node name="timer" type="Sprite2D" parent="sfxTimer/knob"]
 position = Vector2(4.76837e-07, -4.76837e-07)
@@ -119,14 +123,15 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_e64cu")
 
 [node name="Handle" type="Sprite2D" parent="sfxTimer/knob"]
+position = Vector2(6.29444e-06, 72)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_jb3qc")
 
 [node name="knobPoint" type="Marker2D" parent="sfxTimer/knob"]
-position = Vector2(0, -102)
+position = Vector2(2.57546e-06, -102)
 
 [node name="middlePoint" type="Marker2D" parent="sfxTimer"]
-position = Vector2(0, 101)
+position = Vector2(-4.76837e-07, 102)
 
 [node name="Node" type="Node" parent="sfxTimer"]
 script = ExtResource("8_npv5h")
@@ -136,10 +141,10 @@ z_index = 2
 position = Vector2(98, 916)
 scale = Vector2(0.5, 0.5)
 script = ExtResource("7_r5efj")
-audioBus = 2
+audioBus = 1
 
 [node name="knob" type="Marker2D" parent="musicTimer"]
-position = Vector2(0, -1)
+position = Vector2(-4.76837e-07, -9.53674e-07)
 
 [node name="timer" type="Sprite2D" parent="musicTimer/knob"]
 position = Vector2(4.76837e-07, -4.76837e-07)
@@ -147,14 +152,15 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_e64cu")
 
 [node name="Handle" type="Sprite2D" parent="musicTimer/knob"]
+position = Vector2(-6.11959e-06, 0)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_jb3qc")
 
 [node name="knobPoint" type="Marker2D" parent="musicTimer/knob"]
-position = Vector2(0, -102)
+position = Vector2(2.57546e-06, 102)
 
 [node name="middlePoint" type="Marker2D" parent="musicTimer"]
-position = Vector2(0, 101)
+position = Vector2(-4.76837e-07, -103)
 
 [node name="Node" type="Node" parent="musicTimer"]
 script = ExtResource("8_npv5h")
@@ -174,6 +180,7 @@ position = Vector2(512, 600)
 scale = Vector2(2, 2)
 stream = ExtResource("5_v6kgi")
 bus = &"SFX"
+metadata/_edit_lock_ = true
 
 [node name="ringNoise" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
@@ -181,6 +188,7 @@ position = Vector2(917, 916)
 scale = Vector2(0.5, 0.5)
 stream = ExtResource("6_kn6ex")
 bus = &"SFX"
+metadata/_edit_lock_ = true
 
 [node name="windingNoise" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
@@ -188,5 +196,6 @@ position = Vector2(512, 600)
 scale = Vector2(2, 2)
 stream = ExtResource("7_2ahw8")
 bus = &"SFX"
+metadata/_edit_lock_ = true
 
 [connection signal="turnedKnob" from="kitchenTimer" to="." method="_on_kitchen_timer_turned_knob"]
