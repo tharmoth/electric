@@ -28,6 +28,26 @@
 [ext_resource type="PackedScene" uid="uid://vmh1o25ctcib" path="res://main_menu/score_box.tscn" id="24_e4kgt"]
 [ext_resource type="Texture2D" uid="uid://c081c3lxu7ysh" path="res://data/sprites/white_circle.png" id="26_jf0l1"]
 
+[sub_resource type="Gradient" id="Gradient_n1abs"]
+offsets = PackedFloat32Array(0, 0.213115, 0.418033, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.535, 0.686, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_glw8s"]
+gradient = SubResource("Gradient_n1abs")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4h18v"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 512.0
+emission_ring_inner_radius = 512.0
+angle_max = 360.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.2
+color_ramp = SubResource("GradientTexture1D_glw8s")
+
 [sub_resource type="Resource" id="Resource_d28yr"]
 script = ExtResource("7_vtfxf")
 reload_time = 5
@@ -88,26 +108,6 @@ streams_count = 1
 stream_0/stream = ExtResource("11_wfk86")
 stream_0/weight = 1.0
 
-[sub_resource type="Gradient" id="Gradient_n1abs"]
-offsets = PackedFloat32Array(0, 0.213115, 0.418033, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.535, 0.686, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_glw8s"]
-gradient = SubResource("Gradient_n1abs")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4h18v"]
-particle_flag_disable_z = true
-emission_shape = 6
-emission_ring_axis = Vector3(0, 0, 1)
-emission_ring_height = 0.0
-emission_ring_radius = 512.0
-emission_ring_inner_radius = 512.0
-angle_max = 360.0
-gravity = Vector3(0, 0, 0)
-scale_min = 0.1
-scale_max = 0.2
-color_ramp = SubResource("GradientTexture1D_glw8s")
-
 [sub_resource type="Environment" id="Environment_f3sby"]
 background_mode = 3
 background_energy_multiplier = 0.0
@@ -132,13 +132,24 @@ script = ExtResource("3_sbw06")
 [node name="Polygon2D" type="CollisionPolygon2D" parent="Edge"]
 polygon = PackedVector2Array(-2, 184, 57, 189, 139, 205, 197, 225, 271, 264, 341, 317, 403, 383, 441, 440, 483, 534, 497, 588, 508, 650, 509, 720, 499, 802, 482, 866, 442, 949, 377, 1041, 329, 1087, 249, 1142, 168, 1180, 84, 1202, -3, 1209, -102, 1200, -164, 1182, -235, 1154, -312, 1106, -374, 1050, -417, 999, -458, 934, -487, 864, -508, 781, -515, 718, -514, 656, -503, 586, -481, 514, -437, 425, -384, 354, -313, 288, -240, 242, -158, 208, -74, 190, -2, 184, -2, 48, -672, 64, -705, 1324, 605, 1342, 579, 58, -2, 48)
 
-[node name="Area2D" type="Area2D" parent="Edge"]
+[node name="EdgeHurtbox" type="Area2D" parent="Edge"]
+unique_name_in_owner = true
 collision_mask = 4
+monitoring = false
+monitorable = false
 
-[node name="HurtBox" type="CollisionPolygon2D" parent="Edge/Area2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Edge/EdgeHurtbox"]
 polygon = PackedVector2Array(1, 194, 56, 212, 139, 224, 189, 243, 263, 278, 330, 332, 387, 397, 423, 451, 465, 534, 482, 591, 493, 657, 492, 720, 486, 801, 468, 869, 428, 945, 363, 1035, 314, 1080, 236, 1135, 161, 1168, 75, 1195, -4, 1200, -99, 1192, -164, 1172, -232, 1142, -311, 1095, -367, 1040, -410, 987, -446, 927, -477, 855, -495, 777, -492, 717, -489, 653, -475, 584, -455, 510, -417, 434, -361, 358, -294, 294, -214, 247, -140, 217, -63, 202, -2, 196, -2, 48, -672, 64, -705, 1324, 605, 1342, 579, 58, -2, 48)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Edge/Area2D"]
+[node name="EdgeParticles" type="GPUParticles2D" parent="Edge/EdgeHurtbox"]
+unique_name_in_owner = true
+modulate = Color(3, 3, 3, 1)
+position = Vector2(-2, 706)
+amount = 250
+amount_ratio = 0.01
+process_material = SubResource("ParticleProcessMaterial_4h18v")
+texture = ExtResource("15_i46s2")
+lifetime = 0.2
 
 [node name="Timer" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -285,13 +296,6 @@ bus = &"SFX"
 
 [node name="Battery" parent="." instance=ExtResource("14_5kbvx")]
 
-[node name="GPUParticles2D5" type="GPUParticles2D" parent="."]
-modulate = Color(3, 3, 3, 1)
-amount = 250
-process_material = SubResource("ParticleProcessMaterial_4h18v")
-texture = ExtResource("15_i46s2")
-lifetime = 0.2
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
@@ -380,5 +384,5 @@ offset = Vector2(0, -512)
 transform = Transform2D(1, 0, 0, 1, 0, -512)
 
 [connection signal="input_event" from="Edge" to="Edge" method="_on_input_event"]
-[connection signal="area_entered" from="Edge/Area2D" to="Edge" method="_on_area_2d_area_entered"]
-[connection signal="body_entered" from="Edge/Area2D" to="Edge" method="_on_area_2d_body_entered"]
+[connection signal="area_entered" from="Edge/EdgeHurtbox" to="Edge" method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Edge/EdgeHurtbox" to="Edge" method="_on_area_2d_body_entered"]
