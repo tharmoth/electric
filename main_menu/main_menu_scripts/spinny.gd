@@ -3,8 +3,8 @@ extends Node2D
 signal turnedKnob
 
 var following := false
-const MAX_DIST := 32000
-const MAX_TURN := 6.28
+const MAX_DIST := 42000
+const MAX_TURN := 2 * PI
 
 func _physics_process(delta: float) -> void:
 	var mouseDist := get_global_mouse_position().distance_squared_to($knob.global_position)

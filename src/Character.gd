@@ -160,5 +160,9 @@ func on_gameover() -> void:
 	%RingNoise.play()
 
 func add_shoulder_laser() -> void:
-	var shoulder_laser : Node2D = shoulder_laser.instantiate()
-	call_deferred("add_child", shoulder_laser)
+	if stats.shoulder_lasers == 0:
+		stats.shoulder_lasers += 1
+		var shoulder_laser : Node2D = shoulder_laser.instantiate()
+		call_deferred("add_child", shoulder_laser)
+	else:
+		stats.shoulder_lasers += 1

@@ -3,7 +3,7 @@ extends Node2D
 var item_name : String
 var items : Array[String] = ["pistol", "rifle", "smg", "shotgun", "reload", "clip_size"]
 var weapons : Array[String] = ["pistol", "rifle", "smg", "shotgun"]
-var passives : Array[String] = ["reload", "clip_size", "piercing", "fire_speed"]
+var passives : Array[String] = ["reload", "clip_size", "piercing", "fire_speed", "shoulder_laser"]
 
 
 func init(item_name : String):
@@ -111,11 +111,9 @@ func on_pickup():
 		FloatingLabel.show(message, global_position, Color.WHITE)
 		return
 	elif item_name == "shoulder_laser":
+		# Adds shoulder laser to stats inside this method instead
 		Character.instance.add_shoulder_laser()
-		Character.instance.stats.shoulder_lasers += 1
-		Character.instance.stats.shoulder_lasers = max(Character.instance.stats.shoulder_lasers, 0)
-		var bonus = Character.instance.stats.shoulder_lasers
-		var message = "+1 Shoulder Lasers! (" + str(bonus-1) + " -> " + str(bonus) + ")"
+		var message = "+1 Shoulder Lasers!"
 		FloatingLabel.show(message, global_position, Color.WHITE)
 		return
 	
