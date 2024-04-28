@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cjfagb6ey5fr3"]
+[gd_scene load_steps=40 format=3 uid="uid://cjfagb6ey5fr3"]
 
 [ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/sprites/timer.png" id="1_4nl5p"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xa5wo"]
@@ -25,7 +25,8 @@
 [ext_resource type="Script" path="res://main_menu/score_label.gd" id="22_3w3ce"]
 [ext_resource type="Script" path="res://main_menu/score_title_label.gd" id="22_m8yp0"]
 [ext_resource type="PackedScene" uid="uid://vmh1o25ctcib" path="res://main_menu/score_box.tscn" id="24_e4kgt"]
-[ext_resource type="Texture2D" uid="uid://dqongslx1l148" path="res://data/sprites/circle.png" id="26_6ddad"]
+[ext_resource type="Texture2D" uid="uid://c081c3lxu7ysh" path="res://data/sprites/white_circle.png" id="26_jf0l1"]
+[ext_resource type="Script" path="res://src/disco.gd" id="27_qypxk"]
 
 [sub_resource type="Resource" id="Resource_d28yr"]
 script = ExtResource("7_vtfxf")
@@ -119,6 +120,7 @@ glow_intensity = 1.0
 script = ExtResource("1_xa5wo")
 
 [node name="Handle" type="Sprite2D" parent="."]
+z_index = -3
 texture = ExtResource("2_jr2jg")
 
 [node name="Edge" type="StaticBody2D" parent="."]
@@ -207,6 +209,32 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Timer/Character/PickupBox"]
 shape = SubResource("CapsuleShape2D_xx30q")
+
+[node name="SpawnPos1" type="Sprite2D" parent="Timer"]
+modulate = Color(5, 5, 5, 1)
+self_modulate = Color(0.264353, 0.369459, 1, 1)
+z_index = -2
+position = Vector2(0, -150)
+texture = ExtResource("26_jf0l1")
+script = ExtResource("27_qypxk")
+
+[node name="SpawnPos2" type="Sprite2D" parent="Timer"]
+modulate = Color(5, 5, 5, 1)
+z_index = -2
+position = Vector2(130, 77)
+texture = ExtResource("26_jf0l1")
+script = ExtResource("27_qypxk")
+time_to_complete = 29
+time_offset = 18.0
+
+[node name="SpawnPos3" type="Sprite2D" parent="Timer"]
+modulate = Color(5, 5, 5, 1)
+z_index = -2
+position = Vector2(-130, 77)
+texture = ExtResource("26_jf0l1")
+script = ExtResource("27_qypxk")
+time_to_complete = 31
+time_offset = 12.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
@@ -344,10 +372,6 @@ environment = SubResource("Environment_f3sby")
 [node name="ParallaxBackground" parent="." instance=ExtResource("19_epnoa")]
 offset = Vector2(0, -512)
 transform = Transform2D(1, 0, 0, 1, 0, -512)
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -310)
-texture = ExtResource("26_6ddad")
 
 [connection signal="input_event" from="Edge" to="Edge" method="_on_input_event"]
 [connection signal="area_entered" from="Edge/Area2D" to="Edge" method="_on_area_2d_area_entered"]
