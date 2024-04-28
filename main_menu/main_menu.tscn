@@ -150,6 +150,7 @@ position = Vector2(-4.76837e-07, 102)
 
 [node name="Node" type="Node" parent="sfxTimer"]
 script = ExtResource("8_npv5h")
+offset = 0.3
 
 [node name="musicTimer" type="Node2D" parent="."]
 z_index = 2
@@ -179,6 +180,7 @@ position = Vector2(-4.76837e-07, -103)
 
 [node name="Node" type="Node" parent="musicTimer"]
 script = ExtResource("8_npv5h")
+offset = -0.3
 
 [node name="Background" parent="." instance=ExtResource("9_ahrn7")]
 scroll_base_offset = Vector2(-93, 0)
