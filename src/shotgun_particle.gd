@@ -1,8 +1,8 @@
 class_name Bullet extends Area2D
 
-const MAX_DISTANCE : float = 200.00
 const SPEED : float = 500.00
 
+var maxDistance : float = 200.00
 var starting_position : Vector2 = Vector2.ZERO
 var minDamage : int = 5
 var maxDamage : int = 8
@@ -14,7 +14,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	global_position += Vector2.from_angle(rotation) * SPEED * delta
 
-	if starting_position.distance_to(global_position) > MAX_DISTANCE:
+	if starting_position.distance_to(global_position) > maxDistance:
 		queue_free()
 
 func _on_body_entered(body_rid, body, body_shape_index, local_shape_index) -> void:
