@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3mekoqxwlrog"]
+[gd_scene load_steps=4 format=3 uid="uid://dgjc4fprbtm8f"]
 
 [ext_resource type="Texture2D" uid="uid://cwswuttwx8lf4" path="res://icon.svg" id="1_laa10"]
 [ext_resource type="Script" path="res://src/microboss.gd" id="1_lf4nr"]

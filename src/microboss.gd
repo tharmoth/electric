@@ -10,8 +10,8 @@ func _ready() -> void:
 	speed = 75
 
 func _process(delta: float) -> void:
-	# var target = Character.instance.global_position
-	# global_position = global_position.move_toward(target, speed * delta)
+	var target = Character.instance.global_position
+	global_position = global_position.move_toward(target, speed * delta)
 
 	timeSinceLastShot += delta
 
@@ -27,13 +27,11 @@ func fire() -> void:
 		var angle = ((-25 / 2) + (25 / (10 - 1)) * i)
 
 		bullet.set_collision_mask_value(1, false)
-		# This freaks OUT
-		bullet.set_collision_layer_value(3, true)
-		bullet.set_collision_mask_value(3, true)
+		bullet.set_collision_mask_value(4, true)
 		bullet.global_position = global_position + offset
 		bullet.rotation = global_position.angle_to_point(Character.instance.global_position) + angle
 		bullet.maxDistance = 800
-		bullet.minDamage = 1
-		bullet.maxDamage = 3
+		bullet.minDamage = 12
+		bullet.maxDamage = 20
 		get_tree().get_root().add_child(bullet)
 
