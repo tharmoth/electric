@@ -138,3 +138,9 @@ func on_gameover() -> void:
 	tween.tween_property(self, "modulate", Color.TRANSPARENT, 1)
 	currentGun.queue_free()
 	%RingNoise.play()
+
+func add_shoulder_laser() -> void:
+	var tween = create_tween()
+	tween.tween_property(self, "modulate", Color.TRANSPARENT, 1)
+	currentGun.queue_free()
+	%RingNoise.play()

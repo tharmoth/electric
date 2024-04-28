@@ -31,6 +31,9 @@ func _ready() -> void:
 	elif item_name == "clip_size":
 		texture = load("res://data/sprites/inductor.png")
 		%Outline.self_modulate = Color("1eff00")
+	elif item_name == "shoulder_laser":
+		texture = load("res://data/sprites/inductor.png")
+		%Outline.self_modulate = Color("1eff00")
 	
 	%LeftWeaponSprite.texture = texture
 	%RightWeaponSprite.texture = texture
@@ -66,9 +69,16 @@ func on_pickup():
 		return
 	elif item_name == "clip_size":
 		Character.instance.stats.clip_bonus += 1
-		Character.instance.stats.clip_bonus = min(Character.instance.stats.clip_bonus, 0)
+		Character.instance.stats.clip_bonus = max(Character.instance.stats.clip_bonus, 0)
 		var bonus = Character.instance.stats.clip_bonus
 		var message = "Clip Size UP! (" + str(bonus-1) + " -> " + str(bonus) + ")"
+		FloatingLabel.show(message, global_position, Color.WHITE)
+		return
+	elif item_name == "shoulder_laser":
+		Character.instance.stats.shoulder_lasers += 1
+		Character.instance.stats.shoulder_lasers = max(Character.instance.stats.shoulder_lasers, 0)
+		var bonus = Character.instance.stats.shoulder_lasers
+		var message = "+1 Shoulder Lasers! (" + str(bonus-1) + " -> " + str(bonus) + ")"
 		FloatingLabel.show(message, global_position, Color.WHITE)
 		return
 	
