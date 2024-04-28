@@ -91,30 +91,35 @@ func on_pickup():
 		Character.instance.stats.reload_time = max(Character.instance.stats.reload_time, 0)
 		var message = "Reload Speed UP!"
 		FloatingLabel.show(message, global_position, Color.WHITE)
+		Character.instance.upgrade_audio.play()
 		return
 	elif item_name == "clip_size":
 		Character.instance.stats.clip_bonus += 1
 		Character.instance.stats.clip_bonus = max(Character.instance.stats.clip_bonus, 0)
 		var message = "Clip Size UP!"
 		FloatingLabel.show(message, global_position, Color.WHITE)
+		Character.instance.upgrade_audio.play()
 		return
 	elif item_name == "piercing":
 		Character.instance.stats.piercing += 1
 		Character.instance.stats.piercing = max(Character.instance.stats.piercing, 0)
 		var message = "piercing UP!"
 		FloatingLabel.show(message, global_position, Color.WHITE)
+		Character.instance.upgrade_audio.play()
 		return
 	elif item_name == "fire_speed":
 		Character.instance.stats.fire_speed_mult -= .15
 		Character.instance.stats.fire_speed_mult = clamp(Character.instance.stats.fire_speed_mult, .25, 2)
 		var message = "Fire Rate UP!"
 		FloatingLabel.show(message, global_position, Color.WHITE)
+		Character.instance.upgrade_audio.play()
 		return
 	elif item_name == "shoulder_laser":
 		# Adds shoulder laser to stats inside this method instead
 		Character.instance.add_shoulder_laser()
 		var message = "+1 Shoulder Lasers!"
 		FloatingLabel.show(message, global_position, Color.WHITE)
+		Character.instance.upgrade_audio.play()
 		return
 	
 	Character.instance.equip_gun(item_name)

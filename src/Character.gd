@@ -18,6 +18,8 @@ var currentGun;
 @onready var charge : ProgressBar = %Charge
 @export var stats : CharacterStats
 
+@onready var upgrade_audio : AudioStreamPlayer2D = %UpgradeAudio
+
 func _enter_tree() -> void:
 	instance = self
 
@@ -54,7 +56,9 @@ func equip_gun(name : String):
 	
 	currentGun.connect("shake", shake_camera)
 	currentGun.connect("knockback", recoil_knockback)
-	call_deferred("add_child", currentGun) 
+	call_deferred("add_child", currentGun)
+	
+	%GunPickupAudio.play()
 	
 func on_level_up():
 	for node in get_tree().get_nodes_in_group("LevelUpPickup"):
