@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dvu7bb1batiyl" path="res://main_menu/tv.tscn" id="3_adonv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h3esm"]
-size = Vector2(54, 42)
+size = Vector2(37, 28)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q1gej"]
 radius = 32.0
@@ -20,7 +20,7 @@ collision_mask = 4
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(1, -4)
+position = Vector2(-0.5, 1)
 shape = SubResource("RectangleShape2D_h3esm")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

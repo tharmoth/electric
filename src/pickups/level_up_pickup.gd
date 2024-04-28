@@ -3,7 +3,7 @@ extends Node2D
 var item_name : String
 var items : Array[String] = ["pistol", "rifle", "smg", "shotgun", "reload", "clip_size"]
 var weapons : Array[String] = ["pistol", "rifle", "smg", "shotgun"]
-var passives : Array[String] = ["reload", "clip_size", "piercing", "fire_speed"]
+var passives : Array[String] = ["reload", "clip_size", "piercing", "fire_speed", "shoulder_laser"]
 
 
 func init(item_name : String):
@@ -48,7 +48,7 @@ func _ready() -> void:
 		texture = load("res://data/sprites/capactior.png")
 		%Outline.self_modulate = Color("9d9d9d")
 	elif item_name == "shoulder_laser":
-		texture = load("res://data/sprites/inductor.png")
+		texture = load("res://data/sprites/shoulder_laser.png")
 	elif item_name == "piercing":
 		texture = load("res://data/sprites/resistor.png")
 		%Outline.self_modulate = Color("e6cc80")
@@ -91,32 +91,35 @@ func on_pickup():
 		Character.instance.stats.reload_time = max(Character.instance.stats.reload_time, 0)
 		var message = "Reload Speed UP!"
 		FloatingLabel.show(message, global_position, Color.WHITE)
+		Character.instance.upgrade_audio.play()
 		return
 	elif item_name == "clip_size":
 		Character.instance.stats.clip_bonus += 1
 		Character.instance.stats.clip_bonus = max(Character.instance.stats.clip_bonus, 0)
 		var message = "Clip Size UP!"
 		FloatingLabel.show(message, global_position, Color.WHITE)
+		Character.instance.upgrade_audio.play()
 		return
 	elif item_name == "piercing":
 		Character.instance.stats.piercing += 1
 		Character.instance.stats.piercing = max(Character.instance.stats.piercing, 0)
 		var message = "piercing UP!"
 		FloatingLabel.show(message, global_position, Color.WHITE)
+		Character.instance.upgrade_audio.play()
 		return
 	elif item_name == "fire_speed":
 		Character.instance.stats.fire_speed_mult -= .15
 		Character.instance.stats.fire_speed_mult = clamp(Character.instance.stats.fire_speed_mult, .25, 2)
 		var message = "Fire Rate UP!"
 		FloatingLabel.show(message, global_position, Color.WHITE)
+		Character.instance.upgrade_audio.play()
 		return
 	elif item_name == "shoulder_laser":
+		# Adds shoulder laser to stats inside this method instead
 		Character.instance.add_shoulder_laser()
-		Character.instance.stats.shoulder_lasers += 1
-		Character.instance.stats.shoulder_lasers = max(Character.instance.stats.shoulder_lasers, 0)
-		var bonus = Character.instance.stats.shoulder_lasers
-		var message = "+1 Shoulder Lasers! (" + str(bonus-1) + " -> " + str(bonus) + ")"
+		var message = "+1 Shoulder Lasers!"
 		FloatingLabel.show(message, global_position, Color.WHITE)
+		Character.instance.upgrade_audio.play()
 		return
 	
 	Character.instance.equip_gun(item_name)
