@@ -38,15 +38,15 @@ func _ready() -> void:
 		texture = load("res://data/shotgun.png")
 	elif item_name == "reload":
 		texture = load("res://data/sprites/reload_up.png")
-		%Outline.self_modulate = Color("1eff00")
+		%Outline.self_modulate = Color("ff8000")
 	elif item_name == "clip_size":
 		texture = load("res://data/sprites/capactior.png")
-		%Outline.self_modulate = Color("1eff00")
+		%Outline.self_modulate = Color("9d9d9d")
 	elif item_name == "shoulder_laser":
 		texture = load("res://data/sprites/inductor.png")
 	elif item_name == "piercing":
 		texture = load("res://data/sprites/resistor.png")
-		%Outline.self_modulate = Color("1eff00")
+		%Outline.self_modulate = Color("e6cc80")
 	elif item_name == "fire_speed":
 		texture = load("res://data/sprites/inductor.png")
 		%Outline.self_modulate = Color("1eff00")
