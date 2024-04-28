@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 func fire() -> void:
 	var offset = (%StaticBody2D/CollisionShape2D.shape.extents / 1.75)
 
-	for i in 10:
+	for i in 20:
 		var bullet : Bullet = projectile.instantiate()
 		var angle = ((-25 / 2) + (25 / (10 - 1)) * i)
 
@@ -33,5 +33,6 @@ func fire() -> void:
 		bullet.maxDistance = 800
 		bullet.minDamage = 12
 		bullet.maxDamage = 20
+		bullet.get_node('GPUParticles2D2').modulate = Color(1, 0.08, 0.265)
 		get_tree().get_root().add_child(bullet)
 
