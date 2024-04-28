@@ -9,9 +9,10 @@ func _process(delta: float) -> void:
 
 func on_pickup():
 	queue_free()
+	Character.instance.score += 1
 	WorldTimer.instance.seek(10)
 	if Character.instance.charge.value < 100:
-		Character.instance.charge.value += 10
+		Character.instance.charge.value += 12.5
 	
 	if Character.instance.charge.value >= 100:
 		Character.instance.on_level_up()

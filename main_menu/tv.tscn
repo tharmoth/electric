@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://c5rhcwcen8hyt" path="res://data/sprites/tv.png" id="3_asner"]
 
 [sub_resource type="Gradient" id="Gradient_iirpr"]
-colors = PackedColorArray(0, 0, 0, 1, 0.411765, 0.870588, 1, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_jkj7c"]
 frequency = 1.0
@@ -32,6 +31,7 @@ texture = ExtResource("3_asner")
 [node name="static" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 modulate = Color(3, 3, 3, 1)
+self_modulate = Color(0.411765, 0.870588, 1, 1)
 light_mask = 0
 z_index = 2
 position = Vector2(-4.24989, 66.75)

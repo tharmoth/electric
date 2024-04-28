@@ -2,6 +2,8 @@ class_name Character extends CharacterBody2D
 
 const SPEED = 300.0
 
+static var high_score = -1
+static var score = -1
 static var instance : Character
 var knockbackTween : Tween = null
 var knockback : Vector2 = Vector2.ZERO
@@ -19,9 +21,10 @@ func _enter_tree() -> void:
 	instance = self
 
 func _ready() -> void:
+	score = -1
 	%PickupBox.area_entered.connect(pickup)
 	add_to_group("Character")
-	equip_gun("rifle")
+	equip_gun("pistol")
 	charge.value = 99
 	currentGun.reload()
 	
@@ -123,6 +126,9 @@ func on_damage() -> void:
 	tween3.tween_property(%Sprites, "rotation_degrees", 0, time / 3.0)
 	
 	shake_camera()
+	
+	for node in get_tree().get_nodes_in_group("Enemy"):
+		node.on_death()
 
 func shake_camera() -> void:
 	%Camera2D/AnimationPlayer.play("shake")

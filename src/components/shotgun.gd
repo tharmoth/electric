@@ -57,7 +57,7 @@ func fire() -> void:
 	var v : Vector2 = $ParticleOrigin.global_position - global_position.direction_to(get_global_mouse_position()) * KNOCKBACK_FORCE
 	emit_signal("shake")
 	emit_signal("knockback", v)
-	%ShootTimer.start(SHOT_DELAY)
+	%ShootTimer.start(SHOT_DELAY * Character.instance.stats.fire_speed_mult)
 	%ShootAudio.play(0)
 
 	if ammo == 0:

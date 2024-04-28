@@ -51,14 +51,21 @@ func game_over():
 		
 	for node in get_tree().get_nodes_in_group("Pickup"):
 		node.on_gameover()
+		
+	if Character.instance.score > Character.instance.high_score:
+		Character.instance.high_score = Character.instance.score
+		%HighScore.visible = true
 	
 	#get_tree().paused = true
-	%GameOver.visible = true
+	%GameOverGui.visible = true
 	get_tree().create_timer(5, true).timeout.connect(return_to_menu)
 
 func return_to_menu():
 	get_tree().change_scene_to_file("res://main_menu/main_menu.tscn")
 	#get_tree().paused = false
+
+func get_minutes_elapsed() -> int:
+	return floori(WorldTimer.instance.time_elapsed / 60)
 
 func get_current_time() -> float:
 	return to_timer(rotation_degrees)

@@ -104,7 +104,10 @@ func fire() -> void:
 			right_tween.tween_callback(loose)
 		tween.tween_interval(time_between_shots)
 		right_tween.tween_interval(time_between_shots)
-	tween.tween_interval(time_between_salvos)
+		
+		
+	var time_to_wait = time_between_salvos * Character.instance.stats.fire_speed_mult
+	tween.tween_interval(time_to_wait)
 	tween.tween_callback(func(): ready_to_fire = true)
 	
 func loose() -> void:
@@ -121,19 +124,21 @@ func loose() -> void:
 	
 	var space_state = get_world_2d().direct_space_state
 	
+	var exclude : Array[RID] = []
 	var end : Vector2
 	for i in range(Character.instance.stats.piercing + 1):
-		var query = PhysicsRayQueryParameters2D.create(origin,  origin + direction * 2000)
+		var query = PhysicsRayQueryParameters2D.create(origin,  origin + direction * 2000, 0xFFFFFFFF, exclude)
 		var result = space_state.intersect_ray(query)
 		if result:
 			var node = result.collider.get_parent()
 			end = result.position
+			exclude.append(result.rid)
 			if node is Enemy:
 				var damage = randi_range(5, 10)
 				node.damage(damage)
-		else:
-			end = mouse
-			break
+
+	if not end:
+		end = mouse
 	
 	var line = Line2D.new()
 	line.points = [origin, end]

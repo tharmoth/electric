@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cjfagb6ey5fr3"]
+[gd_scene load_steps=38 format=3 uid="uid://cjfagb6ey5fr3"]
 
 [ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/sprites/timer.png" id="1_4nl5p"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xa5wo"]
@@ -22,6 +22,9 @@
 [ext_resource type="AudioStream" uid="uid://bljeed1cthxbd" path="res://data/sfx/timer_winding_noloop.wav" id="18_0scj5"]
 [ext_resource type="PackedScene" uid="uid://bvhveibcwfqxw" path="res://src/background.tscn" id="19_epnoa"]
 [ext_resource type="AudioStream" uid="uid://dry1v31tlx1fy" path="res://data/sfx/timer_ring_2.wav" id="19_xib4t"]
+[ext_resource type="Script" path="res://main_menu/score_label.gd" id="22_3w3ce"]
+[ext_resource type="Script" path="res://main_menu/score_title_label.gd" id="22_m8yp0"]
+[ext_resource type="PackedScene" uid="uid://vmh1o25ctcib" path="res://main_menu/score_box.tscn" id="24_e4kgt"]
 
 [sub_resource type="Resource" id="Resource_d28yr"]
 script = ExtResource("7_vtfxf")
@@ -29,7 +32,8 @@ reload_time = 5
 clip_bonus = 1
 burst_bonus = 0
 shoulder_lasers = 0
-piercing = 1
+piercing = 0
+fire_speed_mult = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vknm1"]
 bg_color = Color(0.203922, 0.203922, 0.203922, 1)
@@ -217,7 +221,7 @@ speed_scale = 4.0
 [node name="Music" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("10_bhipu")
-volume_db = -10.0
+volume_db = -20.0
 autoplay = true
 bus = &"Music"
 
@@ -255,7 +259,38 @@ lifetime = 0.2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="GameOver" type="Label" parent="CanvasLayer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label3" type="Label" parent="CanvasLayer/HBoxContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 30
+text = "Score: "
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("22_m8yp0")
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 30
+text = "3
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("22_3w3ce")
+
+[node name="GameOverGui" type="MarginContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 15
@@ -263,12 +298,36 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameOverGui"]
+layout_mode = 2
+alignment = 1
+
+[node name="GameOver" type="Label" parent="CanvasLayer/GameOverGui/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 150
-text = "Game Over"
+text = "Time's Up!"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HighScore" type="Label" parent="CanvasLayer/GameOverGui/VBoxContainer"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.639216, 0.207843, 0.933333, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 50
+text = "New High Score!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" parent="CanvasLayer/GameOverGui/VBoxContainer" instance=ExtResource("24_e4kgt")]
+layout_mode = 2
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.6, 0.6, 0.6, 1)

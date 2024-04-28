@@ -19,8 +19,20 @@ func _process(delta: float) -> void:
 		return
 	timer = 0
 	
-	var amount_to_spawn = roundi(abs(%Timer.get_current_time()) / 10) + 1
+	var bonus 
 	
+	var amount_to_spawn = 1
+	
+	if WorldTimer.instance.time_elapsed > 20:
+		amount_to_spawn += 1
+		
+	if WorldTimer.instance.time_elapsed > 60:
+		amount_to_spawn += 1
+	
+	for i in range(floori(WorldTimer.instance.get_minutes_elapsed() / 5)):
+		amount_to_spawn += 1
+
+	print("Spawning: ", amount_to_spawn)
 	for i in range(amount_to_spawn):
 		var enemy = preload("res://src/enemy.tscn").instantiate()
 		%Timer.add_child(enemy)
