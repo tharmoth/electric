@@ -56,12 +56,7 @@ func on_level_up():
 	tween.tween_property(%Charge, "value", 0, 1)
 
 	var pick : Node2D = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
-	var rng = RandomNumberGenerator.new()
-	match rng.randi_range(0, 1):
-		0:
-			pick.init("reload")
-		1:
-			pick.init("clip_size")
+	pick.init("passive")
 
 	var direction = global_position.direction_to(Vector2.ZERO)
 	var angle = global_position.angle_to_point(Vector2.ZERO) + PI / 2
@@ -70,13 +65,13 @@ func on_level_up():
 	pick.global_position = global_position + direction * 100
 	
 	var pick2 : Node2D = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
-	pick2.init("dual_smg")
+	pick2.init("weapon")
 
 	get_parent().add_child(pick2)
 	pick2.global_position = global_position + direction * 100 + Vector2.LEFT.rotated(angle) * 100
 	
 	var pick3 : Node2D = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
-	pick3.init("shotgun")
+	pick3.init("passive")
 	get_parent().add_child(pick3)
 	pick3.global_position = global_position + direction * 100 + Vector2.RIGHT.rotated(angle) * 100
 

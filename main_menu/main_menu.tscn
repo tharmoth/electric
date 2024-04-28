@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://main_menu/main_menu_scripts/main_menu.gd" id="1_0cyx6"]
 [ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/sprites/timer.png" id="1_e64cu"]
 [ext_resource type="Script" path="res://main_menu/main_menu_scripts/spinny.gd" id="1_jfd6a"]
-[ext_resource type="Texture2D" path="res://main_menu/textures/sfx.png" id="3_oxab4"]
-[ext_resource type="Texture2D" path="res://main_menu/textures/music.png" id="4_a8pkt"]
+[ext_resource type="Texture2D" uid="uid://ddg67bxk3ew6y" path="res://main_menu/textures/sfx.png" id="3_oxab4"]
+[ext_resource type="Texture2D" uid="uid://bmgjqr8i8bk6j" path="res://main_menu/textures/music.png" id="4_a8pkt"]
 [ext_resource type="Texture2D" uid="uid://h4cjswv74lav" path="res://data/sprites/handle.png" id="4_jb3qc"]
 [ext_resource type="AudioStream" uid="uid://crnsfvqvx5d4r" path="res://data/sfx/a-kitchen-timer-55420.mp3" id="5_v6kgi"]
 [ext_resource type="AudioStream" uid="uid://dry1v31tlx1fy" path="res://data/sfx/timer_ring_2.wav" id="6_kn6ex"]
@@ -12,8 +12,8 @@
 [ext_resource type="Script" path="res://main_menu/sound_dial.gd" id="7_r5efj"]
 [ext_resource type="Script" path="res://src/components/bounce_movement_component.gd" id="8_npv5h"]
 [ext_resource type="PackedScene" path="res://src/background.tscn" id="9_ahrn7"]
-[ext_resource type="AudioStream" path="res://data/sfx/main_menu_music.mp3" id="9_cuh44"]
-[ext_resource type="Texture2D" path="res://main_menu/textures/title.png" id="11_08up0"]
+[ext_resource type="AudioStream" uid="uid://d0qkjaxmaxipq" path="res://data/sfx/main_menu_music.mp3" id="9_cuh44"]
+[ext_resource type="Texture2D" uid="uid://cciufktoxstl3" path="res://main_menu/textures/title.png" id="11_08up0"]
 
 [sub_resource type="Gradient" id="Gradient_ucsia"]
 offsets = PackedFloat32Array(0, 0.435065)

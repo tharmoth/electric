@@ -19,7 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://d2ak74rou1req" path="res://data/sfx/a-kitchen-timer-55420.wav" id="14_2bgwq"]
 [ext_resource type="PackedScene" uid="uid://bgk1fl5lw4fyi" path="res://src/pickup.tscn" id="14_5kbvx"]
 [ext_resource type="Texture2D" uid="uid://doi73aghhpalw" path="res://data/particles/spark_02.png" id="15_i46s2"]
-[ext_resource type="AudioStream" path="res://data/sfx/timer_winding_noloop.wav" id="18_0scj5"]
+[ext_resource type="AudioStream" uid="uid://bljeed1cthxbd" path="res://data/sfx/timer_winding_noloop.wav" id="18_0scj5"]
 [ext_resource type="PackedScene" path="res://src/background.tscn" id="19_epnoa"]
 [ext_resource type="AudioStream" uid="uid://dry1v31tlx1fy" path="res://data/sfx/timer_ring_2.wav" id="19_xib4t"]
 
