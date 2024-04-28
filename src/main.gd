@@ -44,11 +44,12 @@ func _process(delta: float) -> void:
 		amount_to_spawn += 1
 
 	if WorldTimer.instance.time_elapsed >= boss_times[0]:
-		boss_times.pop_front()
+		var t = boss_times.pop_front()
 		var boss = load("res://src/microboss.tscn").instantiate()
 		boss.connect("boss_down", func() -> void: boss_alive = false)
 		boss_alive = true
 		boss.global_position = random_point_on_circle(512)
+		boss.health = t / 2
 		add_child(boss)
 
 	print("Spawning: ", amount_to_spawn)
