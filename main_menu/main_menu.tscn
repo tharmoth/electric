@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ddg67bxk3ew6y" path="res://main_menu/textures/sfx.png" id="3_oxab4"]
 [ext_resource type="Texture2D" uid="uid://bmgjqr8i8bk6j" path="res://main_menu/textures/music.png" id="4_a8pkt"]
 [ext_resource type="Texture2D" uid="uid://h4cjswv74lav" path="res://data/sprites/handle.png" id="4_jb3qc"]
-[ext_resource type="PackedScene" path="res://main_menu/score_box.tscn" id="5_lftf5"]
+[ext_resource type="PackedScene" uid="uid://vmh1o25ctcib" path="res://main_menu/score_box.tscn" id="5_lftf5"]
 [ext_resource type="AudioStream" uid="uid://crnsfvqvx5d4r" path="res://data/sfx/a-kitchen-timer-55420.mp3" id="5_v6kgi"]
 [ext_resource type="AudioStream" uid="uid://dry1v31tlx1fy" path="res://data/sfx/timer_ring_2.wav" id="6_kn6ex"]
 [ext_resource type="AudioStream" uid="uid://cdi574hqve8cc" path="res://data/sfx/timer_winding.wav" id="7_2ahw8"]
@@ -16,7 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://d0qkjaxmaxipq" path="res://data/sfx/main_menu_music.mp3" id="9_cuh44"]
 [ext_resource type="Texture2D" uid="uid://cciufktoxstl3" path="res://main_menu/textures/title.png" id="11_08up0"]
 [ext_resource type="AudioStream" uid="uid://bljeed1cthxbd" path="res://data/sfx/timer_winding_noloop.wav" id="12_eeaxq"]
-[ext_resource type="AudioStream" uid="uid://buxqb5c3l7jnh" path="res://data/sfx/1911-reload-6248.mp3" id="17_da5tw"]
+[ext_resource type="AudioStream" path="res://data/sfx/1911-reload-6248.mp3" id="17_da5tw"]
 
 [sub_resource type="Gradient" id="Gradient_ucsia"]
 offsets = PackedFloat32Array(0, 0.435065)

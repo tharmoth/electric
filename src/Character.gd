@@ -8,6 +8,7 @@ static var score : int  = -1
 static var instance : Character
 var knockbackTween : Tween = null
 var knockback : Vector2 = Vector2.ZERO
+var first_selection : bool = true
 
 var gun = preload("res://src/gun.tscn")
 var rifle = preload("res://src/weapons/rifle.tscn")
@@ -74,7 +75,11 @@ func on_level_up():
 	var angle = global_position.angle_to_point(Vector2.ZERO) + PI / 2
 
 	var pick : Node2D = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
-	pick.init("weapon")
+	if first_selection:
+		first_selection = false
+		pick.init("passive")
+	else:
+		pick.init("weapon")
 	get_parent().call_deferred("add_child", pick)
 	#pick.global_position = global_position + direction * 100
 	#pick.position = Vector2(0, -310)
@@ -82,14 +87,14 @@ func on_level_up():
 	
 	
 	var pick2 : Node2D = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
-	pick2.init("passive")
+	pick2.init_ignore("passive", pick.item_name)
 	get_parent().call_deferred("add_child", pick2)
 	#pick2.global_position = global_position + direction * 100 + Vector2.LEFT.rotated(angle) * 100
 	#pick2.position = Vector2(270, 160)
 	pick2.position = Vector2(130, 77)
 	
 	var pick3 : Node2D = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
-	pick3.init_ignore("passive", pick2.item_name)
+	pick3.init_ignore2("passive", pick.item_name, pick2.item_name)
 	get_parent().call_deferred("add_child", pick3)
 	#pick3.global_position = global_position + direction * 100 + Vector2.RIGHT.rotated(angle) * 100
 	#pick3.position = Vector2(-270, 160)
