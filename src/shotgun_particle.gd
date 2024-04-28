@@ -18,9 +18,13 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 func _on_body_entered(body_rid, body, body_shape_index, local_shape_index) -> void:
-	if body.get_parent() is Enemy && body.get_parent().has_method("damage"):
+	var parent = body.get_parent()
+	var isEnemy : bool = parent is Enemy || parent.is_in_group("Enemy")
+
+	if isEnemy && parent.has_method("damage"):
 		var dmg: int = floor(randf_range(minDamage, maxDamage))
-		body.get_parent().damage(dmg)
+		parent.damage(dmg)
 		piercing -= 1
+
 		if piercing <= 0:
 			queue_free()

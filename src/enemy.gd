@@ -6,6 +6,7 @@ var dead : bool = false
 static var pickup = preload("res://src/pickup.tscn")
 
 func _ready() -> void:
+	print("in enemy")
 	add_to_group("Enemy")
 	%Hurtbox.area_entered.connect(damage_player)
 	
