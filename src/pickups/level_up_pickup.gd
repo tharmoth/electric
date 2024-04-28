@@ -2,9 +2,8 @@ extends Node2D
 
 var item_name : String
 var items : Array[String] = ["pistol", "rifle", "smg", "shotgun", "reload", "clip_size"]
-var weapons : Array[String] = ["pistol", "rifle", "smg", "shotgun"]
+var weapons : Array[String] = ["pistol", "rifle", "smg", "shotgun", "tesla_gun"]
 var passives : Array[String] = ["reload", "clip_size", "piercing", "fire_speed", "shoulder_laser"]
-
 
 func init(item_name : String):
 	init_ignore(item_name, "")
@@ -41,6 +40,9 @@ func _ready() -> void:
 		texture = load("res://data/sprites/rifle.png")
 	elif item_name == "shotgun":
 		texture = load("res://data/sprites/shotgun.png")
+		texture = load("res://data/shotgun.png")
+	elif item_name == "tesla_gun":
+		texture = load("res://data/sprites/tesla_gun.png")
 	elif item_name == "reload":
 		texture = load("res://data/sprites/reload_up.png")
 		%Outline.self_modulate = Color("ff8000")

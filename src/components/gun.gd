@@ -17,6 +17,7 @@ var damage : Vector2 = Vector2(5, 10)
 # State Data
 var ammo : int = 0
 var reloading : bool = false
+var reload_started : bool = false
 var ready_to_fire : bool = true
 var spin_to_win : int = 5	
 
@@ -37,6 +38,12 @@ func _ready() -> void:
 		max_ammo = 12
 		shots = 1
 		time_between_shots = .1
+		time_between_salvos = 0
+		reload_time = 3
+	elif weapon_type == "tesla_gun":
+		max_ammo = 8
+		shots = 1
+		time_between_shots = 1
 		time_between_salvos = 0
 		reload_time = 3
 
@@ -83,14 +90,22 @@ func move_to_position() -> void:
 
 func reload() -> void:
 	%GunAnimationPlayer.play("reload")
-	reloading = true
-	%GunReload.play()
+	# Only play sound once for tesla gun
+	print (str(reload_started) + " " + weapon_type)
+	if weapon_type == "tesla_gun" && reload_started:
+		return
+	else:
+		reload_started = true
+		reloading = true
+		%GunReload.play()
 
 func reload_complete(something):
 	reloading = false
 	if spin_to_win > 0:
 		spin_to_win -= 1
 		reload()
+	else:
+		reload_started = false
 	ammo = max_ammo + Character.instance.stats.clip_bonus
 
 func fire() -> void:
@@ -128,34 +143,59 @@ func loose() -> void:
 	
 	var exclude : Array[RID] = []
 	var end : Vector2
-	for i in range(Character.instance.stats.piercing + 1):
+	if weapon_type == "tesla_gun":
 		var query = PhysicsRayQueryParameters2D.create(origin,  origin + direction * 2000, 0xFFFFFFFF, exclude)
 		var result = space_state.intersect_ray(query)
 		if result:
 			var node = result.collider.get_parent()
 			end = result.position
 			exclude.append(result.rid)
+			if not end:
+				end = mouse
+			TargetingUtils.drawLightning(origin, end)
 			if node is Enemy:
+				# Damage first node
+				
 				node.damage( randi_range(damage.x, damage.y))
+				for n in range(Character.instance.stats.piercing + 1):
+					# Gets a enemy node in range if exists
+					var oldNodePosition : Vector2 = node.global_position
+					node = TargetingUtils.getEnemyInRange(node, 500)
+					if node != null:
+						node.damage(randi_range(damage.x, damage.y))
+						TargetingUtils.drawLightning(node.global_position, oldNodePosition)
+					else:
+						break
 
-	if not end:
-		end = mouse
-	
-	var line = Line2D.new()
-	line.points = [origin, end]
-	line.width = 0
-	line.default_color = Color(10, 0, 0, 1)
-	get_parent().get_tree().root.add_child(line)
-	
-	var laser_tween = get_parent().get_tree().create_tween()
-	laser_tween.tween_property(line, "width", 6, .05)
-	laser_tween.tween_property(line, "width", 0, .3)
-	laser_tween.tween_callback(func(): line.queue_free())
+	else:
+		for i in range(Character.instance.stats.piercing + 1):
+			var query = PhysicsRayQueryParameters2D.create(origin,  origin + direction * 2000, 0xFFFFFFFF, exclude)
+			var result = space_state.intersect_ray(query)
+			if result:
+				var node = result.collider.get_parent()
+				end = result.position
+				exclude.append(result.rid)
+				if node is Enemy:
+					node.damage( randi_range(damage.x, damage.y))
+
+		if not end:
+			end = mouse
+		
+		var line = Line2D.new()
+		line.points = [origin, end]
+		line.width = 0
+		line.default_color = Color(10, 0, 0, 1)
+		get_parent().get_tree().root.add_child(line)
+		
+		var laser_tween = get_parent().get_tree().create_tween()
+		laser_tween.tween_property(line, "width", 6, .05)
+		laser_tween.tween_property(line, "width", 0, .3)
+		laser_tween.tween_callback(func(): line.queue_free())
 
 	%GunAudio.play()
 	emit_signal("shake")
 	emit_signal("knockback", origin - direction * 250)
-	
+		
 	if ammo == 0:
 		spin_to_win = reload_time + Character.instance.stats.reload_time
 		reload()

@@ -13,6 +13,7 @@ var gun = preload("res://src/gun.tscn")
 var rifle = preload("res://src/weapons/rifle.tscn")
 var shotgun = preload("res://src/components/shotgun.tscn")
 var smg = preload("res://src/weapons/smg.tscn")
+var tesla_gun = preload("res://src/weapons/tesla_gun.tscn")
 var shoulder_laser = preload("res://src/shoulder_laser.tscn")
 var currentGun;
 @onready var charge : ProgressBar = %Charge
@@ -51,6 +52,8 @@ func equip_gun(name : String):
 		currentGun = smg.instantiate()
 	elif name == "dual_smg":
 		currentGun = smg.instantiate()
+	elif name == "tesla_gun":
+		currentGun = tesla_gun.instantiate()
 		
 	currentGun.weapon_type = name
 	
