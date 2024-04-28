@@ -1,9 +1,10 @@
 class_name Enemy extends Node2D
 
+signal boss_down
+
 var health : int = 5
 var speed := 100.0
 var dead : bool = false
-static var pickup = preload("res://src/pickup.tscn")
 
 func _ready() -> void:
 	add_to_group("Enemy")
@@ -30,21 +31,34 @@ func _process(delta: float) -> void:
 	var target = Character.instance.global_position
 	global_position = global_position.move_toward(target, speed * delta)
 
-
 func on_death():
 	if dead:
 		return
 	dead = true
-	
-	if (randf() > .66):
-		var battery = pickup.instantiate()
+
+	if self is Microboss:
+		var battery = load("res://src/pickup.tscn")
+		var remaining = (100 - int(Character.instance.charge.value)) / 10
+		
+		for i in remaining:
+			var bat = battery.instantiate()
+			bat.global_position = global_position + Vector2(randf_range(25, 75), randf_range(25, 75))
+			WorldTimer.instance.add_child(bat)
+		
+		emit_signal("boss_down")
+	elif (randf() > .66):
+		var battery = load("res://src/pickup.tscn").instantiate()
 		WorldTimer.instance.add_child(battery)
 		battery.global_position = global_position
 	
 	%StaticBody2D.free()
+	
 	if %Sprite2D:
 		death_animation.kill(%Sprite2D)
-	%tv.kill()
+
+	if %tv:
+		%tv.kill()
+
 	queue_free()
 
 func on_gameover():
@@ -63,7 +77,9 @@ func damage(damage: int) -> void:
 		color = Color.GOLD
 	if damage > 20:
 		color = Color.RED
+
 	FloatingLabel.show(str(damage), global_position, color)
 	health -= damage
+
 	if health <= 0:
 		self.on_death()

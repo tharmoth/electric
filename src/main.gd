@@ -3,6 +3,9 @@ extends Node2D
 var COOLDOWN := 3.0
 var timer := 0.0
 var edge_shock : bool = false
+var boss_alive : bool = false
+var boss_times : Array[int] = [60, 240, 580, 820]
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	%TickTick.finished.connect(restart)
@@ -19,11 +22,10 @@ func _process(delta: float) -> void:
 	if (timer < COOLDOWN):
 		return
 	timer = 0
-	
+
 	var bonus 
-	
 	var amount_to_spawn = 1
-	
+
 	if WorldTimer.instance.time_elapsed > 20:
 		amount_to_spawn += 1
 		
@@ -41,11 +43,21 @@ func _process(delta: float) -> void:
 	for i in range(floori(WorldTimer.instance.get_minutes_elapsed() / 5)):
 		amount_to_spawn += 1
 
+	if WorldTimer.instance.time_elapsed >= boss_times[0]:
+		var t = boss_times.pop_front()
+		var boss = load("res://src/microboss.tscn").instantiate()
+		boss.connect("boss_down", func() -> void: boss_alive = false)
+		boss_alive = true
+		boss.global_position = random_point_on_circle(512)
+		boss.health = t / 2
+		add_child(boss)
+
 	print("Spawning: ", amount_to_spawn)
-	for i in range(amount_to_spawn):
-		var enemy = preload("res://src/enemy.tscn").instantiate()
-		%Timer.add_child(enemy)
-		enemy.global_position = random_point_on_circle(512)
+	if !boss_alive:
+		for i in range(amount_to_spawn):
+			var enemy = preload("res://src/enemy.tscn").instantiate()
+			%Timer.add_child(enemy)
+			enemy.global_position = random_point_on_circle(512)
 
 func random_point_on_circle(radius : float) -> Vector2:
 	var angle = randf() * PI * 2

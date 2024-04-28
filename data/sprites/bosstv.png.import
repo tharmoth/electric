@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hpasopkvipfy"
-path="res://.godot/imported/shotgun.png-67aa3dc555d6a7ba3c3d3b8161da5609.ctex"
+uid="uid://btdo2cw4ovpdg"
+path="res://.godot/imported/bosstv.png-6b22575b8edd695d293f577dce5b05c3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/shotgun.png"
-dest_files=["res://.godot/imported/shotgun.png-67aa3dc555d6a7ba3c3d3b8161da5609.ctex"]
+source_file="res://data/sprites/bosstv.png"
+dest_files=["res://.godot/imported/bosstv.png-6b22575b8edd695d293f577dce5b05c3.ctex"]
 
 [params]
 

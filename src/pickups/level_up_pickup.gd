@@ -45,7 +45,8 @@ func _ready() -> void:
 	elif item_name == "rifle":
 		texture = load("res://data/sprites/rifle.png")
 	elif item_name == "shotgun":
-		texture = load("res://data/shotgun.png")
+		texture = load("res://data/sprites/shotgun.png")
+		texture = load("res://data/sprites/shotgun.png")
 	elif item_name == "tesla_gun":
 		texture = load("res://data/sprites/tesla_gun.png")
 	elif item_name == "reload":

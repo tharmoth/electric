@@ -19,6 +19,7 @@ var isReloading: bool = false
 # Upgrading shotgun upgrades damage
 var minDamage: int = 10
 var maxDamage: int = 30
+var reloadSpinCount: int = 5
 
 func _ready() -> void:
 	%AmmoCapacity.min_value = 0
@@ -61,7 +62,7 @@ func fire() -> void:
 	%ShootAudio.play(0)
 
 	if ammo == 0:
-		spin_to_win = Character.instance.stats.reload_time
+		reloadSpinCount = Character.instance.stats.reload_time
 		self.reload()
 
 func can_fire() -> bool:
@@ -76,14 +77,12 @@ func can_fire() -> bool:
 func reload() -> void:
 	isReloading = true
 	%GunAnimationPlayer.play("reload")
-	
-var spin_to_win = 5	
-	
+
 func _reload_complete(something):
 	isReloading = false
-	if spin_to_win > 0:
-		spin_to_win -= 1
-		reload()
+	if reloadSpinCount > 0:
+		reloadSpinCount -= 1
+		self.reload()
 	ammo = MAX_AMMO + Character.instance.stats.clip_bonus
 
 func _point_at_mouse() -> void:

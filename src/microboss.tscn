@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://dosgt0j5ycv7f"]
+
+[ext_resource type="Script" path="res://src/microboss.gd" id="1_lf4nr"]
+[ext_resource type="Texture2D" uid="uid://btdo2cw4ovpdg" path="res://data/sprites/bosstv.png" id="2_usydn"]
+[ext_resource type="Texture2D" uid="uid://umlrwq71i6o6" path="res://data/sprites/bosstv_eyes.png" id="3_rl5mg"]
+[ext_resource type="Script" path="res://main_menu/main_menu_scripts/background.gd" id="3_ugbb8"]
+[ext_resource type="Texture2D" uid="uid://hvo56y3o530f" path="res://data/sprites/bosstv_mouth.png" id="4_aiqw1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_evhgb"]
+size = Vector2(293, 211.533)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7rrk4"]
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_n8dtw"]
+noise = SubResource("FastNoiseLite_7rrk4")
+
+[node name="Node2D2" type="Node2D"]
+scale = Vector2(0.657109, 0.657109)
+script = ExtResource("1_lf4nr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(146.094, 109.571)
+scale = Vector2(5.03324, 4.98188)
+texture = ExtResource("2_usydn")
+
+[node name="eyes" type="Sprite2D" parent="Sprite2D"]
+self_modulate = Color(5, 1, 1, 1)
+z_index = 1
+texture = ExtResource("3_rl5mg")
+
+[node name="mouth" type="Sprite2D" parent="Sprite2D"]
+self_modulate = Color(5, 1, 1, 1)
+z_index = 1
+texture = ExtResource("4_aiqw1")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(146.094, 105.005)
+shape = SubResource("RectangleShape2D_evhgb")
+
+[node name="static" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(145.334, 105.766)
+scale = Vector2(0.514208, 0.353704)
+texture = SubResource("NoiseTexture2D_n8dtw")
+script = ExtResource("3_ugbb8")

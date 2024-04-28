@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://7dpeg2lwawjb"]
+
+[ext_resource type="Script" path="res://src/boss_projectile.gd" id="1_ntasg"]
+[ext_resource type="Texture2D" uid="uid://c081c3lxu7ysh" path="res://data/sprites/white_circle.png" id="2_j48g5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jfgne"]
+radius = 14.0357
+
+[node name="Node2D" type="Node2D"]
+scale = Vector2(0.667534, 0.667534)
+script = ExtResource("1_ntasg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.080002, 0.265098, 1)
+self_modulate = Color(5, 5, 5, 1)
+texture = ExtResource("2_j48g5")
+
+[node name="Area2D" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_jfgne")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+unique_name_in_owner = true
