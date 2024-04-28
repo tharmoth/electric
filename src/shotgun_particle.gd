@@ -23,6 +23,7 @@ func _on_body_entered(body_rid, body, body_shape_index, local_shape_index) -> vo
 
 	if isEnemy && parent.has_method("damage"):
 		var dmg: int = floor(randf_range(minDamage, maxDamage))
+		var rngVec: Vector2 = Vector2(randf_range(25, 75), randf_range(25, 75))
 		parent.damage(dmg)
 		piercing -= 1
 

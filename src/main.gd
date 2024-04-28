@@ -7,7 +7,6 @@ var edge_shock : bool = false
 func _ready() -> void:
 	%TickTick.finished.connect(restart)
 	death_animation.init()
-	print("Hello")
 	var boss = preload("res://src/microboss.tscn").instantiate()
 	add_child(boss)
 
@@ -25,7 +24,7 @@ func _process(delta: float) -> void:
 
 	var bonus 
 	var amount_to_spawn = 1
-	
+
 	if WorldTimer.instance.time_elapsed > 20:
 		amount_to_spawn += 1
 		

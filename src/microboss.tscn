@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2li25rr42qy4"]
+[gd_scene load_steps=5 format=3 uid="uid://d3mekoqxwlrog"]
 
 [ext_resource type="Texture2D" uid="uid://cwswuttwx8lf4" path="res://icon.svg" id="1_laa10"]
 [ext_resource type="Script" path="res://src/microboss.gd" id="1_lf4nr"]
@@ -14,6 +14,7 @@ scale = Vector2(0.657109, 0.657109)
 script = ExtResource("1_lf4nr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(136, 134.5)
 scale = Vector2(2.29688, 2.27344)
 texture = ExtResource("1_laa10")
@@ -25,6 +26,7 @@ position = Vector2(135.5, 135)
 shape = SubResource("RectangleShape2D_wpq6i")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(136.5, 134.5)
