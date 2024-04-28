@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cjfagb6ey5fr3"]
+[gd_scene load_steps=35 format=3 uid="uid://cjfagb6ey5fr3"]
 
 [ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/sprites/timer.png" id="1_4nl5p"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xa5wo"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://doi73aghhpalw" path="res://data/particles/spark_02.png" id="15_i46s2"]
 [ext_resource type="AudioStream" uid="uid://bljeed1cthxbd" path="res://data/sfx/timer_winding_noloop.wav" id="18_0scj5"]
 [ext_resource type="PackedScene" uid="uid://bvhveibcwfqxw" path="res://src/background.tscn" id="19_epnoa"]
+[ext_resource type="AudioStream" uid="uid://dry1v31tlx1fy" path="res://data/sfx/timer_ring_2.wav" id="19_xib4t"]
 
 [sub_resource type="Resource" id="Resource_d28yr"]
 script = ExtResource("7_vtfxf")
@@ -234,6 +235,11 @@ bus = &"SFX"
 [node name="WindClock" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("18_0scj5")
+bus = &"SFX"
+
+[node name="RingNoise" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("19_xib4t")
 bus = &"SFX"
 
 [node name="Battery" parent="." instance=ExtResource("14_5kbvx")]

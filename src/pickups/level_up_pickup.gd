@@ -18,6 +18,9 @@ func _ready() -> void:
 	elif item_name == "reload":
 		texture = load("res://data/sprites/resistor.png")
 		%Outline.self_modulate = Color("1eff00")
+	elif item_name == "clip_size":
+		texture = load("res://data/sprites/inductor.png")
+		%Outline.self_modulate = Color("1eff00")
 	
 	%LeftWeaponSprite.texture = texture
 	%RightWeaponSprite.texture = texture
@@ -47,7 +50,16 @@ func on_pickup():
 	if item_name == "reload":
 		Character.instance.stats.reload_time -= 1
 		Character.instance.stats.reload_time = max(Character.instance.stats.reload_time, 0)
-		FloatingLabel.show("Reload UP!", global_position, Color.WHITE)
+		var bonus = Character.instance.stats.clip_bonus
+		var message = "Reload Speed UP! (" + str(abs(bonus-1)) + " -> " + str(abs(bonus)) + ")"
+		FloatingLabel.show(message, global_position, Color.WHITE)
+		return
+	elif item_name == "clip_size":
+		Character.instance.stats.clip_bonus += 1
+		Character.instance.stats.clip_bonus = min(Character.instance.stats.clip_bonus, 0)
+		var bonus = Character.instance.stats.clip_bonus
+		var message = "Clip Size UP! (" + str(bonus-1) + " -> " + str(bonus) + ")"
+		FloatingLabel.show(message, global_position, Color.WHITE)
 		return
 	
 	Character.instance.equip_gun(item_name)

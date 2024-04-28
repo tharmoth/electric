@@ -56,7 +56,12 @@ func on_level_up():
 	tween.tween_property(%Charge, "value", 0, 1)
 
 	var pick : Node2D = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
-	pick.init("reload")
+	var rng = RandomNumberGenerator.new()
+	match rng.randi_range(0, 1):
+		0:
+			pick.init("reload")
+		1:
+			pick.init("clip_size")
 
 	var direction = global_position.direction_to(Vector2.ZERO)
 	var angle = global_position.angle_to_point(Vector2.ZERO) + PI / 2
@@ -137,3 +142,4 @@ func on_gameover() -> void:
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color.TRANSPARENT, 1)
 	currentGun.queue_free()
+	%RingNoise.play()
