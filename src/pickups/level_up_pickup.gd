@@ -7,8 +7,11 @@ var passives : Array[String] = ["reload", "clip_size", "piercing", "fire_speed",
 
 func init(item_name : String):
 	init_ignore(item_name, "")
-
+	
 func init_ignore(item_name : String, exclude : String):
+	init_ignore2(item_name, exclude, "")
+
+func init_ignore2(item_name : String, exclude : String, exclude2 : String):
 	
 	var valid_items : Array[String]
 	if item_name == "weapon":
@@ -26,6 +29,9 @@ func init_ignore(item_name : String, exclude : String):
 	
 	if exclude in passives:
 		valid_items.erase(exclude)
+	if exclude2 in passives:
+		valid_items.erase(exclude2)
+		
 	self.item_name = valid_items[randi_range(0, valid_items.size() - 1)]
 
 func _ready() -> void:

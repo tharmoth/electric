@@ -1,0 +1,689 @@
+[gd_scene load_steps=44 format=3 uid="uid://hjxj5554ebno"]
+
+[ext_resource type="PackedScene" uid="uid://bvhveibcwfqxw" path="res://src/background.tscn" id="1_2d4xj"]
+[ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/sprites/timer.png" id="3_2eouo"]
+[ext_resource type="Texture2D" uid="uid://h4cjswv74lav" path="res://data/sprites/handle.png" id="4_28387"]
+[ext_resource type="Script" path="res://src/components/bounce_movement_component.gd" id="5_ky5ma"]
+[ext_resource type="Texture2D" uid="uid://b0wl2wna6gd12" path="res://data/particles/SofterLight.png" id="6_0bxe0"]
+[ext_resource type="Texture2D" uid="uid://5taqte82qsbl" path="res://data/character/character.png" id="7_jvufo"]
+[ext_resource type="Texture2D" uid="uid://bwaoufhbbl4vc" path="res://data/character/eyes.png" id="8_d8xcd"]
+[ext_resource type="Script" path="res://src/Blink.gd" id="9_3va1a"]
+[ext_resource type="Texture2D" uid="uid://udvcofnt2ayp" path="res://data/character/engines.png" id="10_yvegm"]
+[ext_resource type="Texture2D" uid="uid://dn147m1na16l1" path="res://data/character/fire.png" id="11_1ya6w"]
+[ext_resource type="AudioStream" path="res://data/sfx/1911-reload-6248.mp3" id="12_5tblb"]
+[ext_resource type="Texture2D" uid="uid://c04y4abfq57ao" path="res://data/sprites/smg.png" id="13_1ixjf"]
+[ext_resource type="AudioStream" uid="uid://bi1ml8cqnnkne" path="res://data/sfx/Metal Rattle 8.wav" id="13_bf73p"]
+[ext_resource type="Script" path="res://src/wave.gd" id="13_bn7dg"]
+[ext_resource type="Texture2D" uid="uid://cciufktoxstl3" path="res://main_menu/textures/title.png" id="13_jl1ky"]
+[ext_resource type="AudioStream" uid="uid://biyn8iit2iqh0" path="res://data/sfx/laser1.wav" id="14_ynjjb"]
+[ext_resource type="AudioStream" uid="uid://bcvn6k2q0c7yu" path="res://data/sfx/laser2.wav" id="15_d6yg3"]
+[ext_resource type="AudioStream" uid="uid://b5vq5m1xlp6o8" path="res://data/sfx/laser3.wav" id="16_ea101"]
+[ext_resource type="AudioStream" uid="uid://djumfjwa8t515" path="res://data/sfx/recharge.wav" id="17_1jd6d"]
+[ext_resource type="Texture2D" uid="uid://bm73u6kjv4ftu" path="res://data/sprites/gun.png" id="18_ag4rl"]
+[ext_resource type="Texture2D" uid="uid://ceg1hiloai3x3" path="res://data/sprites/rifle.png" id="19_7uyhs"]
+[ext_resource type="Texture2D" path="res://data/sprites/shotgun.png" id="19_o60iy"]
+[ext_resource type="AudioStream" uid="uid://b7y8flhhbcdo4" path="res://data/sfx/shotgun_shoot.mp3" id="20_cl6sf"]
+[ext_resource type="AudioStream" uid="uid://s3nmubg5gry1" path="res://data/sfx/shotgun_reload_2.wav" id="21_dijxn"]
+[ext_resource type="Script" path="res://src/icon_fire.gd" id="22_2pmtd"]
+
+[sub_resource type="Environment" id="Environment_rhhol"]
+background_mode = 3
+background_energy_multiplier = 0.0
+ambient_light_energy = 0.0
+reflected_light_source = 1
+glow_enabled = true
+glow_intensity = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lqtcn"]
+bg_color = Color(0.203922, 0.203922, 0.203922, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cpclg"]
+bg_color = Color(0.6, 2.4, 4, 1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0awas"]
+radius = 24.0
+height = 64.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7ma3"]
+bg_color = Color(0.360784, 0.364706, 0.345098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5r0or"]
+bg_color = Color(16, 0, 0, 1)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ht4f7"]
+streams_count = 3
+stream_0/stream = ExtResource("14_ynjjb")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("15_d6yg3")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("16_ea101")
+stream_2/weight = 1.0
+
+[sub_resource type="Animation" id="Animation_5jov8"]
+resource_name = "reload"
+length = 2.0
+step = 0.33
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Smg/RightHand/RightHandProgressBar:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 100.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Smg/RightHand:rotation")
+tracks/1/interp = 3
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.33, 0.66, 0.99, 1.32, 1.65, 1.98),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 2.0944, 4.18879, 6.28319, 8.37758, 10.472, 12.5664]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Smg/LeftHand:rotation")
+tracks/2/interp = 3
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.33, 0.66, 0.99, 1.32, 1.65, 1.98),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 2.0944, 4.18879, 6.28319, 8.37758, 10.472, 12.5664]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Smg/LeftHand/LeftHandProgressBar:value")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.98),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 100.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6jwtj"]
+_data = {
+"reload": SubResource("Animation_5jov8")
+}
+
+[sub_resource type="Animation" id="Animation_aqynb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [5.75086]
+}
+
+[sub_resource type="Animation" id="Animation_dad1v"]
+resource_name = "new_animation"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 4
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.872665, 5.75086, 4.93056, 5.75086, 4.93056, 5.41052, 5.41052, 5.41052]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5sh13"]
+_data = {
+"RESET": SubResource("Animation_aqynb"),
+"new_animation": SubResource("Animation_dad1v")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kun5"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f6yuq"]
+bg_color = Color(0.6, 2.4, 4, 1)
+
+[sub_resource type="Animation" id="Animation_wuwvb"]
+resource_name = "reload"
+length = 2.0
+step = 0.33
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 3
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33, 0.66, 1, 1.32, 1.65, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 2.0944, 4.18879, 6.28319, 8.37758, 10.472, 12.5664]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ReloadAudio:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_78r6x"]
+_data = {
+"reload": SubResource("Animation_wuwvb")
+}
+
+[sub_resource type="Animation" id="Animation_bvjvu"]
+resource_name = "shake"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-12, 0), Vector2(0, 12), Vector2(-12, 0), Vector2(0, -12), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 4
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0174533, 0.0174533, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wmlpi"]
+_data = {
+"shake": SubResource("Animation_bvjvu")
+}
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("1_2d4xj")]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rhhol")
+
+[node name="kitchenTimer" type="Node2D" parent="."]
+visible = false
+modulate = Color(0.808998, 0.808998, 0.808998, 1)
+position = Vector2(512, 512)
+scale = Vector2(4, 4)
+metadata/_edit_lock_ = true
+
+[node name="knob" type="Marker2D" parent="kitchenTimer"]
+position = Vector2(0, -1)
+
+[node name="timer" type="Sprite2D" parent="kitchenTimer/knob"]
+position = Vector2(4.76837e-07, -4.76837e-07)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_2eouo")
+
+[node name="knobPoint" type="Marker2D" parent="kitchenTimer/knob"]
+position = Vector2(0, -102)
+
+[node name="middlePoint" type="Marker2D" parent="kitchenTimer"]
+position = Vector2(0, 101)
+
+[node name="Handle" type="Sprite2D" parent="kitchenTimer"]
+position = Vector2(0, -1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_28387")
+
+[node name="Node" type="Node" parent="kitchenTimer"]
+script = ExtResource("5_ky5ma")
+
+[node name="Character" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(512, 512)
+scale = Vector2(7.5, 7.5)
+collision_layer = 4
+collision_mask = 4
+
+[node name="Sprites" type="Node2D" parent="Character"]
+unique_name_in_owner = true
+scale = Vector2(2, 2)
+
+[node name="PointLight2D" type="PointLight2D" parent="Character/Sprites"]
+visible = false
+scale = Vector2(0.5, 0.5)
+energy = 0.2
+texture = ExtResource("6_0bxe0")
+texture_scale = 2.0
+
+[node name="Charge" type="ProgressBar" parent="Character/Sprites"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+self_modulate = Color(0.617455, 0.617455, 0.617455, 1)
+custom_minimum_size = Vector2(100, 100)
+offset_left = -7.0
+offset_top = -4.5
+offset_right = 133.0
+offset_bottom = 175.5
+scale = Vector2(0.1, 0.1)
+theme_override_styles/background = SubResource("StyleBoxFlat_lqtcn")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cpclg")
+value = 75.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Body" type="Sprite2D" parent="Character/Sprites"]
+unique_name_in_owner = true
+texture = ExtResource("7_jvufo")
+
+[node name="Eyes" type="Sprite2D" parent="Character/Sprites"]
+unique_name_in_owner = true
+modulate = Color(2, 4, 4, 1)
+texture = ExtResource("8_d8xcd")
+script = ExtResource("9_3va1a")
+
+[node name="Engines" type="Sprite2D" parent="Character/Sprites"]
+unique_name_in_owner = true
+texture = ExtResource("10_yvegm")
+
+[node name="Fire" type="Sprite2D" parent="Character/Sprites/Engines"]
+unique_name_in_owner = true
+modulate = Color(2, 4, 4, 1)
+texture = ExtResource("11_1ya6w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Character"]
+visible = false
+shape = SubResource("CapsuleShape2D_0awas")
+
+[node name="GunPickupAudio" type="AudioStreamPlayer2D" parent="Character"]
+unique_name_in_owner = true
+stream = ExtResource("12_5tblb")
+volume_db = -5.0
+
+[node name="UpgradeAudio" type="AudioStreamPlayer2D" parent="Character"]
+unique_name_in_owner = true
+stream = ExtResource("13_bf73p")
+volume_db = 5.0
+pitch_scale = 1.2
+
+[node name="Node" type="Node" parent="Character"]
+script = ExtResource("5_ky5ma")
+
+[node name="Node2D" type="Node2D" parent="Character"]
+rotation = 5.75086
+script = ExtResource("13_bn7dg")
+
+[node name="Gun" type="Node2D" parent="Character/Node2D"]
+position = Vector2(50, 0)
+
+[node name="LeftHand" type="Sprite2D" parent="Character/Node2D/Gun"]
+unique_name_in_owner = true
+visible = false
+y_sort_enabled = true
+position = Vector2(0, -8)
+texture = ExtResource("18_ag4rl")
+
+[node name="LeftHandProgressBar" type="ProgressBar" parent="Character/Node2D/Gun/LeftHand"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+z_index = 1
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 160.0
+offset_bottom = 27.0
+scale = Vector2(0.1, 0.1)
+theme_override_styles/background = SubResource("StyleBoxFlat_x7ma3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5r0or")
+value = 100.0
+show_percentage = false
+
+[node name="LeftHandMarker" type="Marker2D" parent="Character/Node2D/Gun/LeftHand"]
+unique_name_in_owner = true
+position = Vector2(10, 0)
+
+[node name="RightHand" type="Sprite2D" parent="Character/Node2D/Gun"]
+unique_name_in_owner = true
+y_sort_enabled = true
+texture = ExtResource("18_ag4rl")
+
+[node name="RightHandProgressBar" type="ProgressBar" parent="Character/Node2D/Gun/RightHand"]
+unique_name_in_owner = true
+self_modulate = Color(0.219501, 0.219501, 0.219501, 1)
+z_index = 1
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 160.0
+offset_bottom = 27.0
+scale = Vector2(0.1, 0.1)
+theme_override_styles/background = SubResource("StyleBoxFlat_x7ma3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5r0or")
+value = 100.0
+show_percentage = false
+
+[node name="RightHandMarker" type="Marker2D" parent="Character/Node2D/Gun/RightHand"]
+unique_name_in_owner = true
+position = Vector2(10, 0)
+
+[node name="GunAudio" type="AudioStreamPlayer" parent="Character/Node2D/Gun"]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_ht4f7")
+
+[node name="GunAnimationPlayer" type="AnimationPlayer" parent="Character/Node2D/Gun"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_6jwtj")
+}
+speed_scale = 5.0
+
+[node name="GunReload" type="AudioStreamPlayer" parent="Character/Node2D/Gun"]
+unique_name_in_owner = true
+stream = ExtResource("17_1jd6d")
+volume_db = -10.0
+
+[node name="WaveAnimationPlayer" type="AnimationPlayer" parent="Character/Node2D"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_5sh13")
+}
+speed_scale = 2.0
+
+[node name="Node2D2" type="Node2D" parent="Character"]
+visible = false
+rotation = 0.872665
+
+[node name="Smg" type="Node2D" parent="Character/Node2D2"]
+position = Vector2(-60, 0)
+rotation = 3.14159
+
+[node name="LeftHand" type="Sprite2D" parent="Character/Node2D2/Smg"]
+visible = false
+y_sort_enabled = true
+position = Vector2(0, -8)
+texture = ExtResource("13_1ixjf")
+
+[node name="LeftHandProgressBar" type="ProgressBar" parent="Character/Node2D2/Smg/LeftHand"]
+auto_translate_mode = 1
+z_index = 1
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 160.0
+offset_bottom = 27.0
+scale = Vector2(0.1, 0.1)
+theme_override_styles/background = SubResource("StyleBoxFlat_x7ma3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5r0or")
+value = 100.0
+show_percentage = false
+
+[node name="LeftHandMarker" type="Marker2D" parent="Character/Node2D2/Smg/LeftHand"]
+position = Vector2(10, 0)
+
+[node name="RightHand" type="Sprite2D" parent="Character/Node2D2/Smg"]
+y_sort_enabled = true
+texture = ExtResource("13_1ixjf")
+flip_v = true
+
+[node name="RightHandProgressBar" type="ProgressBar" parent="Character/Node2D2/Smg/RightHand"]
+modulate = Color(0.374139, 0.374139, 0.374139, 1)
+z_index = 1
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 160.0
+offset_bottom = 27.0
+scale = Vector2(0.1, 0.1)
+theme_override_styles/background = SubResource("StyleBoxFlat_x7ma3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5r0or")
+value = 100.0
+show_percentage = false
+
+[node name="RightHandMarker" type="Marker2D" parent="Character/Node2D2/Smg/RightHand"]
+position = Vector2(10, 0)
+
+[node name="GunAudio" type="AudioStreamPlayer" parent="Character/Node2D2/Smg"]
+stream = SubResource("AudioStreamRandomizer_ht4f7")
+
+[node name="GunAnimationPlayer" type="AnimationPlayer" parent="Character/Node2D2/Smg"]
+libraries = {
+"": SubResource("AnimationLibrary_6jwtj")
+}
+speed_scale = 5.0
+
+[node name="GunReload" type="AudioStreamPlayer" parent="Character/Node2D2/Smg"]
+stream = ExtResource("17_1jd6d")
+volume_db = -10.0
+
+[node name="Smg2" type="Node2D" parent="Character/Node2D2"]
+position = Vector2(-38.0815, 40.6702)
+rotation = -3.14159
+
+[node name="LeftHand" type="Sprite2D" parent="Character/Node2D2/Smg2"]
+visible = false
+y_sort_enabled = true
+position = Vector2(0, -8)
+texture = ExtResource("13_1ixjf")
+
+[node name="LeftHandProgressBar" type="ProgressBar" parent="Character/Node2D2/Smg2/LeftHand"]
+auto_translate_mode = 1
+z_index = 1
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 160.0
+offset_bottom = 27.0
+scale = Vector2(0.1, 0.1)
+theme_override_styles/background = SubResource("StyleBoxFlat_x7ma3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5r0or")
+value = 100.0
+show_percentage = false
+
+[node name="LeftHandMarker" type="Marker2D" parent="Character/Node2D2/Smg2/LeftHand"]
+position = Vector2(10, 0)
+
+[node name="RightHand" type="Sprite2D" parent="Character/Node2D2/Smg2"]
+y_sort_enabled = true
+texture = ExtResource("13_1ixjf")
+flip_v = true
+
+[node name="RightHandProgressBar" type="ProgressBar" parent="Character/Node2D2/Smg2/RightHand"]
+auto_translate_mode = 1
+modulate = Color(0.374139, 0.374139, 0.374139, 1)
+z_index = 1
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 160.0
+offset_bottom = 27.0
+scale = Vector2(0.1, 0.1)
+theme_override_styles/background = SubResource("StyleBoxFlat_x7ma3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5r0or")
+value = 100.0
+show_percentage = false
+
+[node name="RightHandMarker" type="Marker2D" parent="Character/Node2D2/Smg2/RightHand"]
+position = Vector2(10, 0)
+
+[node name="GunAudio" type="AudioStreamPlayer" parent="Character/Node2D2/Smg2"]
+stream = SubResource("AudioStreamRandomizer_ht4f7")
+
+[node name="GunAnimationPlayer" type="AnimationPlayer" parent="Character/Node2D2/Smg2"]
+root_node = NodePath("../../Smg2")
+libraries = {
+"": SubResource("AnimationLibrary_6jwtj")
+}
+speed_scale = 5.0
+
+[node name="GunReload" type="AudioStreamPlayer" parent="Character/Node2D2/Smg2"]
+stream = ExtResource("17_1jd6d")
+volume_db = -10.0
+
+[node name="Node2D3" type="Node2D" parent="Character"]
+visible = false
+rotation = 0.872665
+scale = Vector2(0.8, 0.8)
+
+[node name="Node2D" type="Node2D" parent="Character/Node2D3"]
+
+[node name="ShootTimer" type="Timer" parent="Character/Node2D3/Node2D"]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Character/Node2D3/Node2D"]
+position = Vector2(-70, 0)
+rotation = -6.28319
+texture = ExtResource("19_o60iy")
+flip_h = true
+
+[node name="AmmoCapacity" type="ProgressBar" parent="Character/Node2D3/Node2D/Sprite2D"]
+unique_name_in_owner = true
+offset_left = -7.99998
+offset_top = -3.00004
+offset_right = 16.0
+offset_bottom = 2.99996
+theme_override_styles/background = SubResource("StyleBoxFlat_5kun5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_f6yuq")
+max_value = 5.0
+value = 3.0
+show_percentage = false
+
+[node name="ParticleOrigin" type="Marker2D" parent="Character/Node2D3/Node2D"]
+modulate = Color(0.802518, 0, 0.170893, 1)
+position = Vector2(50.4781, -0.980239)
+
+[node name="ShootAudio" type="AudioStreamPlayer2D" parent="Character/Node2D3/Node2D"]
+unique_name_in_owner = true
+stream = ExtResource("20_cl6sf")
+
+[node name="ReloadAudio" type="AudioStreamPlayer2D" parent="Character/Node2D3/Node2D"]
+unique_name_in_owner = true
+stream = ExtResource("21_dijxn")
+volume_db = -10.0
+
+[node name="GunAnimationPlayer" type="AnimationPlayer" parent="Character/Node2D3/Node2D"]
+libraries = {
+"": SubResource("AnimationLibrary_78r6x")
+}
+speed_scale = 5.0
+
+[node name="Rifle" type="Node2D" parent="."]
+visible = false
+position = Vector2(264, 714)
+scale = Vector2(7.5, 7.5)
+script = ExtResource("22_2pmtd")
+disabled = true
+
+[node name="LeftHand" type="Sprite2D" parent="Rifle"]
+visible = false
+y_sort_enabled = true
+position = Vector2(0, -8)
+texture = ExtResource("19_7uyhs")
+
+[node name="LeftHandProgressBar" type="ProgressBar" parent="Rifle/LeftHand"]
+auto_translate_mode = 1
+z_index = 1
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 319.0
+offset_bottom = 27.0
+scale = Vector2(0.1, 0.1)
+theme_override_styles/background = SubResource("StyleBoxFlat_x7ma3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5r0or")
+value = 100.0
+show_percentage = false
+
+[node name="LeftHandMarker" type="Marker2D" parent="Rifle/LeftHand"]
+position = Vector2(15.9998, -0.000463193)
+
+[node name="RightHand" type="Sprite2D" parent="Rifle"]
+y_sort_enabled = true
+position = Vector2(0, 16)
+texture = ExtResource("19_7uyhs")
+
+[node name="RightHandProgressBar" type="ProgressBar" parent="Rifle/RightHand"]
+modulate = Color(0.219501, 0.219501, 0.219501, 1)
+z_index = 1
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 318.0
+offset_bottom = 27.0
+scale = Vector2(0.1, 0.1)
+theme_override_styles/background = SubResource("StyleBoxFlat_x7ma3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5r0or")
+value = 100.0
+show_percentage = false
+
+[node name="RightHandMarker2" type="Marker2D" parent="Rifle/RightHand"]
+unique_name_in_owner = true
+position = Vector2(30.8, 0.266675)
+
+[node name="Node2D2" type="Node2D" parent="Rifle/RightHand/RightHandMarker2"]
+rotation = 0.872665
+
+[node name="GunAudio" type="AudioStreamPlayer" parent="Rifle"]
+stream = SubResource("AudioStreamRandomizer_ht4f7")
+
+[node name="GunAnimationPlayer" type="AnimationPlayer" parent="Rifle"]
+libraries = {
+"": SubResource("AnimationLibrary_6jwtj")
+}
+speed_scale = 5.0
+
+[node name="GunReload" type="AudioStreamPlayer" parent="Rifle"]
+stream = ExtResource("17_1jd6d")
+volume_db = -10.0
+
+[node name="Node" type="Node" parent="Rifle"]
+script = ExtResource("5_ky5ma")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="titleLabel" type="TextureRect" parent="."]
+auto_translate_mode = 1
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 1.0
+offset_top = 510.0
+offset_right = 1010.0
+offset_bottom = 687.0
+grow_horizontal = 2
+texture = ExtResource("13_jl1ky")
+expand_mode = 3
+
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(512, 512)
+ignore_rotation = false
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_wmlpi")
+}
+speed_scale = 4.0
