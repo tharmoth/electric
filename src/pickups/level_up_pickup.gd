@@ -40,7 +40,7 @@ func _ready() -> void:
 	elif item_name == "rifle":
 		texture = load("res://data/sprites/rifle.png")
 	elif item_name == "shotgun":
-		texture = load("res://data/shotgun.png")
+		texture = load("res://data/sprites/shotgun.png")
 	elif item_name == "reload":
 		texture = load("res://data/sprites/reload_up.png")
 		%Outline.self_modulate = Color("ff8000")
