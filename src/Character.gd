@@ -110,9 +110,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("click"):
 		currentGun.fire()
 
-func on_damage() -> void:
-	var time = .3
+func damage_effect(time: float) -> void:
 	var tween = create_tween()
+
 	tween.tween_property(self, "modulate", Color(10, 0, 0, 1), time / 4.0)
 	tween.tween_property(self, "modulate", Color.WHITE, 3 * time / 4.0)
 	
@@ -131,6 +131,13 @@ func on_damage() -> void:
 	tween3.tween_property(%Sprites, "rotation_degrees", 0, time / 3.0)
 	
 	shake_camera()
+
+func projectile_damage(dmg: int) -> void:
+	self.damage_effect(0.3)
+	WorldTimer.instance.seek(-30)
+
+func on_damage() -> void:
+	self.damage_effect(0.3)
 	
 	for node in get_tree().get_nodes_in_group("Enemy"):
 		node.on_death()

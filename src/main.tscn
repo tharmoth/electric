@@ -269,30 +269,25 @@ unique_name_in_owner = true
 stream = ExtResource("10_bhipu")
 volume_db = -20.0
 autoplay = true
-bus = &"Music"
 
 [node name="RecordScratch" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_h315s")
 volume_db = -20.0
-bus = &"SFX"
 
 [node name="TickTick" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("14_2bgwq")
 volume_db = -10.0
 autoplay = true
-bus = &"SFX"
 
 [node name="WindClock" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("18_0scj5")
-bus = &"SFX"
 
 [node name="RingNoise" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("19_xib4t")
-bus = &"SFX"
 
 [node name="Battery" parent="." instance=ExtResource("14_5kbvx")]
 

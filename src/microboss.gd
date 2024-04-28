@@ -6,7 +6,7 @@ var projectile : PackedScene = load("res://src/shotgun_particle.tscn")
 var timeSinceLastShot : float = 0.0
 
 func _ready() -> void:
-	maxHealth = 150
+	health = 150
 	speed = 75
 
 func _process(delta: float) -> void:
@@ -27,6 +27,7 @@ func fire() -> void:
 		bullet.set_collision_mask_value(1, false)
 		# This freaks OUT
 		bullet.set_collision_layer_value(3, true)
+		bullet.set_collision_mask_value(3, true)
 		bullet.global_position = Vector2(global_position.x + global_position.x / 2, global_position.y + global_position.y / 2)
 		bullet.rotation = global_position.angle_to_point(Character.instance.global_position) + angle
 		bullet.maxDistance = 800
