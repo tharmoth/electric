@@ -91,13 +91,12 @@ func move_to_position() -> void:
 func reload() -> void:
 	%GunAnimationPlayer.play("reload")
 	# Only play sound once for tesla gun
-	print (str(reload_started) + " " + weapon_type)
+	reloading = true
 	if weapon_type == "tesla_gun" && reload_started:
 		return
 	else:
-		reload_started = true
-		reloading = true
 		%GunReload.play()
+		reload_started = true
 
 func reload_complete(something):
 	reloading = false
@@ -146,6 +145,7 @@ func loose() -> void:
 	if weapon_type == "tesla_gun":
 		var query = PhysicsRayQueryParameters2D.create(origin,  origin + direction * 2000, 0xFFFFFFFF, exclude)
 		var result = space_state.intersect_ray(query)
+		var lightning_damage = Vector2(damage.x * 0.8, damage.y * 0.8)
 		if result:
 			var node = result.collider.get_parent()
 			end = result.position
@@ -154,15 +154,15 @@ func loose() -> void:
 				end = mouse
 			TargetingUtils.drawLightning(origin, end)
 			if node is Enemy:
-				# Damage first node
-				
-				node.damage( randi_range(damage.x, damage.y))
-				for n in range(Character.instance.stats.piercing + 1):
+				node.damage(randi_range(lightning_damage.x, lightning_damage.y))
+				var excludeLightning : Array[Node2D] = [node]
+				for n in range(Character.instance.stats.piercing + 2):
 					# Gets a enemy node in range if exists
 					var oldNodePosition : Vector2 = node.global_position
-					node = TargetingUtils.getEnemyInRange(node, 500)
+					node = TargetingUtils.getEnemyInRange(node, 500, excludeLightning)
 					if node != null:
-						node.damage(randi_range(damage.x, damage.y))
+						node.damage(randi_range(lightning_damage.x, lightning_damage.y))
+						excludeLightning.append(node)
 						TargetingUtils.drawLightning(node.global_position, oldNodePosition)
 					else:
 						break

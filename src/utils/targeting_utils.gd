@@ -2,12 +2,12 @@ extends Node
 
 class_name TargetingUtils
 
-static func getEnemyInRange(originNode: Node2D, range: int) -> Node2D:
+static func getEnemyInRange(originNode: Node2D, range: int, excludeLightning: Array[Node2D]) -> Node2D:
 	var enemies = Character.instance.get_tree().get_nodes_in_group("Enemy")
 	for enemy in enemies:
 		var origin = originNode.global_position
 		var target = enemy.global_position
-		if origin.distance_to(target) < range:
+		if origin.distance_to(target) < range && !excludeLightning.has(enemy):
 			return enemy
 	return null # no enemies in range!
 

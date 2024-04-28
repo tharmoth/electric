@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://di7v32te6b0ns" path="res://src/gun.tscn" id="1_qrjgn"]
 [ext_resource type="Texture2D" uid="uid://pff6wjk582x5" path="res://data/sprites/tesla_gun.png" id="2_3ltu1"]
-[ext_resource type="AudioStream" uid="uid://dbq2j37n7gdb4" path="res://data/sfx/zap.wav" id="3_rf5oj"]
+[ext_resource type="AudioStream" uid="uid://1b8p6h4ep7is" path="res://data/sfx/zap2.wav" id="3_vi85h"]
 [ext_resource type="AudioStream" uid="uid://byuhswhkf1iga" path="res://data/sfx/steam.wav" id="4_n68ny"]
 
 [node name="tesla_gun" instance=ExtResource("1_qrjgn")]
@@ -11,18 +11,31 @@
 texture = ExtResource("2_3ltu1")
 
 [node name="LeftHandProgressBar" parent="LeftHand" index="0"]
-offset_top = -5.96046e-08
+offset_left = -17.0
+offset_top = -2.0
+offset_right = 133.0
 offset_bottom = 28.0
 value = 0.0
+
+[node name="LeftHandMarker" parent="LeftHand" index="1"]
+position = Vector2(28, 0)
 
 [node name="RightHand" parent="." index="1"]
 texture = ExtResource("2_3ltu1")
 
 [node name="RightHandProgressBar" parent="RightHand" index="0"]
+offset_left = -17.0
+offset_top = -2.0
+offset_right = 133.0
+offset_bottom = 28.0
 value = 0.0
 
+[node name="RightHandMarker" parent="RightHand" index="1"]
+position = Vector2(28, 0)
+
 [node name="GunAudio" parent="." index="2"]
-stream = ExtResource("3_rf5oj")
+stream = ExtResource("3_vi85h")
+pitch_scale = 0.8
 bus = &"SFX"
 
 [node name="GunReload" parent="." index="4"]
