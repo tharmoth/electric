@@ -16,6 +16,8 @@ func init(item_name : String):
 		self.item_name = passives[randi_range(0, passives.size() - 1)]
 
 func _ready() -> void:
+	add_to_group("LevelUpPickup")
+	
 	var texture : Texture2D
 	if item_name == "pistol" || item_name == "dual_pistol":
 		texture = load("res://data/sprites/gun.png")
@@ -63,7 +65,7 @@ func on_pickup():
 	if item_name == "reload":
 		Character.instance.stats.reload_time -= 1
 		Character.instance.stats.reload_time = max(Character.instance.stats.reload_time, 0)
-		var bonus = Character.instance.stats.clip_bonus
+		var bonus = Character.instance.stats.reload_time
 		var message = "Reload Speed UP! (" + str(abs(bonus-1)) + " -> " + str(abs(bonus)) + ")"
 		FloatingLabel.show(message, global_position, Color.WHITE)
 		return
