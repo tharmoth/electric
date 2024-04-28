@@ -12,7 +12,12 @@ func _process(delta: float) -> void:
 
 
 func _on_reload_timeout() -> void:
-	var enemies : Array[Node2D] = $Area2D.get_overlapping_bodies()
-	for enemy in enemies:
+	var enemyHitBoxes : Array[Node2D] = $Area2D.get_overlapping_bodies()
+	print("Reloaded!")
+	print(enemyHitBoxes)
+	for enemyHitBox in enemyHitBoxes:
+		var enemy := enemyHitBox.get_parent()
+		print(enemy.name)
 		if enemy.is_in_group("Enemy"):
+			print(enemy.name)
 			enemy.damage(100)

@@ -3,7 +3,7 @@ extends Node2D
 var item_name : String
 var items : Array[String] = ["pistol", "rifle", "smg", "shotgun", "reload", "clip_size"]
 var weapons : Array[String] = ["pistol", "rifle", "smg", "shotgun"]
-var passives : Array[String] = ["reload", "clip_size"]
+var passives : Array[String] = ["reload", "clip_size", "shoulder_laser"]
 
 func init(item_name : String):
 	if item_name == "weapon":
@@ -13,7 +13,7 @@ func init(item_name : String):
 		elif self.item_name == "smg" && Character.instance.currentGun.weapon_type == "smg":
 			self.item_name = "dual_smg"
 	else:
-		self.item_name = passives[randi_range(0, passives.size() - 1)]
+		self.item_name = passives[2]
 
 func _ready() -> void:
 	add_to_group("LevelUpPickup")
@@ -77,6 +77,7 @@ func on_pickup():
 		FloatingLabel.show(message, global_position, Color.WHITE)
 		return
 	elif item_name == "shoulder_laser":
+		Character.instance.add_shoulder_laser()
 		Character.instance.stats.shoulder_lasers += 1
 		Character.instance.stats.shoulder_lasers = max(Character.instance.stats.shoulder_lasers, 0)
 		var bonus = Character.instance.stats.shoulder_lasers

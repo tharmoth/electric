@@ -18,9 +18,6 @@ func _physics_process(delta: float) -> void:
 	
 	if following:
 		var ang := get_global_mouse_position().angle_to_point($knob.global_position) - PI/2
-		var d : Vector2 = ($knob/knobPoint.position.rotated(knob_rot))
-		var a = $middlePoint.position.angle_to(d)
-		var finalAng : float = remap(a, -PI, PI, 0, 100)
 		var fang : float = lerp_angle(knob_rot, ang, 0.05)
 		$knob.rotation = clamp(fang, 0, 2*PI)
 		

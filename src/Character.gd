@@ -10,6 +10,7 @@ var gun = preload("res://src/gun.tscn")
 var rifle = preload("res://src/weapons/rifle.tscn")
 var shotgun = preload("res://src/components/shotgun.tscn")
 var smg = preload("res://src/weapons/smg.tscn")
+var shoulder_laser = preload("res://src/shoulder_laser.tscn")
 var currentGun;
 @onready var charge : ProgressBar = %Charge
 @export var stats : CharacterStats
@@ -143,7 +144,5 @@ func on_gameover() -> void:
 	%RingNoise.play()
 
 func add_shoulder_laser() -> void:
-	var tween = create_tween()
-	tween.tween_property(self, "modulate", Color.TRANSPARENT, 1)
-	currentGun.queue_free()
-	%RingNoise.play()
+	var shoulder_laser : Node2D = shoulder_laser.instantiate()
+	call_deferred("add_child", shoulder_laser)
