@@ -52,6 +52,9 @@ func equip_gun(name : String):
 	call_deferred("add_child", currentGun) 
 	
 func on_level_up():
+	for node in get_tree().get_nodes_in_group("LevelUpPickup"):
+		node.free()
+	
 	var tween = create_tween()
 	tween.tween_property(%Charge, "value", 0, 1)
 
