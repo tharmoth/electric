@@ -47,7 +47,7 @@ func _ready() -> void:
 		time_between_shots = 1
 		time_between_salvos = 0
 		reload_time = 3
-		damage = Vector2(15, 21)
+		damage = Vector2(20, 25)
 		knockback_amount = 1100
 
 	if weapon_type.contains("dual"):
@@ -131,8 +131,8 @@ func fire() -> void:
 	
 func loose() -> void:
 	ammo -= 1
-	%RightHandProgressBar.value = ammo / float(max_ammo + Character.instance.stats.clip_bonus) * 100.0
-	%LeftHandProgressBar.value = ammo / float(max_ammo + Character.instance.stats.clip_bonus) * 100.0
+	Character.instance.charge_ammo.value = ammo / float(max_ammo + Character.instance.stats.clip_bonus) * 100.0
+	Character.instance.charge_ammo.value = ammo / float(max_ammo + Character.instance.stats.clip_bonus) * 100.0
 
 	var shoot_right = ammo % 2 == 1 && dual_wielding
 
@@ -205,6 +205,8 @@ func loose() -> void:
 		
 	if ammo == 0:
 		spin_to_win = reload_time + Character.instance.stats.reload_time
+		var tween = create_tween()
+		tween.tween_property(Character.instance.charge_ammo, "value", 100, (spin_to_win) * .4)
 		reload()
 	
 	#var light = preload("res://src/laser_light.tscn").instantiate()

@@ -22,9 +22,11 @@ func _process(delta: float) -> void:
 func fire() -> void:
 	var offset = (%StaticBody2D/CollisionShape2D.shape.extents / 1.75)
 
-	for i in 20:
+	var num_bullets = 10
+	var angle_increment = 360.0 / num_bullets
+	for angle_degrees in range(0, 360.0 , angle_increment):
 		var bullet : Node2D = projectile.instantiate()
-		var angle = ((-25 / 2) + (25 / (10 - 1)) * i)
+		var angle = deg_to_rad(angle_degrees)
 
 		bullet.global_position = global_position + offset
 		bullet.rotation = global_position.angle_to_point(Character.instance.global_position) + angle

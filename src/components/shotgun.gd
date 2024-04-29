@@ -25,6 +25,7 @@ func _ready() -> void:
 	%AmmoCapacity.min_value = 0
 	%AmmoCapacity.max_value = MAX_AMMO
 	%AmmoCapacity.value = MAX_AMMO
+	Character.instance.charge_ammo.value = 100
 	%GunAnimationPlayer.animation_finished.connect(_reload_complete)
 	ammo = MAX_AMMO + Character.instance.stats.clip_bonus
 
@@ -49,7 +50,8 @@ func fire() -> void:
 
 	ammo -= 1
 	%AmmoCapacity.value = ammo
-
+	Character.instance.charge_ammo.value = float(ammo) / (MAX_AMMO + Character.instance.stats.clip_bonus)  * 100.0
+	
 	print(%AmmoCapacity.value)
 
 	for shot in _create_shots():
@@ -63,6 +65,8 @@ func fire() -> void:
 
 	if ammo == 0:
 		reloadSpinCount = Character.instance.stats.reload_time
+		var tween = create_tween()
+		tween.tween_property(Character.instance.charge_ammo, "value", 100, (1 + reloadSpinCount) * .4)
 		self.reload()
 
 func can_fire() -> bool:

@@ -17,7 +17,8 @@ var smg = preload("res://src/weapons/smg.tscn")
 var tesla_gun = preload("res://src/weapons/tesla_gun.tscn")
 var shoulder_laser = preload("res://src/shoulder_laser.tscn")
 var currentGun;
-@onready var charge : ProgressBar = %Charge
+@onready var charge_ammo : ProgressBar = %Charge
+var xp = 0
 @export var stats : CharacterStats
 
 @onready var upgrade_audio : AudioStreamPlayer2D = %UpgradeAudio
@@ -29,9 +30,12 @@ func _ready() -> void:
 	score = -1
 	%PickupBox.area_entered.connect(pickup)
 	add_to_group("Character")
-	equip_gun("pistol")
-	charge.value = 99
+	equip_gun("shotgun")
+	xp = 99
 	currentGun.reload()
+	
+	var tween = create_tween()
+	tween.tween_property(Character.instance.charge_ammo, "value", 100, 6 * .4)
 	
 func pickup(area : Area2D) -> void:
 	area.get_parent().on_pickup()
@@ -69,7 +73,7 @@ func on_level_up():
 		node.free()
 	
 	var tween = create_tween()
-	tween.tween_property(%Charge, "value", 0, 1)
+	tween.tween_property(self, "xp", 0, 1)
 	
 	var direction = global_position.direction_to(Vector2.ZERO)
 	var angle = global_position.angle_to_point(Vector2.ZERO) + PI / 2

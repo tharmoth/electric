@@ -38,9 +38,7 @@ func on_death():
 
 	if self is Microboss:
 		var battery = load("res://src/pickup.tscn")
-		var remaining = (100 - int(Character.instance.charge.value)) / 10
-		
-		for i in remaining:
+		for i in range(8):
 			var bat = battery.instantiate()
 			bat.global_position = global_position + Vector2(randf_range(25, 75), randf_range(25, 75))
 			WorldTimer.instance.add_child(bat)
