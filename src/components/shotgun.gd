@@ -18,7 +18,7 @@ var ammo: int = SHOTS
 var isReloading: bool = false
 # Upgrading shotgun upgrades damage
 var minDamage: int = 10
-var maxDamage: int = 30
+var maxDamage: int = 20
 var reloadSpinCount: int = 5
 
 func _ready() -> void:

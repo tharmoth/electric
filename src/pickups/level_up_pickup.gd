@@ -120,7 +120,7 @@ func on_pickup():
 		return
 	elif item_name == "fire_speed":
 		Character.instance.stats.fire_speed_mult -= .15
-		Character.instance.stats.fire_speed_mult = clamp(Character.instance.stats.fire_speed_mult, .25, 2)
+		Character.instance.stats.fire_speed_mult = clamp(Character.instance.stats.fire_speed_mult, .45, 2)
 		var message = "Fire Rate UP!"
 		FloatingLabel.show(message, global_position, Color.WHITE)
 		Character.instance.upgrade_audio.play()
