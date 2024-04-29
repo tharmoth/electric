@@ -29,7 +29,7 @@ func _ready() -> void:
 	score = -1
 	%PickupBox.area_entered.connect(pickup)
 	add_to_group("Character")
-	equip_gun("tesla_gun")
+	equip_gun("pistol")
 	charge.value = 99
 	currentGun.reload()
 	
