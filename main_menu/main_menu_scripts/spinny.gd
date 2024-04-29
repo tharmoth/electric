@@ -51,3 +51,11 @@ func _physics_process(delta: float) -> void:
 		
 func rotate_back():
 	$knob.rotation = clamp($knob.rotation-0.005, 0, 2*PI)
+	
+func _notification(noteCode : int):
+	if noteCode == NOTIFICATION_APPLICATION_FOCUS_OUT:
+		AudioServer.set_bus_mute(1, true)
+		AudioServer.set_bus_mute(2, true)
+	elif noteCode == NOTIFICATION_APPLICATION_FOCUS_IN:
+		AudioServer.set_bus_mute(1, false)
+		AudioServer.set_bus_mute(2, false)

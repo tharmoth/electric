@@ -18,5 +18,5 @@ func _on_reload_timeout() -> void:
 			laser_tween.tween_property(line, "width", 6, .05)
 			laser_tween.tween_property(line, "width", 0, .3)
 			laser_tween.tween_callback(func(): line.queue_free())
-			enemy.damage(100)
+			enemy.damage(30)
 			break
