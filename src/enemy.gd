@@ -18,7 +18,7 @@ func _ready() -> void:
 		health = 40
 	elif WorldTimer.instance.get_minutes_elapsed() >= 10 and randf() > .90:
 		%tv.set_static_color(Color.GREEN)
-		health = 40
+		health = 80
 	
 func damage_player(area : Area2D):
 	death_animation.kill(%Sprite2D)

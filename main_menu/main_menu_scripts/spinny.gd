@@ -13,12 +13,9 @@ var started : bool = false
 func _physics_process(delta: float) -> void:
 	var mouseDist := get_global_mouse_position().distance_squared_to($knob.global_position)
 	var knob_rot = $knob.rotation
-	
-	print($knob.rotation_degrees)
+
 	%Glow.self_modulate = Color(1 + 10 * $knob.rotation_degrees / 360, 1 + 10 * $knob.rotation_degrees/ 360, 1 + 10 * $knob.rotation_degrees / 360)
-	
-	print(%timer.self_modulate)
-	
+
 	if mouseDist < MAX_DIST and Input.is_action_just_pressed("click"):
 		grab = get_global_mouse_position().angle_to_point($knob.global_position) - PI/2
 		following = true

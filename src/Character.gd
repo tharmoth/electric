@@ -67,10 +67,21 @@ func equip_gun(name : String):
 	call_deferred("add_child", currentGun)
 	
 	%GunPickupAudio.play()
-	
+
+var pick : Node2D
+var pick2 : Node2D
+var pick3 : Node2D
+
 func on_level_up():
 	for node in get_tree().get_nodes_in_group("LevelUpPickup"):
 		node.free()
+	
+	if is_instance_valid(pick):
+		pick.queue_free()
+	if is_instance_valid(pick2):
+		pick2.queue_free()
+	if is_instance_valid(pick3):
+		pick3.queue_free()
 	
 	var tween = create_tween()
 	tween.tween_property(self, "xp", 0, 1)
@@ -78,7 +89,7 @@ func on_level_up():
 	var direction = global_position.direction_to(Vector2.ZERO)
 	var angle = global_position.angle_to_point(Vector2.ZERO) + PI / 2
 
-	var pick : Node2D = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
+	pick = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
 	if first_selection:
 		first_selection = false
 		pick.init("passive")
@@ -88,16 +99,15 @@ func on_level_up():
 	#pick.global_position = global_position + direction * 100
 	#pick.position = Vector2(0, -310)
 	pick.position = Vector2(0, -150)
-	
-	
-	var pick2 : Node2D = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
+
+	pick2 = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
 	pick2.init_ignore("passive", pick.item_name)
 	get_parent().call_deferred("add_child", pick2)
 	#pick2.global_position = global_position + direction * 100 + Vector2.LEFT.rotated(angle) * 100
 	#pick2.position = Vector2(270, 160)
 	pick2.position = Vector2(130, 77)
 	
-	var pick3 : Node2D = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
+	pick3 = preload("res://src/pickups/level_up_pickup.tscn").instantiate()
 	pick3.init_ignore2("passive", pick.item_name, pick2.item_name)
 	get_parent().call_deferred("add_child", pick3)
 	#pick3.global_position = global_position + direction * 100 + Vector2.RIGHT.rotated(angle) * 100
