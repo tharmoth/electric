@@ -86,7 +86,6 @@ func _ready() -> void:
 		area.monitoring = true
 		area.monitorable = true
 		add_child(area))
-	
 
 func destroy():
 	var tween = create_tween()

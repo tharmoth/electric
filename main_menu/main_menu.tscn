@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cthcmq0f4mxf4"]
+[gd_scene load_steps=21 format=3 uid="uid://cthcmq0f4mxf4"]
 
 [ext_resource type="Script" path="res://main_menu/main_menu_scripts/main_menu.gd" id="1_0cyx6"]
 [ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/sprites/timer.png" id="1_e64cu"]
@@ -26,6 +26,14 @@ colors = PackedColorArray(0.439049, 0.439049, 0.439049, 1, 0, 0, 0, 1)
 gradient = SubResource("Gradient_ucsia")
 fill = 1
 fill_from = Vector2(0.513761, 0.522936)
+
+[sub_resource type="Environment" id="Environment_8wwxp"]
+background_mode = 3
+background_energy_multiplier = 0.0
+ambient_light_energy = 0.0
+reflected_light_source = 1
+glow_enabled = true
+glow_intensity = 1.0
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -98,10 +106,16 @@ position = Vector2(512, 600)
 scale = Vector2(2, 2)
 script = ExtResource("1_jfd6a")
 
+[node name="Glow" type="Sprite2D" parent="kitchenTimer"]
+unique_name_in_owner = true
+scale = Vector2(0.21, 0.21)
+texture = ExtResource("1_e64cu")
+
 [node name="knob" type="Marker2D" parent="kitchenTimer"]
 position = Vector2(0, -1)
 
 [node name="timer" type="Sprite2D" parent="kitchenTimer/knob"]
+unique_name_in_owner = true
 position = Vector2(4.76837e-07, -4.76837e-07)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_e64cu")
@@ -223,5 +237,8 @@ metadata/_edit_lock_ = true
 [node name="startNoise" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("17_da5tw")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8wwxp")
 
 [connection signal="turnedKnob" from="kitchenTimer" to="." method="_on_kitchen_timer_turned_knob"]
