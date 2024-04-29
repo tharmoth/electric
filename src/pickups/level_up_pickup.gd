@@ -77,12 +77,16 @@ func _ready() -> void:
 	add_to_group("LevelUpPickup")
 	modulate = Color.TRANSPARENT
 	var tween = create_tween()
+	var area = %Area2D
+	call_deferred("remove_child", area)
 	tween.set_trans(Tween.TRANS_QUAD)
 	tween.set_ease(Tween.EASE_OUT)
-	tween.tween_property(self, "modulate", Color.WHITE, 1)
+	tween.tween_property(self, "modulate", Color.WHITE, .5)
 	tween.tween_callback(func():
-		%Area2D.monitoring = true
-		%Area2D.monitorable = true)
+		area.monitoring = true
+		area.monitorable = true
+		add_child(area))
+	
 
 func destroy():
 	var tween = create_tween()

@@ -32,18 +32,20 @@ func _process(delta: float) -> void:
 	if WorldTimer.instance.time_elapsed > 60:
 		amount_to_spawn += 1
 		
-	if WorldTimer.instance.time_elapsed > 90 and not edge_shock:
+	if WorldTimer.instance.time_elapsed > 60 * 4 and not edge_shock:
 		edge_shock = true
 		%EdgeHurtbox.visible = true
-		%EdgeHurtbox.monitoring = true
-		%EdgeHurtbox.monitorable = true
+
 		var tween = create_tween()
-		tween.tween_property(%EdgeParticles, "amount_ratio", 1, 3)
+		tween.tween_property(%EdgeParticles, "amount_ratio", 1, 1)
+		tween.tween_callback(func():
+			%EdgeHurtbox.monitoring = true
+			%EdgeHurtbox.monitorable = true)
 	
 	for i in range(floori(WorldTimer.instance.get_minutes_elapsed() / 5)):
 		amount_to_spawn += 1
 
-	if WorldTimer.instance.time_elapsed >= boss_times[0]:
+	if WorldTimer.instance.time_elapsed >= boss_times[0] && boss_times.size() > 0:
 		var t = boss_times.pop_front()
 		var boss = load("res://src/microboss.tscn").instantiate()
 		boss.connect("boss_down", func() -> void: boss_alive = false)
