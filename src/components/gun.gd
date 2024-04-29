@@ -13,6 +13,7 @@ var reload_time : int = 0
 var dual_wielding : bool = false
 var always_shoot_on_click : bool = false
 var damage : Vector2 = Vector2(5, 10)
+var knockback_amount : float = 250
 
 # State Data
 var ammo : int = 0
@@ -46,6 +47,8 @@ func _ready() -> void:
 		time_between_shots = 1
 		time_between_salvos = 0
 		reload_time = 3
+		damage = Vector2(15, 21)
+		knockback_amount = 1100
 
 	if weapon_type.contains("dual"):
 		max_ammo *= 2
@@ -142,6 +145,7 @@ func loose() -> void:
 	
 	var exclude : Array[RID] = []
 	var end : Vector2
+	var last : Vector2
 	if weapon_type == "tesla_gun":
 		var query = PhysicsRayQueryParameters2D.create(origin,  origin + direction * 2000, 0xFFFFFFFF, exclude)
 		var result = space_state.intersect_ray(query)
@@ -153,19 +157,22 @@ func loose() -> void:
 			if not end:
 				end = mouse
 			TargetingUtils.drawLightning(origin, end)
+			last = end
 			if node is Enemy:
 				node.damage(randi_range(lightning_damage.x, lightning_damage.y))
 				var excludeLightning : Array[Node2D] = [node]
 				for n in range(Character.instance.stats.piercing + 2):
 					# Gets a enemy node in range if exists
-					var oldNodePosition : Vector2 = node.global_position
+					#var previous_node_pos : Vector2 
 					node = TargetingUtils.getEnemyInRange(node, 500, excludeLightning)
 					if node != null:
-						node.damage(randi_range(lightning_damage.x, lightning_damage.y))
+						node.damage(randi_range(5, 10))
 						excludeLightning.append(node)
-						TargetingUtils.drawLightning(node.global_position, oldNodePosition)
+						TargetingUtils.drawLightning(node.global_position, last)
 					else:
 						break
+					
+					last = node.global_position
 
 	else:
 		for i in range(Character.instance.stats.piercing + 1):
@@ -186,7 +193,7 @@ func loose() -> void:
 		line.width = 0
 		line.default_color = Color(10, 0, 0, 1)
 		get_parent().get_tree().root.add_child(line)
-		
+
 		var laser_tween = get_parent().get_tree().create_tween()
 		laser_tween.tween_property(line, "width", 6, .05)
 		laser_tween.tween_property(line, "width", 0, .3)
@@ -194,7 +201,7 @@ func loose() -> void:
 
 	%GunAudio.play()
 	emit_signal("shake")
-	emit_signal("knockback", origin - direction * 250)
+	emit_signal("knockback", origin - direction * knockback_amount)
 		
 	if ammo == 0:
 		spin_to_win = reload_time + Character.instance.stats.reload_time

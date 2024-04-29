@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cjfagb6ey5fr3"]
+[gd_scene load_steps=44 format=3 uid="uid://cjfagb6ey5fr3"]
 
 [ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/sprites/timer.png" id="1_4nl5p"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xa5wo"]
@@ -29,6 +29,7 @@
 [ext_resource type="Script" path="res://main_menu/score_title_label.gd" id="22_m8yp0"]
 [ext_resource type="PackedScene" uid="uid://vmh1o25ctcib" path="res://main_menu/score_box.tscn" id="24_e4kgt"]
 [ext_resource type="Texture2D" uid="uid://c081c3lxu7ysh" path="res://data/sprites/white_circle.png" id="26_jf0l1"]
+[ext_resource type="Texture2D" uid="uid://d3nly1ublpeik" path="res://data/particles/spark_07.png" id="30_xukfa"]
 
 [sub_resource type="Gradient" id="Gradient_n1abs"]
 offsets = PackedFloat32Array(0, 0.213115, 0.418033, 1)
@@ -404,6 +405,14 @@ environment = SubResource("Environment_f3sby")
 [node name="ParallaxBackground" parent="." instance=ExtResource("19_epnoa")]
 offset = Vector2(0, -512)
 transform = Transform2D(1, 0, 0, 1, 0, -512)
+
+[node name="Line2D" type="Line2D" parent="."]
+modulate = Color(5, 5, 5, 1)
+points = PackedVector2Array(-138, -115, 219, -82, 271, 0, 322, 63)
+width = 50.0
+default_color = Color(0.278431, 0.388235, 1, 1)
+texture = ExtResource("30_xukfa")
+texture_mode = 2
 
 [connection signal="input_event" from="Edge" to="Edge" method="_on_input_event"]
 [connection signal="area_entered" from="Edge/EdgeHurtbox" to="Edge" method="_on_area_2d_area_entered"]
