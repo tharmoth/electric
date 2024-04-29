@@ -9,7 +9,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	global_rotation = 0
 	var distance = global_position.distance_to(Vector2.ZERO)
-	if distance > 450:
+	if distance > 400:
 		global_position = global_position.move_toward(Vector2.ZERO, SPEED * delta)
 
 func on_pickup():
