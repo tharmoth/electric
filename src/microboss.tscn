@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dosgt0j5ycv7f"]
+[gd_scene load_steps=9 format=3 uid="uid://osm0xlqve5wh"]
 
 [ext_resource type="Script" path="res://src/microboss.gd" id="1_lf4nr"]
 [ext_resource type="Texture2D" uid="uid://btdo2cw4ovpdg" path="res://data/sprites/bosstv.png" id="2_usydn"]

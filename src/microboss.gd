@@ -6,6 +6,7 @@ var projectile : PackedScene = preload("res://src/boss_projectile.tscn")
 var timeSinceLastShot : float = 0.0
 
 func _ready() -> void:
+	add_to_group("Enemy")
 	health = 150
 	speed = 75
 
