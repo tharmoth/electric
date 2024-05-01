@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://di7v32te6b0ns" path="res://src/gun.tscn" id="1_qrjgn"]
 [ext_resource type="Texture2D" uid="uid://pff6wjk582x5" path="res://data/sprites/tesla_gun.png" id="2_3ltu1"]
-[ext_resource type="AudioStream" path="res://data/sfx/zap2.wav" id="3_vi85h"]
+[ext_resource type="AudioStream" uid="uid://1b8p6h4ep7is" path="res://data/sfx/zap2.wav" id="3_vi85h"]
 [ext_resource type="AudioStream" uid="uid://byuhswhkf1iga" path="res://data/sfx/steam.wav" id="4_n68ny"]
 
 [node name="tesla_gun" instance=ExtResource("1_qrjgn")]

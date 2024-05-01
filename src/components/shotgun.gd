@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 	self._move_to_position()
 
 func _move_to_position() -> void:
-	var mouse = get_global_mouse_position()
+	var mouse = TargetingUtils.get_target()
 	var direction = global_position.direction_to(mouse)
 	var origin = get_parent().global_position
 	var target = origin + direction * 40
@@ -57,7 +57,7 @@ func fire() -> void:
 	for shot in _create_shots():
 		get_tree().get_root().add_child(shot)
 
-	var v : Vector2 = $ParticleOrigin.global_position - global_position.direction_to(get_global_mouse_position()) * KNOCKBACK_FORCE
+	var v : Vector2 = $ParticleOrigin.global_position - global_position.direction_to(TargetingUtils.get_target()) * KNOCKBACK_FORCE
 	emit_signal("shake")
 	emit_signal("knockback", v)
 	%ShootTimer.start(SHOT_DELAY * Character.instance.stats.fire_speed_mult)
@@ -90,7 +90,7 @@ func _reload_complete(something):
 	ammo = MAX_AMMO + Character.instance.stats.clip_bonus
 
 func _point_at_mouse() -> void:
-	var m = get_global_mouse_position()
+	var m = TargetingUtils.get_target()
 	global_rotation = global_position.angle_to_point(m)
 
 	if m.x < 0:
@@ -108,7 +108,7 @@ func _create_shots() -> Array:
 		shot.starting_position = shot.global_position
 		shot.minDamage = minDamage
 		shot.maxDamage = maxDamage
-		shot.rotation = global_position.angle_to_point(get_global_mouse_position()) + angle
+		shot.rotation = global_position.angle_to_point(TargetingUtils.get_target()) + angle
 		shots.push_back(shot)
 
 	return shots

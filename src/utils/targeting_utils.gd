@@ -2,6 +2,19 @@ extends Node
 
 class_name TargetingUtils
 
+static var is_using_controller : bool = false
+
+static func get_target() -> Vector2:
+	if is_using_controller:
+		return Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down") * 20000
+	if is_instance_valid(MainMenu.instance):
+		return MainMenu.instance.get_global_mouse_position()
+	if is_instance_valid(Character.instance):
+		return Character.instance.get_global_mouse_position()
+
+	return Vector2.ZERO
+
+
 static func getEnemyInRange(originNode: Node2D, range: int, excludeLightning: Array[Node2D]) -> Node2D:
 	var enemies = Character.instance.get_tree().get_nodes_in_group("Enemy")
 	for enemy in enemies:

@@ -13,18 +13,18 @@ func _ready():
 	$knob.rotation = PI
 
 func _physics_process(_delta: float) -> void:
-	var mouseDist := get_global_mouse_position().distance_squared_to($knob.global_position)
+	var mouseDist := TargetingUtils.get_target().distance_squared_to($knob.global_position)
 	var knob_rot = $knob.rotation
 	
 	if mouseDist < MAX_DIST and Input.is_action_just_pressed("click"):
-		grab = get_global_mouse_position().angle_to_point($knob.global_position) + PI/2
+		grab = TargetingUtils.get_target().angle_to_point($knob.global_position) + PI/2
 		following = true
 	
 	if Input.is_action_just_released("click"):
 		following = false
 	
 	if following:
-		var ang := get_global_mouse_position().angle_to_point($knob.global_position) - PI/2 - grab
+		var ang := TargetingUtils.get_target().angle_to_point($knob.global_position) - PI/2 - grab
 		var d : Vector2 = ($knob/knobPoint.position.rotated(knob_rot))
 		var a = $middlePoint.position.angle_to(d)
 		

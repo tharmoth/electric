@@ -70,7 +70,7 @@ func can_fire() -> bool:
 	return (ready_to_fire || (always_shoot_on_click && Input.is_action_just_pressed("click"))) and !reloading
 
 func point_at_mouse() -> void:
-	var mouse = get_global_mouse_position()
+	var mouse = TargetingUtils.get_target()
 	global_rotation = global_position.angle_to_point(mouse)
 
 	if mouse.x < 0:
@@ -81,7 +81,7 @@ func point_at_mouse() -> void:
 		$LeftHand.flip_v = false
 
 func move_to_position() -> void:
-	var mouse = get_global_mouse_position()
+	var mouse = TargetingUtils.get_target()
 	var direction = global_position.direction_to(mouse)
 	var origin = get_parent().global_position
 	var target = origin + direction * 40
@@ -136,7 +136,7 @@ func loose() -> void:
 
 	var shoot_right = ammo % 2 == 1 && dual_wielding
 
-	var mouse = get_global_mouse_position()
+	var mouse = TargetingUtils.get_target()
 	var direction = global_position.direction_to(mouse)
 	var origin = %LeftHandMarker.global_position if shoot_right else %RightHandMarker.global_position
 	var target = origin + direction * 40

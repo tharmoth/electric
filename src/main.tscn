@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cjfagb6ey5fr3"]
+[gd_scene load_steps=44 format=3 uid="uid://cjfagb6ey5fr3"]
 
 [ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/sprites/timer.png" id="1_4nl5p"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xa5wo"]
@@ -27,8 +27,9 @@
 [ext_resource type="AudioStream" uid="uid://dry1v31tlx1fy" path="res://data/sfx/timer_ring_2.wav" id="19_xib4t"]
 [ext_resource type="Script" path="res://main_menu/score_label.gd" id="22_3w3ce"]
 [ext_resource type="Script" path="res://main_menu/score_title_label.gd" id="22_m8yp0"]
-[ext_resource type="PackedScene" path="res://main_menu/score_box.tscn" id="24_e4kgt"]
+[ext_resource type="PackedScene" uid="uid://vmh1o25ctcib" path="res://main_menu/score_box.tscn" id="24_e4kgt"]
 [ext_resource type="Texture2D" uid="uid://c081c3lxu7ysh" path="res://data/sprites/white_circle.png" id="26_jf0l1"]
+[ext_resource type="Script" path="res://src/ControllerListener.gd" id="30_48reh"]
 
 [sub_resource type="Gradient" id="Gradient_n1abs"]
 offsets = PackedFloat32Array(0, 0.213115, 0.418033, 1)
@@ -404,6 +405,9 @@ environment = SubResource("Environment_f3sby")
 [node name="ParallaxBackground" parent="." instance=ExtResource("19_epnoa")]
 offset = Vector2(0, -512)
 transform = Transform2D(1, 0, 0, 1, 0, -512)
+
+[node name="ControllerListener" type="Node" parent="."]
+script = ExtResource("30_48reh")
 
 [connection signal="input_event" from="Edge" to="Edge" method="_on_input_event"]
 [connection signal="area_entered" from="Edge/EdgeHurtbox" to="Edge" method="_on_area_2d_area_entered"]

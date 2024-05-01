@@ -1,10 +1,15 @@
-extends Node2D
+class_name Level extends Node2D
 
 var COOLDOWN := 3.0
 var timer := 0.0
 var edge_shock : bool = false
 var boss_alive : bool = false
 var boss_times : Array[int] = [60, 240, 580, 820]
+
+static var instance : Level
+
+func _enter_tree() -> void:
+	instance = self
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

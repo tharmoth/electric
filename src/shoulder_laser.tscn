@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bilfghrhw66fv"]
+[gd_scene load_steps=3 format=3 uid="uid://c7qycadjr7eto"]
 
 [ext_resource type="Script" path="res://src/shoulder_laser.gd" id="1_l8uuy"]
 [ext_resource type="AudioStream" uid="uid://cvotg4gq6x7bb" path="res://data/sfx/shoulder_laser.wav" id="2_t7arp"]
