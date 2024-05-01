@@ -64,10 +64,13 @@ func fire() -> void:
 	%ShootAudio.play(0)
 
 	if ammo == 0:
-		reloadSpinCount = Character.instance.stats.reload_time
-		var tween = create_tween()
-		tween.tween_property(Character.instance.charge_ammo, "value", 100, (1 + reloadSpinCount) * .4)
-		self.reload()
+		reload()
+
+func reload():
+	reloadSpinCount = Character.instance.stats.reload_time
+	var tween = create_tween()
+	tween.tween_property(Character.instance.charge_ammo, "value", 100, (1 + reloadSpinCount) * .4)
+	self._reload_spin()
 
 func can_fire() -> bool:
 	if isReloading:
@@ -78,7 +81,7 @@ func can_fire() -> bool:
 
 	return ammo > 0
 
-func reload() -> void:
+func _reload_spin() -> void:
 	isReloading = true
 	%GunAnimationPlayer.play("reload")
 
@@ -86,7 +89,7 @@ func _reload_complete(something):
 	isReloading = false
 	if reloadSpinCount > 0:
 		reloadSpinCount -= 1
-		self.reload()
+		self._reload_spin()
 	ammo = MAX_AMMO + Character.instance.stats.clip_bonus
 
 func _point_at_mouse() -> void:

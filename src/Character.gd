@@ -1,30 +1,45 @@
 class_name Character extends CharacterBody2D
 
-const SPEED : float = 300.0
-const MAX_VELOCITY : float = 1200.0
+# Global Referance
+static var instance : Character
 
+# High Score Data (Should be elsewhere)
 static var high_score : int = -1
 static var score : int  = -1
-static var instance : Character
-var knockbackTween : Tween = null
-var knockback : Vector2 = Vector2.ZERO
-var first_selection : bool = true
 
+# Guns
 var gun = preload("res://src/gun.tscn")
 var rifle = preload("res://src/weapons/rifle.tscn")
 var shotgun = preload("res://src/components/shotgun.tscn")
 var smg = preload("res://src/weapons/smg.tscn")
 var tesla_gun = preload("res://src/weapons/tesla_gun.tscn")
 var shoulder_laser = preload("res://src/shoulder_laser.tscn")
-var currentGun;
-@onready var charge_ammo : ProgressBar = %Charge
-var xp = 0
-@export var stats : CharacterStats
+var current_gun;
 
+# Constants
+const SPEED : float = 300.0
+const MAX_VELOCITY : float = 1200.0
+
+# Child Accessors
 @onready var upgrade_audio : AudioStreamPlayer2D = %UpgradeAudio
+@onready var charge_ammo : ProgressBar = %Charge
+
+# State Data
+@export var stats : CharacterStats
+var knockbackTween : Tween = null
+var knockback : Vector2 = Vector2.ZERO
+var xp = 0
+
+# Pickup Data
+var first_selection : bool = true
+var pick : Node2D
+var pick2 : Node2D
+var pick3 : Node2D
+
 
 func _enter_tree() -> void:
 	instance = self
+
 
 func _ready() -> void:
 	score = -1
@@ -32,45 +47,73 @@ func _ready() -> void:
 	add_to_group("Character")
 	equip_gun("pistol")
 	xp = 99
-	currentGun.reload()
+	current_gun.reload()
 	
 	var tween = create_tween()
 	tween.tween_property(Character.instance.charge_ammo, "value", 100, 6 * .4)
+
+
+func _process(delta: float) -> void:
+	global_rotation = 0
+
+
+func _physics_process(delta: float) -> void:
+	if WorldTimer.instance.is_game_over:
+		return
+	var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
+	var movement : Vector2
+	%Fire.visible = direction.length()
+	if direction.length() > 0:
+		movement = direction * SPEED
+	else:
+		movement = Vector2.ZERO 
+		
+
+	velocity = movement + knockback
+	var speed = velocity.length()
+	velocity = velocity.normalized() * clamp(speed, 0, MAX_VELOCITY)
+
+	move_and_slide()
+
+	if Input.is_action_pressed("click"):
+		current_gun.fire()
+	
+	if Input.is_action_just_pressed("reload"):
+		current_gun.reload()
+
+
 func pickup(area : Area2D) -> void:
 	area.get_parent().on_pickup()
 
 
 func equip_gun(name : String):
-	if currentGun:
-		currentGun.queue_free()
+	if current_gun:
+		current_gun.queue_free()
 		
 	if (name == "pistol"):
-		currentGun = gun.instantiate()
+		current_gun = gun.instantiate()
 	if (name == "dual_pistol"):
-		currentGun = gun.instantiate()
+		current_gun = gun.instantiate()
 	elif name == "rifle":
-		currentGun = rifle.instantiate()
+		current_gun = rifle.instantiate()
 	elif name == "shotgun":
-		currentGun = shotgun.instantiate()
+		current_gun = shotgun.instantiate()
 	elif name == "smg":
-		currentGun = smg.instantiate()
+		current_gun = smg.instantiate()
 	elif name == "dual_smg":
-		currentGun = smg.instantiate()
+		current_gun = smg.instantiate()
 	elif name == "tesla_gun":
-		currentGun = tesla_gun.instantiate()
+		current_gun = tesla_gun.instantiate()
 		
-	currentGun.weapon_type = name
+	current_gun.weapon_type = name
 	
-	currentGun.connect("shake", shake_camera)
-	currentGun.connect("knockback", recoil_knockback)
-	call_deferred("add_child", currentGun)
+	current_gun.connect("shake", shake_camera)
+	current_gun.connect("knockback", recoil_knockback)
+	call_deferred("add_child", current_gun)
 	
 	%GunPickupAudio.play()
 
-var pick : Node2D
-var pick2 : Node2D
-var pick3 : Node2D
 
 func on_level_up():
 	for node in get_tree().get_nodes_in_group("LevelUpPickup"):
@@ -114,32 +157,8 @@ func on_level_up():
 	#pick3.position = Vector2(-270, 160)
 	pick3.position = Vector2(-130, 77)
 
-func _process(delta: float) -> void:
-	global_rotation = 0
 
-func _physics_process(delta: float) -> void:
-	if WorldTimer.instance.is_game_over:
-		return
-	var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	
-	var movement : Vector2
-	%Fire.visible = direction.length()
-	if direction.length() > 0:
-		movement = direction * SPEED
-	else:
-		movement = Vector2.ZERO 
-		
-
-	velocity = movement + knockback
-	var speed = velocity.length()
-	velocity = velocity.normalized() * clamp(speed, 0, MAX_VELOCITY)
-
-	move_and_slide()
-
-	if Input.is_action_pressed("click"):
-		currentGun.fire()
-
-func damage_effect(time: float) -> void:
+func play_damage_animation(time: float) -> void:
 	var tween = create_tween()
 
 	tween.tween_property(self, "modulate", Color(10, 0, 0, 1), time / 4.0)
@@ -161,20 +180,24 @@ func damage_effect(time: float) -> void:
 	
 	shake_camera()
 
+
 func projectile_damage(dmg: int) -> void:
-	self.damage_effect(0.3)
+	self.play_damage_animation(0.3)
 	WorldTimer.instance.seek(dmg * -1)
 
+
 func on_damage() -> void:
-	self.damage_effect(0.3)
+	self.play_damage_animation(0.3)
 	
 	for node in get_tree().get_nodes_in_group("Enemy"):
 		node.on_death()
 	for node in get_tree().get_nodes_in_group("Pickup"):
 		node.on_gameover()
 
+
 func shake_camera() -> void:
 	%Camera2D/AnimationPlayer.play("shake")
+
 
 func recoil_knockback(recoil: Vector2) -> void:
 	if knockbackTween:
@@ -186,11 +209,13 @@ func recoil_knockback(recoil: Vector2) -> void:
 	knockbackTween.set_trans(Tween.TRANS_CUBIC)
 	knockbackTween.tween_property(self, "knockback", Vector2.ZERO, .25)
 
+
 func on_gameover() -> void:
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color.TRANSPARENT, 1)
-	currentGun.queue_free()
+	current_gun.queue_free()
 	%RingNoise.play()
+
 
 func add_shoulder_laser() -> void:
 	if stats.shoulder_lasers == 0:

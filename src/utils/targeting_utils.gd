@@ -3,8 +3,20 @@ extends Node
 class_name TargetingUtils
 
 static var is_using_controller : bool = false
+static var should_auto_aim : bool = false
 
 static func get_target() -> Vector2:
+	if is_instance_valid(Character.instance) and should_auto_aim:
+		var tree = Character.instance.get_tree()
+		var nodes = tree.get_nodes_in_group("Enemy")
+		var closest
+		var closest_dist = INF
+		for node in nodes:
+			var dist = Character.instance.global_position.distance_to(node.global_position)
+			if dist < closest_dist:
+				closest = node
+				dist = closest_dist
+		return closest.global_position if is_instance_valid(closest) else Vector2.ZERO
 	if is_using_controller:
 		return Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down") * 20000
 	if is_instance_valid(MainMenu.instance):

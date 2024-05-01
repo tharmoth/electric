@@ -17,7 +17,7 @@ func init_ignore2(item_name : String, exclude : String, exclude2 : String):
 	if item_name == "weapon":
 		valid_items = weapons
 		
-		var current = Character.instance.currentGun.weapon_type
+		var current = Character.instance.current_gun.weapon_type
 		if current in weapons:
 			valid_items.erase(current)
 		if current == "pistol":

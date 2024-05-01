@@ -20,7 +20,7 @@ var ammo : int = 0
 var reloading : bool = false
 var reload_started : bool = false
 var ready_to_fire : bool = true
-var spin_to_win : int = 5	
+var reload_spin_count : int = 5	
 
 # Tweens
 var knockback_tween : Tween
@@ -55,7 +55,7 @@ func _ready() -> void:
 		dual_wielding = true
 
 	%LeftHand.visible = dual_wielding
-	spin_to_win = reload_time + Character.instance.stats.reload_time
+	reload_spin_count = reload_time + Character.instance.stats.reload_time
 	ammo = max_ammo + Character.instance.stats.clip_bonus
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -91,7 +91,7 @@ func move_to_position() -> void:
 	else:
 		global_position += global_position.direction_to(target)
 
-func reload() -> void:
+func _reload_spin() -> void:
 	%GunAnimationPlayer.play("reload")
 	# Only play sound once for tesla gun
 	reloading = true
@@ -103,9 +103,9 @@ func reload() -> void:
 
 func reload_complete(something):
 	reloading = false
-	if spin_to_win > 0:
-		spin_to_win -= 1
-		reload()
+	if reload_spin_count > 0:
+		reload_spin_count -= 1
+		_reload_spin()
 	else:
 		reload_started = false
 	ammo = max_ammo + Character.instance.stats.clip_bonus
@@ -204,17 +204,11 @@ func loose() -> void:
 	emit_signal("knockback", origin - direction * knockback_amount)
 		
 	if ammo == 0:
-		spin_to_win = reload_time + Character.instance.stats.reload_time
-		var tween = create_tween()
-		tween.tween_property(Character.instance.charge_ammo, "value", 100, (spin_to_win) * .4)
 		reload()
 	
-	#var light = preload("res://src/laser_light.tscn").instantiate()
-	#light.global_position = global_position
-	#light.global_rotation = global_rotation + PI / 2.0
-	#light.color = Color(Color.RED, 0)
-	#line.add_child(light)
-	#
-	#var laser_tween2 = create_tween()
-	#laser_tween2.tween_property(light, "color", Color.RED, .05)
-	#laser_tween2.tween_property(light, "color", Color(Color.RED, 0), .3)
+
+func reload():
+	reload_spin_count = reload_time + Character.instance.stats.reload_time
+	var tween = create_tween()
+	tween.tween_property(Character.instance.charge_ammo, "value", 100, (reload_spin_count) * .4)
+	_reload_spin()
