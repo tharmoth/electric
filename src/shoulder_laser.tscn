@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7qycadjr7eto"]
+[gd_scene load_steps=6 format=3 uid="uid://c7qycadjr7eto"]
 
 [ext_resource type="Script" path="res://src/shoulder_laser.gd" id="1_l8uuy"]
 [ext_resource type="AudioStream" uid="uid://cvotg4gq6x7bb" path="res://data/sfx/shoulder_laser.wav" id="2_t7arp"]
+[ext_resource type="Texture2D" uid="uid://hf0netok3xrl" path="res://data/sprites/shoulder_laser.png" id="3_ga58e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2rdeq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5bsfp"]
+bg_color = Color(0.6, 2.4, 4, 1)
 
 [node name="ShoulderLaser" type="Node2D"]
 script = ExtResource("1_l8uuy")
@@ -14,5 +21,36 @@ autostart = true
 [node name="laserNoise" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_t7arp")
 bus = &"SFX"
+
+[node name="Line2D2" type="Line2D" parent="."]
+z_index = -1
+points = PackedVector2Array(32, -48, 0, 0)
+width = 9.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="Line2D" type="Line2D" parent="."]
+z_index = -1
+points = PackedVector2Array(32, -48, 0, 0)
+width = 7.0
+default_color = Color(0.796078, 0.796078, 0.796078, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(32, -48)
+texture = ExtResource("3_ga58e")
+centered = false
+offset = Vector2(-8, -6)
+flip_v = true
+
+[node name="AmmoCapacity" type="ProgressBar" parent="Sprite2D"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+offset_top = -2.0
+offset_right = 20.0
+offset_bottom = 1.0
+rotation = 0.785398
+theme_override_styles/background = SubResource("StyleBoxFlat_2rdeq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5bsfp")
+show_percentage = false
 
 [connection signal="timeout" from="Reload" to="." method="_on_reload_timeout"]

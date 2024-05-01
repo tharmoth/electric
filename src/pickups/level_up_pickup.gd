@@ -113,7 +113,7 @@ func start_pickup(area : Area2D):
 	if is_instance_valid(progress_tween):
 		progress_tween.kill()
 	progress_tween = create_tween()
-	progress_tween.tween_property(%TextureProgressBar, "value", 100, 1)
+	progress_tween.tween_property(%TextureProgressBar, "value", 100, %Timer.time_left)
 	
 
 func on_pickup():
