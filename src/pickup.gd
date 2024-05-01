@@ -4,6 +4,7 @@ const SPEED : float = 100
 
 func _ready() -> void:
 	add_to_group("Pickup")
+	%Area2D.area_entered.connect(on_pickup)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -12,7 +13,7 @@ func _process(delta: float) -> void:
 	if distance > 400:
 		global_position = global_position.move_toward(Vector2.ZERO, SPEED * delta)
 
-func on_pickup():
+func on_pickup(area : Area2D):
 	queue_free()
 	Character.instance.score += 1
 	WorldTimer.instance.seek(10)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cof2fwefma8ws"]
+[gd_scene load_steps=10 format=3 uid="uid://cof2fwefma8ws"]
 
 [ext_resource type="Texture2D" uid="uid://dol3a711l6rbn" path="res://data/sprites/pedestal.png" id="1_cglw0"]
 [ext_resource type="Script" path="res://src/pickups/level_up_pickup.gd" id="1_ugs5h"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b0wl2wna6gd12" path="res://data/particles/SofterLight.png" id="4_6siwo"]
 [ext_resource type="Script" path="res://src/components/bounce_movement_component.gd" id="5_yntot"]
 [ext_resource type="Texture2D" uid="uid://ceg1hiloai3x3" path="res://data/sprites/rifle.png" id="6_di0ia"]
+[ext_resource type="Texture2D" uid="uid://d2vx2ab3ypj03" path="res://data/gui/flair_circle_8.png" id="8_dbass"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yhgod"]
 
@@ -15,8 +16,8 @@ script = ExtResource("1_ugs5h")
 
 [node name="Area2D" type="Area2D" parent="."]
 unique_name_in_owner = true
-collision_layer = 512
-collision_mask = 0
+collision_layer = 0
+collision_mask = 512
 monitoring = false
 monitorable = false
 
@@ -58,3 +59,25 @@ texture = ExtResource("6_di0ia")
 
 [node name="Node" type="Node" parent="LeftWeaponSprite"]
 script = ExtResource("5_yntot")
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.66
+one_shot = true
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+visible = false
+self_modulate = Color(2, 4, 4, 1)
+z_index = 100
+offset_left = -21.0
+offset_top = -101.0
+offset_right = 107.0
+offset_bottom = 27.0
+scale = Vector2(0.33, 0.33)
+fill_mode = 4
+texture_under = ExtResource("8_dbass")
+texture_progress = ExtResource("8_dbass")
+tint_under = Color(0.134, 0.067, 0.067, 1)
+tint_progress = Color(0.278431, 0.388235, 1, 1)

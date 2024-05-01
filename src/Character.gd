@@ -43,7 +43,6 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	score = -1
-	%PickupBox.area_entered.connect(pickup)
 	add_to_group("Character")
 	equip_gun("pistol")
 	xp = 99
@@ -81,11 +80,6 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("reload"):
 		current_gun.reload()
-
-
-func pickup(area : Area2D) -> void:
-	area.get_parent().on_pickup()
-
 
 func equip_gun(name : String):
 	if current_gun:
@@ -190,7 +184,8 @@ func on_damage() -> void:
 	self.play_damage_animation(0.3)
 	
 	for node in get_tree().get_nodes_in_group("Enemy"):
-		node.on_death()
+		if node is not Microboss:
+			node.on_death()
 	for node in get_tree().get_nodes_in_group("Pickup"):
 		node.on_gameover()
 

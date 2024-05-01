@@ -164,7 +164,7 @@ func loose() -> void:
 				for n in range(Character.instance.stats.piercing + 2):
 					# Gets a enemy node in range if exists
 					#var previous_node_pos : Vector2 
-					node = TargetingUtils.getEnemyInRange(node, 500, excludeLightning)
+					node = TargetingUtils.getEnemyInRange(node, 250, excludeLightning)
 					if node != null:
 						node.damage(randi_range(5, 10))
 						excludeLightning.append(node)

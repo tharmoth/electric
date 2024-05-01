@@ -4,6 +4,7 @@ var item_name : String
 var items : Array[String] = ["pistol", "rifle", "smg", "shotgun", "reload", "clip_size"]
 var weapons : Array[String] = ["pistol", "rifle", "smg", "shotgun", "tesla_gun"]
 var passives : Array[String] = ["reload", "clip_size", "piercing", "fire_speed", "shoulder_laser"]
+var progress_tween : Tween
 
 func init(item_name : String):
 	init_ignore(item_name, "")
@@ -36,7 +37,7 @@ func init_ignore2(item_name : String, exclude : String, exclude2 : String):
 
 func _ready() -> void:
 	add_to_group("LevelUpPickup")
-	
+		
 	var texture : Texture2D
 	if item_name == "pistol" || item_name == "dual_pistol":
 		texture = load("res://data/sprites/gun.png")
@@ -78,6 +79,8 @@ func _ready() -> void:
 	modulate = Color.TRANSPARENT
 	var tween = create_tween()
 	var area = %Area2D
+	area.area_entered.connect(start_pickup)
+	area.area_exited.connect(cancel_pickup)
 	call_deferred("remove_child", area)
 	tween.set_trans(Tween.TRANS_QUAD)
 	tween.set_ease(Tween.EASE_OUT)
@@ -86,11 +89,32 @@ func _ready() -> void:
 		area.monitoring = true
 		area.monitorable = true
 		add_child(area))
+		
+	%Timer.timeout.connect(on_pickup)
 
 func destroy():
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color.TRANSPARENT, .5)
 	tween.tween_callback(queue_free)
+
+func cancel_pickup(area : Area2D):
+	if is_instance_valid(%Timer):
+		%Timer.stop()
+	if is_instance_valid(progress_tween):
+		progress_tween.kill()
+	if is_instance_valid(%TextureProgressBar):
+		%TextureProgressBar.visible = false
+
+
+func start_pickup(area : Area2D):
+	%Timer.start()
+	%TextureProgressBar.value = 0
+	%TextureProgressBar.visible = true
+	if is_instance_valid(progress_tween):
+		progress_tween.kill()
+	progress_tween = create_tween()
+	progress_tween.tween_property(%TextureProgressBar, "value", 100, 1)
+	
 
 func on_pickup():
 	queue_free()
