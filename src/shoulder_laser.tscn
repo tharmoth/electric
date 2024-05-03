@@ -53,4 +53,8 @@ theme_override_styles/background = SubResource("StyleBoxFlat_2rdeq")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5bsfp")
 show_percentage = false
 
+[node name="Marker2D" type="Marker2D" parent="Sprite2D"]
+unique_name_in_owner = true
+position = Vector2(18, 19)
+
 [connection signal="timeout" from="Reload" to="." method="_on_reload_timeout"]
