@@ -59,7 +59,7 @@ func _ready() -> void:
 	ammo = max_ammo + Character.instance.stats.clip_bonus
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta) -> void:
 	move_to_position()
 	if (reloading): 
 		return
@@ -101,7 +101,7 @@ func _reload_spin() -> void:
 		%GunReload.play()
 		reload_started = true
 
-func reload_complete(something):
+func reload_complete(_something):
 	reloading = false
 	if reload_spin_count > 0:
 		reload_spin_count -= 1
@@ -139,7 +139,6 @@ func loose() -> void:
 	var mouse = TargetingUtils.get_target()
 	var direction = global_position.direction_to(mouse)
 	var origin = %LeftHandMarker.global_position if shoot_right else %RightHandMarker.global_position
-	var target = origin + direction * 40
 	
 	var space_state = get_world_2d().direct_space_state
 	

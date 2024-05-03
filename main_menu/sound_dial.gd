@@ -10,7 +10,12 @@ var started : bool = false
 @export var audioBus : int
 
 func _ready():
-	$knob.rotation = PI
+	var volume := AudioServer.get_bus_volume_db(audioBus)
+	if volume < 0:
+		volume = remap(volume, -24, 24, -PI, PI)
+	else:
+		volume = remap(volume, 0, 10, 0, PI)
+	$knob.rotation = volume + PI
 
 func _physics_process(_delta: float) -> void:
 	var mouseDist := TargetingUtils.get_target().distance_squared_to($knob.global_position)

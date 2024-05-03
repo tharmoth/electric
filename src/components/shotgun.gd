@@ -1,6 +1,6 @@
 extends Node2D
 
-signal shake
+#signal shake
 signal knockback(recoil: Vector2)
 
 const KNOCKBACK_FORCE : float = 1250
@@ -29,7 +29,7 @@ func _ready() -> void:
 	%GunAnimationPlayer.animation_finished.connect(_reload_complete)
 	ammo = MAX_AMMO + Character.instance.stats.clip_bonus
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	self._point_at_mouse()
 	self._move_to_position()
 
