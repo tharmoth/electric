@@ -8,15 +8,16 @@ var dead : bool = false
 
 func _ready() -> void:
 	add_to_group("Enemy")
+	var minutesPlayed = WorldTimer.instance.get_minutes_elapsed()
 	%Hurtbox.area_entered.connect(damage_player)
 	
-	if WorldTimer.instance.get_minutes_elapsed() >= 2 and randf() > .80:
+	if minutesPlayed >= 2 and randf() > .80:
 		%tv.set_static_color(Color.RED)
 		health = 20	
-	elif WorldTimer.instance.get_minutes_elapsed() >= 3 and randf() > .90:
+	elif minutesPlayed >= 3 and randf() > .90:
 		%tv.set_static_color(Color.PURPLE)
 		health = 40
-	elif WorldTimer.instance.get_minutes_elapsed() >= 10 and randf() > .90:
+	elif minutesPlayed >= 10 and randf() > .90:
 		%tv.set_static_color(Color.GREEN)
 		health = 80
 	
@@ -24,7 +25,7 @@ func damage_player(area : Area2D):
 	death_animation.kill(%Sprite2D)
 	Character.instance.on_damage()
 	WorldTimer.instance.seek(-30)
-	queue_free()
+	call_deferred("queue_free")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -67,7 +68,7 @@ func on_gameover():
 	%StaticBody2D.queue_free()
 	death_animation.kill(%Sprite2D)
 	%tv.kill()
-	queue_free()
+	call_deferred("queue_free")
 
 func damage(damage: int) -> void:
 	var color = Color.WHITE

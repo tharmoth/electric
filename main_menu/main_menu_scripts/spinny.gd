@@ -10,7 +10,7 @@ var last_angle = 0
 var grab : float = 0
 var started : bool = false
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var mouseDist := TargetingUtils.get_target().distance_squared_to($knob.global_position)
 	var knob_rot = $knob.rotation
 
@@ -27,9 +27,6 @@ func _physics_process(delta: float) -> void:
 		var ang := TargetingUtils.get_target().angle_to_point($knob.global_position) - PI/2 - grab
 		var fang : float = lerp_angle(knob_rot, ang, 0.05)
 		$knob.rotation = clamp(fang, 0, 2*PI)
-		
-		var mouse_pos := TargetingUtils.get_target()
-		var knob_pos : Vector2 = $knob.global_position
 
 		if knob_rot >= MAX_TURN:
 			get_tree().create_timer(.5).timeout.connect(func(): emit_signal("turnedKnob"))

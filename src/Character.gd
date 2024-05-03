@@ -52,7 +52,7 @@ func _ready() -> void:
 	tween.tween_property(Character.instance.charge_ammo, "value", 100, 6 * .4)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	global_rotation = 0
 
 

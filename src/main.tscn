@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cjfagb6ey5fr3"]
+[gd_scene load_steps=45 format=3 uid="uid://cjfagb6ey5fr3"]
 
 [ext_resource type="Texture2D" uid="uid://dlklea4emlp2" path="res://data/sprites/timer.png" id="1_4nl5p"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xa5wo"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://src/MapBorder.gd" id="3_sbw06"]
 [ext_resource type="Texture2D" uid="uid://5taqte82qsbl" path="res://data/character/character.png" id="5_8cd5a"]
 [ext_resource type="Script" path="res://src/Engines.gd" id="5_au8ny"]
+[ext_resource type="AudioStream" uid="uid://dlvg4gfyoa1an" path="res://data/sfx/whoosh.wav" id="5_yuquu"]
 [ext_resource type="Texture2D" uid="uid://udvcofnt2ayp" path="res://data/character/engines.png" id="6_uva1i"]
 [ext_resource type="Texture2D" uid="uid://b0wl2wna6gd12" path="res://data/particles/SofterLight.png" id="6_yea85"]
 [ext_resource type="Texture2D" uid="uid://bwaoufhbbl4vc" path="res://data/character/eyes.png" id="7_2rs57"]
@@ -27,7 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://dry1v31tlx1fy" path="res://data/sfx/timer_ring_2.wav" id="19_xib4t"]
 [ext_resource type="Script" path="res://main_menu/score_label.gd" id="22_3w3ce"]
 [ext_resource type="Script" path="res://main_menu/score_title_label.gd" id="22_m8yp0"]
-[ext_resource type="PackedScene" uid="uid://vmh1o25ctcib" path="res://main_menu/score_box.tscn" id="24_e4kgt"]
+[ext_resource type="PackedScene" path="res://main_menu/score_box.tscn" id="24_e4kgt"]
 [ext_resource type="Texture2D" uid="uid://c081c3lxu7ysh" path="res://data/sprites/white_circle.png" id="26_jf0l1"]
 [ext_resource type="Script" path="res://src/ControllerListener.gd" id="30_48reh"]
 
@@ -142,8 +143,6 @@ polygon = PackedVector2Array(-1, 192, 61, 195, 139, 213, 197, 233, 270, 270, 337
 [node name="EdgeHurtbox" type="Area2D" parent="Edge"]
 unique_name_in_owner = true
 collision_mask = 4
-monitoring = false
-monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Edge/EdgeHurtbox"]
 polygon = PackedVector2Array(-2, 199, 59, 205, 140, 223, 191, 243, 263, 278, 333, 331, 391, 393, 429, 447, 467, 531, 486, 590, 496, 658, 499, 723, 490, 802, 471, 870, 434, 949, 388, 1019, 322, 1085, 242, 1142, 166, 1176, 78, 1201, -4, 1207, -102, 1197, -173, 1176, -242, 1144, -316, 1096, -371, 1043, -417, 988, -452, 927, -481, 855, -498, 777, -505, 711, -500, 645, -486, 576, -461, 505, -417, 424, -361, 355, -292, 295, -213, 248, -136, 219, -61, 203, -2, 199, -2, 48, -672, 64, -705, 1324, 605, 1342, 579, 58, -2, 48)
@@ -157,6 +156,9 @@ amount_ratio = 0.01
 process_material = SubResource("ParticleProcessMaterial_4h18v")
 texture = ExtResource("15_i46s2")
 lifetime = 0.2
+
+[node name="borderNoise" type="AudioStreamPlayer2D" parent="Edge"]
+stream = ExtResource("5_yuquu")
 
 [node name="Timer" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -297,25 +299,30 @@ unique_name_in_owner = true
 stream = ExtResource("10_bhipu")
 volume_db = -20.0
 autoplay = true
+bus = &"Music"
 
 [node name="RecordScratch" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_h315s")
 volume_db = -20.0
+bus = &"SFX"
 
 [node name="TickTick" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("14_2bgwq")
 volume_db = -10.0
 autoplay = true
+bus = &"SFX"
 
 [node name="WindClock" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("18_0scj5")
+bus = &"SFX"
 
 [node name="RingNoise" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("19_xib4t")
+bus = &"SFX"
 
 [node name="Battery" parent="." instance=ExtResource("14_5kbvx")]
 

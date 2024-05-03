@@ -24,14 +24,13 @@ func _process(delta: float) -> void:
 	var music_length_seconds = %Music.stream.get_length()
 	
 	if (abs(bonus_rotation) > 0):
-		var amout_to_bonus_rotate = clamp(60 * delta, 0, abs(bonus_rotation))
-		amout_to_bonus_rotate *= sign(bonus_rotation)
-		bonus_rotation -= amout_to_bonus_rotate
-		rotation_degrees += amout_to_bonus_rotate
+		var amount_to_bonus_rotate = clamp(60 * delta, 0, abs(bonus_rotation))
+		amount_to_bonus_rotate *= sign(bonus_rotation)
+		bonus_rotation -= amount_to_bonus_rotate
+		rotation_degrees += amount_to_bonus_rotate
 
 	rotation_degrees -= max_spin / music_length_seconds * delta
 	rotation_degrees = clamp(rotation_degrees, -361, 0)
-	
 
 	if (rotation_degrees < -max_spin):
 		game_over()
